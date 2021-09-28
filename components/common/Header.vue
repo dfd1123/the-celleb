@@ -22,9 +22,15 @@
         <router-link to="#">
           업체검색
         </router-link>
+        <cl-button type="line" class="login-btn">
+          로그인
+        </cl-button>
         <router-link to="#">
           마이페이지
         </router-link>
+
+        <Avatar />
+
         <router-link to="#">
           <div class="profile" />
         </router-link>
@@ -35,9 +41,15 @@
 
 <script>
 import colorLogo from '@/assets/imgs/icon/color-logo.svg'
+import ClButton from '@/components/common/ClButton'
+import Avatar from '@/components/common/Avatar'
 
 export default {
   name: 'Header',
+  components: {
+    ClButton,
+    Avatar
+  },
   data () {
     return {
       colorLogo
@@ -49,19 +61,26 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj';
 
-[header] { box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.08);
+[header] { .sticky; .lt(0, 0); .z(10); .w(100%); box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.08); .bgc(#FFFFFF);
   .top-hd { .crop; .p(14, 0); .-b(#EEEEEE, 2);
     > ul {
       > li { .fr; .vam;
-        > a { .ib; .mr(2); .fs(14,17); .c(@gray); .vam; }
-        &::after{ .cnt; .ib; .wh(15); .vam; .bg('@{icon}/ico-small-arrow.svg'); .no-repeat; .bg-c; .bg-sx(4.5); }
+        > a { .ib; .mr(2); .fs(14, 17); .c(@gray); .vam; }
+        &::after { .cnt; .ib; .wh(15); .vam; .bg('@{icon}/ico-small-arrow.svg'); .no-repeat; .bg-c; .bg-sx(4.5); }
       }
     }
   }
-  .main-hd { .crop; .pt(19); .pb(20);
-    .logo { .fl; .p(10,0); }
+  .main-hd { .clear; .pt(19); .pb(20);
+    .logo { .fl; .p(10, 0); }
     nav { .fr;
-      > a { .ib; .m(0, 2.5); .p(0, 12); .fs(16, 42); .c(@gray); }
+      > a { .ib; .m(0, 2.5); .p(0, 12); .fs(16, 42); .c(@gray); .vam; }
+      > button { .ib; .vam; }
+      [avatar] { .ib; .vam; }
+      [cl-button] {
+        &.login-btn { .p(1, 0);
+          > button { .wh(85, 40); .fs(15); }
+        }
+      }
     }
   }
 }

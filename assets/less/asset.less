@@ -27,6 +27,7 @@
 .flex(@v: center, @h: center, @d: row) { display: flex; justify-content: @v; align-items: @h; flex-direction: @d; }
 .flex-jc(@align: center) { justify-content: @align;}
 .flex-ai(@align: center) { align-items: @align; }
+.flex-center(@display: flex) { display: @display; justify-content: center; align-items: center; }
 .grid(@tc: 1fr 1fr, @g: 10px, @tr: 1fr) { display: grid; grid-template-columns: @tc; gap: @g; grid-template-rows: @tr;}
 .visible() { visibility: visible; }
 .hidden() { visibility: hidden; }
@@ -34,6 +35,7 @@
 .abs() { position: absolute; }
 .fix() { position: fixed;}
 .static() { position: static;}
+.sticky() { position: sticky; }
 .tc() { text-align: center }
 .tl() { text-align: left }
 .tr() { text-align: right }
@@ -44,7 +46,6 @@
 .vab() { vertical-align: bottom; }
 .extra-light() { font-weight: 200; }
 .light() { font-weight: 300; }
-.fw-light() { font-weight: 300; }
 .regular() { font-weight: 400; }
 .medium() { font-weight: 500; }
 .semi-bold() { font-weight: 600; }
@@ -308,7 +309,7 @@ if((get-unit(@v) = ~""), unit(@v, px), @v)))}
 
 .trans(@p: all, @s: .4s, @t: ease) { transition: @p @s @t; }
 .sh(@x: 3px, @y: 3px, @b: 5px, @s: 3px, @c: @placeholder) { box-shadow: @x @y @b @s @c};
-.z(@v) { .sv(@v); z-index: @_sv; }
+.z(@v) { z-index: @v; }
 
 
 /*--------------------------------------------------------------------------------------------------------------
@@ -344,3 +345,9 @@ if((get-unit(@v) = ~""), unit(@v, px), @v)))}
 
 
 .crop() { overflow: hidden; }
+
+.no-drag { -webkit-user-select: initial !important;
+  -khtml-user-select: initial !important;
+  -moz-user-select: initial !important;
+  -ms-user-select: initial !important;
+  user-select: initial !important; }

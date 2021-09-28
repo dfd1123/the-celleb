@@ -165,6 +165,14 @@ textarea {
   box-sizing: border-box;
 }
 
+button{
+  -webkit-user-select: initial !important;
+  -khtml-user-select: initial !important;
+  -moz-user-select: initial !important;
+  -ms-user-select: initial !important;
+  user-select: initial !important;
+}
+
 input, input:before, input:after {
   -webkit-user-select: initial !important;
   -khtml-user-select: initial !important;
@@ -239,6 +247,7 @@ textarea {
 }
 
 input{
+  border:none;
   outline:none;
 }
 
@@ -271,3 +280,5 @@ svg{
   -webkit-user-select:none;
   user-select:none;
 }
+
+em{ font-style: normal; }

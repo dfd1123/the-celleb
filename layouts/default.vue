@@ -22,6 +22,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less">
+@import '~@/assets/less/proj';
 
+#app{ .min-w(@wrapper-size); .crop; }
 </style>

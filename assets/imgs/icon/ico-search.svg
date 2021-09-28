@@ -1,0 +1,11 @@
+<svg id="그룹_722" data-name="그룹 722" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21" height="21" viewBox="0 0 21 21">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Clip_2" data-name="Clip 2" d="M0,21H21V0H0V21Z" fill="none"/>
+    </clipPath>
+  </defs>
+  <path id="Clip_2-2" data-name="Clip 2" d="M0,21H21V0H0V21Z" fill="none"/>
+  <g id="마스크_그룹_2" data-name="마스크 그룹 2" clip-path="url(#clip-path)">
+    <path id="Fill_1" data-name="Fill 1" d="M19.559,21h0l-4.94-5.309A10.513,10.513,0,0,1,8.8,17.981a8.654,8.654,0,0,1-6.225-2.633,9.126,9.126,0,0,1,0-12.714,8.673,8.673,0,0,1,12.449,0,9.116,9.116,0,0,1,.918,11.6L21,19.378,19.559,21ZM8.8,1.879A7.046,7.046,0,0,0,1.84,8.991,7.046,7.046,0,0,0,8.8,16.1a7.045,7.045,0,0,0,6.962-7.111A7.045,7.045,0,0,0,8.8,1.879Z" transform="translate(0 0)" fill="#505050"/>
+  </g>
+</svg>
