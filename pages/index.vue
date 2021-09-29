@@ -28,7 +28,7 @@
 import SelectBox from '@/components/common/input/SelectBox'
 
 export default {
-  name: 'Main',
+  name: 'MainPage',
   components: { SelectBox }
 }
 </script>
