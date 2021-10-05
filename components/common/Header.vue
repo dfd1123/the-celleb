@@ -19,17 +19,17 @@
         <router-link to="#">
           메시지
         </router-link>
-        <router-link to="#">
+        <router-link to="/product/instagram/list">
           업체검색
         </router-link>
-        <cl-button type="line" class="login-btn">
+        <cl-button type="line-purple" class="login-btn">
           로그인
         </cl-button>
         <router-link to="#">
           마이페이지
         </router-link>
 
-        <Avatar />
+        <Avatar tootip />
 
         <router-link to="#">
           <div class="profile" />

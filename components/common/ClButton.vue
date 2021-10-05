@@ -39,12 +39,18 @@ export default {
 @import '~@/assets/less/proj';
 
 [cl-button]{ .ib; .vam;
-  button { .min-h(40); .p(0, 10); .tc; .br(6);
+  button { .min-h(40); .p(0, 10); .tc; .br(5);
     &:hover{ box-shadow: 0 0 0 black; }
   }
-  &.line {
+  &.line-purple {
     button { .c(@purple); .-a(@purple); .bgc(#FFFFFF);
     }
+  }
+  &.line {
+    button { .c(@gray); .-a(#d9d9d9); .bgc(#FFFFFF); }
+  }
+  &.purple {
+    button { .c(#fff); .bgc(@strong-purple);  }
   }
 }
 </style>

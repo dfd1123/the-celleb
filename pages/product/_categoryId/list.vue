@@ -1,6 +1,6 @@
 <template>
   <div product-list-page>
-    <SubTopNav :menu-list="menuList" />
+    <CategoryNav />
     <div class="inner-holder">
       <h2 class="page-tit">
         인스타그램
@@ -11,29 +11,23 @@
         <SelectBox v-model="orderBy" :list="orderByList" />
       </div>
       <ProductCardWrap :list="itemList" />
+      <Pagination :chunk-size="10" :total-count="100" />
     </div>
   </div>
 </template>
 
 <script>
-import SubTopNav from '@/components/common/menu/SubTopNav'
+import CategoryNav from '@/components/product/CategoryNav'
 import FilterBox from '@/components/product/FilterBox'
 import SelectBox from '@/components/common/input/SelectBox'
 import ProductCardWrap from '@/components/product/ProductCardWrap'
+import Pagination from '@/components/common/Pagination'
 
 export default {
   name: 'ProductListPage',
-  components: { SubTopNav, FilterBox, SelectBox, ProductCardWrap },
+  components: { CategoryNav, FilterBox, SelectBox, ProductCardWrap, Pagination },
   data () {
     return {
-      menuList: [
-        { name: '인스타그램', path: '/product/instagram/list' },
-        { name: '유튜브', path: '/product/youtube/list' },
-        { name: '블로그', path: '/product/blog/list' },
-        { name: '카페', path: '/product/cafe/list' },
-        { name: '틱톡', path: '/product/tiktok/list' },
-        { name: '라이브커머스', path: '/product/live-commerce/list' }
-      ],
       orderByList: [
         { label: '추천순', value: 'recommend' },
         { label: '인기순', value: 'popular' },

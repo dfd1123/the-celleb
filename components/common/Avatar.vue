@@ -1,7 +1,7 @@
 <template>
   <div avatar>
     <img :src="image" :alt="alt">
-    <div class="my-menu">
+    <div v-if="tootip" class="my-menu">
       <span />
       <ul>
         <li>
@@ -26,7 +26,8 @@ export default {
   name: 'Avatar',
   props: {
     src: { type: String, default: '' },
-    alt: { type: String, default: 'profile-image' }
+    alt: { type: String, default: 'profile-image' },
+    tootip: { type: Boolean, default: false }
   },
   computed: {
     image () {

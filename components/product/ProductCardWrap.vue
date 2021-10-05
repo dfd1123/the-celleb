@@ -17,7 +17,7 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj';
 
-[product-card-wrap]{
+[product-card-wrap]{ .crop;
   &.default {
     [product-card] {
       .card-holder { .fl; width:calc((100% / 4) - (90px / 4)); .mb(60); .mr(30); }
