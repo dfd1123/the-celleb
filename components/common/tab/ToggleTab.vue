@@ -1,6 +1,13 @@
 <template>
   <div toggle-tab :class="['tab', {disabled}]">
-    <button v-for="(tab, index) in tabs" :key="'tab-' + index" :class="{'on': value === index}" :disabled="disabled" @click="changeTab(index)">
+    <button
+      v-for="(tab, index) in tabs"
+      :key="'tab-' + index"
+      v-wave
+      :class="{'on': value === index}"
+      :disabled="disabled"
+      @click="changeTab(index)"
+    >
       {{ tab }}
     </button>
   </div>

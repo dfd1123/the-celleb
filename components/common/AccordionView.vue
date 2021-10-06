@@ -77,6 +77,7 @@ export default {
     }
   },
   mounted () {
+    this.updateModel()
     window.addEventListener('resize', this.resizeHandler)
     this.resizeObserve = new ResizeObserver(() => this.resizeHandler(0))
     this.resizeObserve.observe(this.$refs.accorContextBox)
@@ -128,6 +129,9 @@ export default {
     },
     resizeHandler () {
       this.setBodyHeight()
+    },
+    updateModel () {
+      this.model = this.value
     }
   }
 }
@@ -149,7 +153,7 @@ export default {
     }
   }
 
-  .view-wrapper { .bgc(#FFF);
+  .view-wrapper { .bgc(transparent);
     > label { .block; .p(10, 10); .-b(#DDD); .pointer; }
   }
   .title { .rel;
