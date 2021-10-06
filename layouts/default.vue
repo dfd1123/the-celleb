@@ -2,7 +2,7 @@
   <div id="app">
     <Header />
     <KeepAlive>
-      <RouterView :include="keepAliveLists" class="page-body" />
+      <RouterView :key="`${$route.name}`" :include="keepAliveLists" class="page-body" />
     </KeepAlive>
     <Footer />
   </div>

@@ -25,14 +25,22 @@ export default {
       return this.menuList.map((menu, index) => ({ id: pathList[index], name: menu, path: `/product/${pathList[index]}/list` }))
     }
   },
+  watch: {
+    categoryId () {
+      this.activeIndexUpdate()
+    }
+  },
   mounted () {
-    const activeIndex = this.menuRouteList.findIndex(menu => menu.id === this.categoryId)
-    if (activeIndex !== -1) { this.activeIndex = activeIndex }
+    this.activeIndexUpdate()
   },
   methods: {
     route () {
       const path = this.menuRouteList[this.activeIndex].path
       this.$router.push(path)
+    },
+    activeIndexUpdate () {
+      const activeIndex = this.menuRouteList.findIndex(menu => menu.id === this.categoryId)
+      if (activeIndex !== -1) { this.activeIndex = activeIndex }
     }
   }
 }

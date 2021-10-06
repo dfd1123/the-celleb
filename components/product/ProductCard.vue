@@ -1,7 +1,7 @@
 <template>
   <div product-card>
     <div class="card-holder">
-      <router-link to="#">
+      <router-link to="/product/youtube/1">
         <div class="prod-img-box">
           <img :src="item.image || sampleProductImg" :alt="item.name || 'sample image'">
         </div>
