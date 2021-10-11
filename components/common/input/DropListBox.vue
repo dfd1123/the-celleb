@@ -6,9 +6,8 @@
         :key="`list-${index}${uid}`"
         :class="{'active': value === (item.value || item)}"
         @mousedown.left="clickListHandler(item)"
-      >
-        {{ item.label || item }}
-      </li>
+        v-html="item.label || item"
+      />
       <li v-show="!showList.length" class="none-data">
         리스트가 존재하지 않습니다.
       </li>

@@ -52,5 +52,8 @@ export default {
   &.purple {
     button { .c(#fff); .bgc(@strong-purple);  }
   }
+  &.light-gray{
+    button{ .c(#fff); .bgc(#ccc); }
+  }
 }
 </style>
