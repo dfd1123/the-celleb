@@ -36,9 +36,18 @@ import ClButton from '@/components/common/ClButton'
 export default {
   name: 'OrderBuyController',
   components: { ClButton },
+  computed: {
+    productId () {
+      return this.$route.params.productId || ''
+    }
+  },
   methods: {
     async buyClickHandler () {
       const result = await this.$confirm({ title: '결제하시겠습니까?', message: '네이버쇼핑라이브 -989,500원' })
+
+      if (result) {
+        await this.$router.push(`/order/${this.productId}/complete`)
+      }
     }
   }
 }

@@ -38,7 +38,7 @@ export default {
         this.$router.replace(this.$route.path)
       }
       // this.$router.push({ hash: "#modal=" + component.name });
-      this.transitionMode = options.transitionMode || this.transitionMode
+      this.transitionMode = options?.transitionMode || this.transitionMode
 
       return new Promise((resolve, reject) => {
         this.modals = _cloneDeep([

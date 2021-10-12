@@ -6,7 +6,7 @@
     <p class="name">
       업체 이름
     </p>
-    <cl-button type="line" class="qna-btn">
+    <cl-button type="line" class="qna-btn" @click="qnaModalOpen">
       문의 남기기
     </cl-button>
     <p class="introduce">
@@ -17,11 +17,17 @@
 </template>
 
 <script>
+import QnaSubmitModal from '@/components/product/modal/QnaSubmitModal'
 import ClButton from '@/components/common/ClButton'
 
 export default {
   name: 'ProductStoreBox',
-  components: { ClButton }
+  components: { ClButton },
+  methods: {
+    qnaModalOpen () {
+      this.$modal(QnaSubmitModal)
+    }
+  }
 }
 </script>
 

@@ -23,10 +23,12 @@
 
 <script>
 import ProductReviewItem from '@/components/product/view/ProductReviewItem'
+import RatingStar from '@/components/common/RatingStar'
+import ClButton from '@/components/common/ClButton'
 
 export default {
   name: 'ReviewWrap',
-  components: { ProductReviewItem }
+  components: { ProductReviewItem, RatingStar, ClButton }
 }
 </script>
 

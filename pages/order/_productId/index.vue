@@ -7,7 +7,7 @@
       <div class="order-info-holder">
         <div class="change-order-info">
           <div class="article-box order-card-holder">
-            <OrderCard v-for="(product, index) in productList" :key="`product-${index}`" :product="product" />
+            <OrderControlCard v-for="(product, index) in productList" :key="`product-${index}`" :product="product" />
           </div>
           <div class="article-box coupon-use-holder">
             <h4 class="sub-tit">
@@ -64,7 +64,7 @@
 
 <script>
 import { numberFormat } from '@/utils/numberUtils'
-import OrderCard from '@/components/order/OrderCard'
+import OrderControlCard from '@/components/order/OrderControlCard'
 import OrderBuyController from '@/components/order/OrderBuyController'
 import IntegerSelect from '@/components/common/input/IntegerSelect'
 import SelectBox from '@/components/common/input/SelectBox'
@@ -80,7 +80,7 @@ export default {
     ClButton,
     RadioBox,
     CheckBox,
-    OrderCard,
+    OrderControlCard,
     OrderBuyController
   },
   data () {

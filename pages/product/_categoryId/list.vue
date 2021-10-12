@@ -2,7 +2,6 @@
   <div product-list-page>
     <CategoryNav />
     <div class="inner-holder">
-      {{ $route.name }}
       <h2 class="page-tit">
         인스타그램
       </h2>

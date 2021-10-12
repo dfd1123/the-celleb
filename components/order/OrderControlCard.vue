@@ -35,7 +35,7 @@ import sampleOrderProduct from '@/assets/imgs/sample/product-order-sample.jpg'
 import IntegerSelect from '@/components/common/input/IntegerSelect'
 
 export default {
-  name: 'OrderCard',
+  name: 'OrderControlCard',
   components: { IntegerSelect },
   props: {
     product: {
