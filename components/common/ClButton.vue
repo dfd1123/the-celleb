@@ -1,6 +1,6 @@
 <template>
-  <div cl-button :class="[type, {disable}]" @click="onClickHandler">
-    <button v-wave="rippleOption" type="button">
+  <div cl-button :class="[type, {disabled}]" @click="onClickHandler">
+    <button v-wave="rippleOption" type="button" :disabled="disabled">
       <slot />
     </button>
   </div>
@@ -12,7 +12,7 @@ export default {
   props: {
     type: { type: String, default: 'primary' },
     loading: { type: Boolean, default: false },
-    disable: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
     rippleColor: { type: String, default: '' },
     rippleOpacity: { type: Number, default: 0.5 },
     rippleDuration: { type: Number, default: 0.4 }
@@ -24,7 +24,7 @@ export default {
       if (this.rippleOpacity) { params.initialOpacity = this.rippleOpacity }
       if (this.rippleDuration) { params.duration = this.rippleDuration }
 
-      return params
+      return this.disabled ? false : params
     }
   },
   methods: {
@@ -50,7 +50,9 @@ export default {
     button { .c(@gray); .-a(#d9d9d9); .bgc(#FFFFFF); }
   }
   &.purple {
-    button { .c(#fff); .bgc(@strong-purple);  }
+    button { .c(#fff); .bgc(@strong-purple);
+      &:disabled{ .c(#fff); .bgc(#999999); cursor:not-allowed;  }
+    }
   }
   &.light-gray{
     button{ .c(#fff); .bgc(#ccc); }

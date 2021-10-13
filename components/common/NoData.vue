@@ -22,7 +22,8 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj';
 
-[no-data]{ .p(150, 0); .tc;
+[no-data]{ .flex-center; flex-direction: column; .p(150, 0); .tc;
+  >img{ .block; }
   p{
     &.main-msg { .mt(19.5); .mb(19); .fs(18, 21); .c(#555); }
     &.sub-msg { .fs(14, 20); .c(#999); .light; }

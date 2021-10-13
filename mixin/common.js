@@ -8,10 +8,11 @@ export const common = {
      * @returns {Promise<*>}
      */
     timeoutShield (duration = 0.5) {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         const now = +new Date()
         if (this.__shieldTime__ && this.__shieldTime__ + (duration * 1000) > now) {
-          reject(NoToast)
+          // eslint-disable-next-line prefer-promise-reject-errors
+          // reject()
         } else {
           resolve()
         }
