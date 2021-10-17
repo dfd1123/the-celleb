@@ -1,7 +1,7 @@
 <template>
   <div accordion-view :class="{'open':isOpen}">
     <input
-      v-if="name"
+      v-if="single"
       :id="`accord${uid}`"
       ref="accordInp"
       type="radio"
@@ -16,6 +16,7 @@
       ref="accordInp"
       type="checkbox"
       class="accord-inp"
+      :name="name"
       :value="uid"
       :checked="isOpen"
     >
@@ -25,7 +26,7 @@
           {{ title }}
           <span class="angle-holder">
             <slot name="angle">
-              <img src="~/assets/imgs/icon/ico-angle.svg" alt="angle">
+              <img src="~/assets/imgs/icon/ico-radius-arrow.svg" class="default-angle" alt="angle">
             </slot>
           </span>
         </p>
@@ -47,12 +48,13 @@ export default {
   name: 'AccordionView',
   props: {
     /*
-    name 값을 전달하면 input[type=radio]가 랜더링 되고
+    single 값이 true면 input[type=radio]가 랜더링 되고
     같은 name 값을 전달받은 Accordion 중 하나만 열리고
     나머지는 다 닫히는 기능을 활성화 할 수 있습니다.
     */
     id: { type: [Boolean, String, Number], default: null },
     name: { type: String, default: null },
+    single: { type: Boolean, default: false },
     title: { type: String },
     value: { type: [Boolean, String, Number, Array], default: null }
   },
@@ -73,14 +75,17 @@ export default {
       return typeof this.uid
     },
     isOpen () {
-      if (this.value === null) { return false } else if (!this.name) { return this.value.includes(this.uid) } else { return this.value === this.uid }
+      if (Array.isArray(this.model)) { return this.model.includes(this.uid) } else { return this.model === this.uid }
     }
   },
+  watch: {
+    value: 'updateModel'
+  },
   mounted () {
-    this.updateModel()
     window.addEventListener('resize', this.resizeHandler)
     this.resizeObserve = new ResizeObserver(() => this.resizeHandler(0))
     this.resizeObserve.observe(this.$refs.accorContextBox)
+    this.updateModel()
   },
   beforeDestroy () {
     this.resizeObserve.disconnect()
@@ -88,6 +93,8 @@ export default {
   },
   methods: {
     clickHandler (e) {
+      e.preventDefault()
+
       let value
       const defaultValueObj = {
         number: -1,
@@ -96,28 +103,22 @@ export default {
       }
 
       if (this.isOpen) {
-        value = defaultValueObj[this.valueType]
-
-        if (!this.name) {
-          const arr = Array.isArray(this.value) ? this.value : []
-          value = arr.filter(x => x !== this.uid)
+        if (!this.single && this.value !== null && Array.isArray(this.value)) {
+          value = this.value.filter(x => x !== this.uid)
+        } else {
+          value = defaultValueObj[this.valueType]
         }
-
-        e.preventDefault()
       } else {
         this.setBodyHeight()
 
-        value = this.uid
-
-        if (!this.name) {
-          const arr = Array.isArray(this.value) ? this.value : []
-          value = [...arr, this.uid]
-        }
-
-        if (this.value === null) {
-          if (this.$el.classList.contains('open')) { this.$el.classList.remove('open') } else { this.$el.classList.add('open') }
+        if (!this.single && this.value !== null && Array.isArray(this.value)) {
+          value = [...this.value, this.uid]
+        } else {
+          value = this.uid
         }
       }
+
+      this.model = value
 
       this.$emit('input', value)
     },
@@ -131,7 +132,7 @@ export default {
       this.setBodyHeight()
     },
     updateModel () {
-      this.model = this.value
+      if (this.value) { this.model = this.value }
     }
   }
 }
@@ -158,7 +159,7 @@ export default {
   }
   .title { .rel;
     .angle-holder { .abs; .rt(0, 0); .z(1); .h(100%); .flex-center; .p(10, 0); }
-    .default-angle { .wh(13, 13); transition: transform 0.3s;
+    .default-angle { transition: transform 0.3s;
       path {stroke: #000;}
     }
   }

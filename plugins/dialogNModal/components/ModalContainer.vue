@@ -6,7 +6,7 @@
         v-for="modal in modals"
         :key="modal.id"
         :options="modal.options"
-        @close="() => resolve(modal.id, true)"
+        @close="close(modal.id)"
         @resolve="(result) => resolve(modal.id, result)"
         @reject="(result) => reject(modal.id, result)"
       />

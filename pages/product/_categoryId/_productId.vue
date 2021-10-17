@@ -52,7 +52,7 @@ export default {
 <style lang="less">
 @import '~assets/less/proj.less';
 
-[product-view-page] {
+[product-view-page] { .bgc(#fff);
   .sec-tit { .mb(29); .fs(26,31); .c(@gray); .medium; }
   .product-wrap{ .crop; .p(62, 0);
     .detail-info{ .fl; .w(612); .mt(3); .mr(102);

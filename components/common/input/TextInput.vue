@@ -75,7 +75,8 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj.less';
 
-[text-input] { .block; .-box; .c(@placeholder); .h(48); .br(5); .medium; .crop; .rel; .lh(0); .-a(#d9d9d9);
+[text-input] { .block; .-box; .c(@placeholder); .h(48); .br(5); .medium; .crop; .rel; .lh(0); .-a(#d9d9d9); transition: border 0.2s;
+  &.focus{ .-a(@strong-purple); }
   .password { -webkit-text-security: disc; }
   input {.fs(16, 48px); .wh(100%); .-a; .bgc(#fff); .p(0, 11); .-box; .c(@title-black); .br(0);
     &::placeholder {.c(@placeholder); .medium;}

@@ -48,5 +48,9 @@ export default {
       }
     }
   }
+
+  &.small {
+    .panel { .max-w(400); }
+  }
 }
 </style>

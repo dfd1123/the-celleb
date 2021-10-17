@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import DialogContainer from '@/components/common/dialog/DialogContainer'
-import ModalContainer from '@/components/common/modal/ModalContainer'
-import Confirm from '@/components/common/dialog/Confirm'
-import Alert from '@/components/common/dialog/Alert'
-import Prompt from '@/components/common/dialog/Prompt'
+import DialogContainer from './components/DialogContainer'
+import ModalContainer from './components/ModalContainer'
+import Confirm from './components/Confirm'
+import Alert from './components/Alert'
+import Prompt from './components/Prompt'
 
 export default ({ app }, inject) => {
   const getContainer = (c, type = 'modal') => {

@@ -43,7 +43,7 @@ export default {
       &.main{
         >.page-body{ .mb(0); .pb(0); }
       }
-      >.page-body{ .min-h(100vh); .mt(-131.3); .pt(131.3); .mb(-240.39); .pb(240.39); }
+      >.page-body{ .min-h(100vh); .mt(-131.3); .pt(131.3); .mb(-240.39); .pb(240.39); .bgc(#fafbff); }
     }
   }
 }

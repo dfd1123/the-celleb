@@ -1,3 +1,5 @@
+import routes from './router'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -23,11 +25,18 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '@/plugins/dialogNmodal', mode: 'client' }
+    { src: '@/plugins/dialogNModal', mode: 'client' },
+    { src: '@/plugins/toast', mode: 'client' },
+    { src: '@/plugins/validation' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
+
+  router: {
+    middleware: [],
+    extendRoutes: routes
+  },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [

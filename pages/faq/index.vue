@@ -94,7 +94,7 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj';
 
-[faq-page] {
+[faq-page] { .bgc(#fff);
   .page-tit { .mt(57); .mb(31); .fs(28, 33); .c(@black); }
   .search-holder { .wh(100%, 160); .pt(34); .pb(32); .br(5); .-a(#D7D1FF); .bgc(#F9F8FF); box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.06);
     .search-inp { .rel; .w(516); .mh-c; .pr(116);

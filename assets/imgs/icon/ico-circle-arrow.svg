@@ -1,0 +1,34 @@
+<svg id="arrow_left_c" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #d9d9d9;
+      }
+
+      .cls-2, .cls-4 {
+        fill: none;
+      }
+
+      .cls-2 {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="arrow_left_c-2" data-name="arrow_left_c" transform="translate(34.509 34.51) rotate(180)">
+    <g id="타원_101" data-name="타원 101" class="cls-1" transform="translate(-0.491 -0.49)">
+      <circle class="cls-3" cx="17.5" cy="17.5" r="17.5"/>
+      <circle class="cls-4" cx="17.5" cy="17.5" r="17"/>
+    </g>
+    <path id="chevron-right" class="cls-2" d="M0,7.964,3.982,3.982,0,0" transform="translate(15.264 12.609)"/>
+  </g>
+</svg>

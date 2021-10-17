@@ -80,7 +80,7 @@ export default {
     activeIcon: { type: String, default: '/img/icon/icon-star-active.svg' },
     inactiveIcon: { type: String, default: '/img/icon/icon-star-inactive.svg' },
     activeColor: { type: String, default: '' }, // 별 활성화시 내부 색 (색이 있을 경우 이미지가 아닌 색으로 표출 됩니다.)
-    inactiveColor: { type: String, default: '#FFF' }, // 별 비활성화시 내부 색 (색이 있을 경우 이미지가 아닌 색으로 표출 됩니다.)
+    inactiveColor: { type: String, default: '#DDD' }, // 별 비활성화시 내부 색 (색이 있을 경우 이미지가 아닌 색으로 표출 됩니다.)
     starSize: { type: Number, default: 20 }, // 별 사이즈
     readonly: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false }

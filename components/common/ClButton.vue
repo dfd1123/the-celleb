@@ -46,6 +46,10 @@ export default {
     button { .c(@purple); .-a(@purple); .bgc(#FFFFFF);
     }
   }
+  &.line-gray {
+    button { .c(#cccccc); .-a(#aaaaaa); .bgc(#f9f9f9);
+    }
+  }
   &.line {
     button { .c(@gray); .-a(#d9d9d9); .bgc(#FFFFFF); }
   }

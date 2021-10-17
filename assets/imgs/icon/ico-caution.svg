@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #505050;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-3 {
+        fill: #333;
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect id="사각형_744" data-name="사각형 744" class="cls-1" width="24" height="24" transform="translate(760 1342)"/>
+    </clipPath>
+  </defs>
+  <g id="마스크_그룹_18" data-name="마스크 그룹 18" class="cls-2" transform="translate(-760 -1342)">
+    <g id="caution-sign" transform="translate(760 1343.363)">
+      <path id="패스_162" data-name="패스 162" class="cls-3" d="M23.753,20.33,13.594,2.738a1.841,1.841,0,0,0-3.189,0L.247,20.33a1.841,1.841,0,0,0,1.594,2.762H22.159a1.841,1.841,0,0,0,1.594-2.762ZM1.841,21.25,12,3.658,22.159,21.25Z" transform="translate(0 -1.817)"/>
+      <path id="패스_163" data-name="패스 163" class="cls-3" d="M14.3,12.259l.528,6.044a.749.749,0,0,0,1.493,0l.528-6.044a1.369,1.369,0,0,0,0-.223,1.279,1.279,0,1,0-2.549.223Z" transform="translate(-3.573 -4.08)"/>
+      <circle id="타원_162" data-name="타원 162" class="cls-3" cx="1.056" cy="1.056" r="1.056" transform="translate(10.944 15.279)"/>
+    </g>
+  </g>
+</svg>

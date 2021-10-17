@@ -16,7 +16,7 @@
         </router-link>
       </div>
       <nav>
-        <router-link to="#">
+        <router-link to="/chatting">
           메시지
         </router-link>
         <router-link to="/product/instagram/list">
@@ -25,7 +25,7 @@
         <cl-button type="line-purple" class="login-btn">
           로그인
         </cl-button>
-        <router-link to="#">
+        <router-link to="/mypage">
           마이페이지
         </router-link>
 

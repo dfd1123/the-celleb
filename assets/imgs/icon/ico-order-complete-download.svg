@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="82.602" height="77.834" viewBox="0 0 82.602 77.834">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #d7d1ff;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #888;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="그룹_21751" data-name="그룹 21751" transform="translate(-558.728 -171.11)">
+    <circle id="타원_332" data-name="타원 332" class="cls-1" cx="20.196" cy="20.196" r="20.196" transform="translate(579.514 189.831)"/>
+    <path id="패스_9372" data-name="패스 9372" class="cls-2" d="M576.523,193.324l-12.256,4.464L560,185.462" transform="translate(0 0.01)"/>
+    <path id="패스_9373" data-name="패스 9373" class="cls-2" d="M562.421,206.113a37.8,37.8,0,0,0,73.06,16.993q.126-.339.243-.678" transform="translate(0.002 0.024)"/>
+    <path id="패스_9374" data-name="패스 9374" class="cls-2" d="M637.622,214.016a37.8,37.8,0,0,0-73.049-17.092c-.078.211-.154.421-.227.632" transform="translate(0.003)"/>
+    <path id="패스_9375" data-name="패스 9375" class="cls-2" d="M623.489,226.685l12.256-4.464,4.267,12.326" transform="translate(0.046 0.036)"/>
+    <path id="패스_9376" data-name="패스 9376" class="cls-2" d="M587.87,205.8l11.7,11.7,23.021-23.021" transform="translate(0.02 0.016)"/>
+    <path id="패스_9377" data-name="패스 9377" class="cls-2" d="M612.628,194.478a20.165,20.165,0,1,0,7.042,12.416" transform="translate(0.014 0.013)"/>
+  </g>
+</svg>

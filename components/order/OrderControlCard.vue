@@ -1,5 +1,5 @@
 <template>
-  <div order-card>
+  <div order-control-card>
     <div class="main-info">
       <div class="product-img">
         <img :src="sampleOrderProduct" alt="order-product">
@@ -63,7 +63,7 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj';
 
-[order-card] { .bgc(#FFFFFF);
+[order-control-card] { .bgc(#FFFFFF);
   .main-info { .rel; .min-h(108); .mb(33); .pl(189);
     .product-img { .abs; .lt(0, 0); .z(1); .wh(157, 108);
       > img { .wh(100%); .vam; object-fit: cover; object-position: center; }

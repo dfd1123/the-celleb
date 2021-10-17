@@ -47,7 +47,7 @@ export default {
 
 <style lang="less">
 @import "~@/assets/less/proj";
-[pagination] { .mt(60); .mb(173); .tc;
+[pagination] { .pt(60); .pb(173); .tc;
   .page-holder { .ib; .br(4); .-a(#d9d9d9); }
   button { .wh(35, 40); .vam; .lh(0);
     svg { .w(11);

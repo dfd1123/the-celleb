@@ -241,7 +241,7 @@ export default {
     &::placeholder { .c(@light-gray); .regular; }
   }
 
-  .show-value { .rel; .z(2); .wh(100%); .pl(10); .pr(31); .tl; .fs(14); .regular; .c(#787781); .ellipsis(1); .bgc(transparent); .pointer; display: flex; .flex-ai;
+  .show-value { .rel; .z(2); .wh(100%); width:calc(100% - 31px); .pl(10); .pr(31); .tl; .fs(14); .regular; .c(#787781); .ellipsis(1); .bgc(transparent); .pointer; display: flex; .flex-ai;
     &.placeholder { .c(@light-gray); .regular; }
   }
 

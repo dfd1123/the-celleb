@@ -49,7 +49,7 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj';
 
-[product-list-page] {
+[product-list-page] { .bgc(#fff);
   .page-tit { .mt(57); .mb(31); .fs(28, 33); .c(@black); }
   .orderby-controller{ .crop; .mt(53); .mb(40);
     .total-cnt{ .fl; .fs(20,24); .c(@gray); .bold; }
