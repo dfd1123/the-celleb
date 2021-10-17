@@ -83,19 +83,21 @@ export default {
   },
   methods: {
     async addCoupon () {
-      await this.timeoutShield(0.5)
+      await this.timeoutShield(1)
       // await this.$validate(this.$refs.validator)
       const addCouponIndex = this.preCouponList.findIndex(coupon => coupon.id === this.couponCode)
 
       if (addCouponIndex !== -1) {
         this.couponList = [this.preCouponList[addCouponIndex], ...this.couponList]
-        this.preCouponList.slice(addCouponIndex, 1)
+        this.preCouponList.splice(addCouponIndex, 1)
         this.$toast('쿠폰이 발급되었습니다.', { type: 'success' })
       } else {
         this.$toast('존재하지 않은 쿠폰 아이디 입니다.', { type: 'fail' })
       }
 
-      this.couponCode = ''
+      setTimeout(() => {
+        this.couponCode = ''
+      }, 10)
     }
   }
 }
