@@ -1,7 +1,7 @@
 <template>
   <div toast-container>
     <transition-group name="toast">
-      <div v-for="toast in toastStack" :key="toast.id" :style="{transform: `translateY(${toast.top})`}" :class="[toast.type, toast.out ? 'out' : null]" @click="remove(toast.id)">
+      <div v-for="toast in toastStack" :key="toast.id" @click="remove(toast.id)">
         <Success v-if="toast.type === 'success'" :toast="toast" />
         <Fail v-else :toast="toast" />
       </div>
@@ -44,8 +44,8 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj';
 [toast-container] { .fix; .wf; .lt; .z(6000); .h(0); .fs(14); .c(#000);
-  >span{ .block; .h(0);
-    >div{ .w(270); .mh-c; .pointer; }
+  >span{ .block; .wh(100%,0); .tc;
+    >div{ display:table; .mh-c; .pointer; }
   }
   .toast-enter-active{ animation: toast-in .3s; }
   .toast-leave-active{ animation: toast-in .3s reverse; }

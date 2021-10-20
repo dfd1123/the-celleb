@@ -1,8 +1,8 @@
 <template>
-  <div alert class="dialog-holder">
+  <div alert :class="['dialog-holder', variant]">
     <div class="context">
       <div v-if="type === 'success'" class="success">
-        <img src="~assets/imgs/icon/ico-success-check.svg" alt="success">
+        <img :src="icon" alt="alert icon">
       </div>
       <div v-if="alert.title" class="title">
         <h5>{{ alert.title }}</h5>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import successCheck from '@/assets/imgs/icon/ico-success-check.svg'
 import ClButton from '@/components/common/ClButton'
 
 export default {
@@ -45,6 +46,12 @@ export default {
   computed: {
     type () {
       return this.option.type || 'success'
+    },
+    icon () {
+      return this.option.icon || successCheck
+    },
+    variant () {
+      return this.option.variant || ''
     }
   },
   mounted () {

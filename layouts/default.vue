@@ -1,12 +1,12 @@
 <template>
-  <div id="app" :class="{'main': isMain}">
-    <Header />
+  <div id="app" :class="{ftHide, hdHide}">
+    <Header v-if="!hdHide" />
     <div class="page-body">
       <KeepAlive :include="keepAliveLists">
         <RouterView :key="`${$route.name}`" />
       </KeepAlive>
     </div>
-    <Footer v-show="!isMain" />
+    <Footer v-if="!ftHide" v-show="!isMain" />
   </div>
 </template>
 
@@ -30,6 +30,12 @@ export default {
   computed: {
     isMain () {
       return this.$route.name === 'index'
+    },
+    hdHide () {
+      return Boolean(this.$route.meta.hdHide)
+    },
+    ftHide () {
+      return Boolean(this.$route.meta.ftHide)
     }
   }
 }
@@ -40,8 +46,11 @@ export default {
 #__nuxt{ .h(100%);
   #__layout{ .h(100%);
     #app{ .min-w(@wrapper-size); .min-h(100%);
-      &.main{
+      &.ftHide{
         >.page-body{ .mb(0); .pb(0); }
+      }
+      &.hdHide{
+        >.page-body{ .mt(0); .pt(0); }
       }
       >.page-body{ .min-h(100vh); .mt(-131.3); .pt(131.3); .mb(-240.39); .pb(240.39); .bgc(#fafbff); }
     }

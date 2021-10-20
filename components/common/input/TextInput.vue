@@ -85,8 +85,7 @@ export default {
   em {.fs(16, 48px); .h(48); .pl(12);}
   .msg {.fs(9); .c(@placeholder); .tr; .hide; .mt(2); .block;}
 
-  &.error {
-    &:after { .bgc(#f90); .t-s(1); }
-  }
+  &.error { .-a(#fd3d63); }
+  &.success { .pr(40); .contain('~assets/imgs/icon/ico-success-check.svg'); .bg-xy(90%, 50%); .bg-s(20,20); background-position-x: calc(100% - 10px);   }
 }
 </style>

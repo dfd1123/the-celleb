@@ -1,6 +1,13 @@
 <template>
   <div check-box :class="{disabled}">
-    <input :id="`check-box${uid}`" type="checkbox" :value="val" :disabled="disabled" @change="changeValue">
+    <input
+      :id="`check-box${uid}`"
+      v-model="model"
+      type="checkbox"
+      :value="val"
+      :disabled="disabled"
+      @change="changeValue"
+    >
     <label :for="`check-box${uid}`" class="checkbox" :style="`transform: scale(${sizeRatio})`" />
     <label :for="`check-box${uid}`">
       <span v-html="label" />

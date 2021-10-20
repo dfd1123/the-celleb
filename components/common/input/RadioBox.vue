@@ -59,7 +59,7 @@ export default {
 [radio-box] { .rel; .ib; .vam; .tl;
   &.md-checkbox-inline { .ib; }
 
-  label.checkbox { .ib; .wh(1.25em); .vat; .mr(5); .pl(1); clear: both; .pointer;
+  label.checkbox { .ib; .wh(1.25em); .vam; .mr(5); .pl(1); clear: both; .pointer;
     &:not(:empty) { .pl(0.75em); }
 
     &:before, &:after { box-sizing: border-box; content: ""; .abs; .lt(0,0); .z(1); .wh(1.25em); }
@@ -76,7 +76,7 @@ export default {
     }
   }
 
-  label{ .pointer;
+  label{ .ib; .vam; .pointer;
     >span{ .vam; }
   }
 

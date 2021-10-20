@@ -36,7 +36,7 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj';
 
-[main] { .rel;
+[main] { .rel; .crop;
   .bg-con { .crop; .abs; .lt(0, 0); .z(1); .h(100vh);
     > img { object-fit: cover; .min-w(100%); .min-h(100%); }
     &::after { .cnt; .abs; .lt(0, 0); .z(1); .wh(100%); .o(0.65); background-image: linear-gradient(116deg, #8E2AE4 2%, #0901F3 100%); }

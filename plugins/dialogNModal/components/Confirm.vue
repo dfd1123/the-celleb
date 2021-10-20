@@ -1,6 +1,9 @@
 <template>
-  <div confirm class="dialog-holder">
+  <div confirm :class="['dialog-holder', variant]">
     <div class="context">
+      <div v-if="icon" class="confirm-icon">
+        <img :src="icon" alt="confirm icon">
+      </div>
       <div v-if="confirm.title" class="title">
         <h5>{{ confirm.title }}</h5>
       </div>
@@ -60,6 +63,14 @@ export default {
       }
     }
   },
+  computed: {
+    icon () {
+      return this.confirm.icon || ''
+    },
+    variant () {
+      return this.option.variant || ''
+    }
+  },
   mounted () {
     this.resetState()
   },
@@ -78,6 +89,7 @@ export default {
 @import '~@/assets/less/proj';
 
 [confirm] { .max-w(496); .w(100%);  .p(47, 53, 38);
+  .confirm-icon{ .mb(21); }
   .title {
     h5 { .fs(30, 36); .c(#505050); .bold; }
   }

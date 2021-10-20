@@ -20,7 +20,7 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj';
 
-[success-toast]{ .w(270); .m(15,0); .mh-c; .p(15,0); .fs(15); .c(#fff); .bold; .tc; .bgc(#12d5a3); .br(50);
+[success-toast]{ .ib; .m(15,0); .mh-c; .p(15,15); .fs(15); .c(#fff); .bold; .tc; .bgc(#12d5a3); .br(50);
   >img { .ib; .vam; .wh(20); .mr(5); }
   span { .ib; .vam; }
 }

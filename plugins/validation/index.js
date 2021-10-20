@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
+import ValidationErrors from '@/plugins/validation/components/ValidationErrors'
 import { getCharLength, getByteLength } from '@/utils/commonUtils'
 
 const required = {
@@ -84,6 +85,7 @@ const init = () => {
     url: value => /^https?:\/\//i.test(value),
     verificationCode: value => /^[A-Z0-9]+$/.test(value),
     nickname: value => /^[a-zA-Z0-9_]+$/.test(value),
+    nicknameRegistered: value => value !== '더셀럽대박',
     isPhoneNumber: value => /^\+(?=(?:\s?\d){7,17}$)\d+(?:\s?\d+){0,3}$/.test(value),
     summonerName: value => /^[0-9a-zA-Z \u3131-\u314E\u314F-\u3163\uAC00-\uD7A3]+$/.test(value),
     hanaCoupon: value => /^Q[0-9A-Z]{6,7}$/.test(value),
@@ -115,27 +117,37 @@ const init = () => {
   })
 }
 
-// ValidationProvider.mixin({ props: { tag: { default: 'div' }, slim: { default: true } } })
-// ValidationObserver.mixin({ props: { tag: { default: 'fieldset' } } })
+ValidationProvider.mixin({ props: { tag: { default: 'div' }, slim: { default: true } } })
+ValidationObserver.mixin({ props: { tag: { default: 'fieldset' } } })
 Vue.component('ValidationProvider', ValidationProvider)
 Vue.component('ValidationObserver', ValidationObserver)
+Vue.component('ValidationErrors', ValidationErrors)
 
 export default ({ app }, inject) => {
   init()
 
   app.$validate = async function (validator, errorCallback) {
     const result = await validator.validate()
-    if (!result) {
-      if (errorCallback) { errorCallback(validator) }
-      console.log(Object.values(validator.errors).filter(a => a.length))
-      // throw Object.values(validator.errors).filter(a => a.length)[0][0]
-    }
-    if (typeof result === 'object') {
-      if (!result.valid) {
+
+    return new Promise((resolve, reject) => {
+      if (!result) {
         if (errorCallback) { errorCallback(validator) }
-        throw result.errors[0]
+        console.log(Object.values(validator.errors).filter(a => a.length))
+        // eslint-disable-next-line prefer-promise-reject-errors
+        reject()
+        // throw Object.values(validator.errors).filter(a => a.length)[0][0]
       }
-    }
+      if (typeof result === 'object') {
+        if (!result.valid) {
+          if (errorCallback) { errorCallback(validator) }
+          // eslint-disable-next-line prefer-promise-reject-errors
+          reject()
+          throw result.errors[0]
+        }
+      }
+
+      resolve()
+    })
   }
 
   inject('validate', app.$validate)

@@ -1,6 +1,9 @@
 export default [
   {
     path: '/',
-    name: 'index'
+    name: 'index',
+    meta: {
+      ftHide: true
+    }
   }
 ]

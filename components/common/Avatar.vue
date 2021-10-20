@@ -5,12 +5,12 @@
       <span />
       <ul>
         <li>
-          <router-link to="/">
+          <router-link to="/mypage/account">
             계정설정
           </router-link>
         </li>
         <li>
-          <router-link to="/">
+          <router-link to="/login">
             로그아웃
           </router-link>
         </li>

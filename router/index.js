@@ -1,4 +1,5 @@
 import home from './home'
+import auth from './auth'
 import product from './product'
 import order from './order'
 import faq from './faq'
@@ -7,6 +8,7 @@ import cash from './cash'
 
 const routeLists = [
   ...home,
+  ...auth,
   ...product,
   ...order,
   ...faq,

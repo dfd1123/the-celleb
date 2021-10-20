@@ -22,7 +22,7 @@
         <router-link to="/product/instagram/list">
           업체검색
         </router-link>
-        <cl-button type="line-purple" class="login-btn">
+        <cl-button type="line-purple" class="login-btn" @click="$router.push('/auth/login')">
           로그인
         </cl-button>
         <router-link to="/mypage">

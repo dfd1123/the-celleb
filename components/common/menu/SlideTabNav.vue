@@ -67,7 +67,7 @@ export default {
 @import '~@/assets/less/proj';
 
 [slide-tab-nav] { .no-drag; .-b(#EEEEEE, 2);
-  .ca-nav-con { .rel; .mt(14);
+  .ca-nav-con { .rel; .pt(14);
     > span {
       > a { .no-drag; .ib; .mr(40); .p(18, 0); .fs(18, 22); .c(@light-gray); .pointer;
         &.on{ .c(@purple); .bold; }
