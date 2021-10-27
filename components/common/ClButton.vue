@@ -40,6 +40,7 @@ export default {
 
 [cl-button]{ .ib; .vam;
   button { .min-h(40); .p(0, 10); .tc; .br(5);
+    >img{ .vam; }
     &:hover{ box-shadow: 0 0 0 black; }
   }
   &.line-purple {
@@ -57,6 +58,9 @@ export default {
     button { .c(#fff); .bgc(@strong-purple);
       &:disabled{ .c(#fff); .bgc(#999999); cursor:not-allowed;  }
     }
+  }
+  &.white{
+    button{ .c(#999999); .bgc(#fff); .-a; }
   }
   &.light-gray{
     button{ .c(#fff); .bgc(#ccc); }

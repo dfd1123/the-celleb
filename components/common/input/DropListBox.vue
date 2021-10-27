@@ -2,7 +2,7 @@
   <div drop-list :class="[convertDirection, className, {mounted, animated, 'on': showList}]" :style="elStyle">
     <ul ref="listBox" class="list-box">
       <li
-        v-for="(item, index) in (showList || [])"
+        v-for="(item, index) in showList"
         :key="`list-${index}${uid}`"
         :class="{'active': value === (item.value || item)}"
         @mousedown.left="clickListHandler(item)"
@@ -33,7 +33,7 @@ export default {
       listHeight: 0,
       pageYOffset: 0,
       convertDirection: '',
-      showList: null,
+      showList: [],
       clicked: false
     }
   },
@@ -70,7 +70,7 @@ export default {
   },
   created () {
     this.mounted = true
-    this.showList = this.list
+    this.showList = this.list || []
   },
   async mounted () {
     await this.renderingHtml()

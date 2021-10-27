@@ -38,48 +38,19 @@ export default {
   name: 'SelectBox',
   props: {
     value: { default: null },
-    list: {
-      type: Array,
-      default: () => []
-    },
-    split: {
-      type: String,
-      default: null
-    },
+    list: { type: Array, default: null },
+    split: { type: String, default: null },
     obj: { default: null },
-    placeholder: {
-      type: String,
-      default: ''
-    },
-    readonly: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    useBlank: {
-      type: Boolean,
-      default: false
-    },
-    variant: {
-      type: String,
-      default: null
-    },
-    artificial: {
-      type: Boolean,
-      default: true
-    },
-    direction: {
-      type: String,
-      default: 'down'
-    },
+    placeholder: { type: String, default: '' },
+    readonly: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
+    useBlank: { type: Boolean, default: false },
+    variant: { type: String, default: null },
+    artificial: { type: Boolean, default: true },
+    direction: { type: String, default: 'down' },
     name: { type: String },
-    error: {
-      type: Boolean,
-      default: false
-    }
+    error: { type: Boolean, default: false },
+    theme: { type: String, default: 'white' }
   },
   data () {
     return {
@@ -90,22 +61,16 @@ export default {
   },
   computed: {
     listCreated () {
-      let list = []
+      let list
 
       if (this.obj) {
-        list = Object.entries(this.obj).map(([key, value]) => ({
-          label: value,
-          value: key
-        }))
+        list = Object.entries(this.obj).map(([key, value]) => ({ label: value, value: key }))
       } else {
         list = this.split ? this.split.split(/[ ]*,[ ]*/) : this.list
       }
 
       if (this.useBlank && list) {
-        list = [...[{
-          value: null,
-          label: this.placeholder || '-'
-        }], ...list]
+        list = [...[{ value: null, label: this.placeholder || '-' }], ...list]
       }
 
       return list
@@ -126,20 +91,12 @@ export default {
   },
   methods: {
     toggleOpen () {
-      if (this.disabled) {
-        return
-      }
+      if (this.disabled) { return }
 
-      if (this.dropListBox) {
-        this.removeDropList()
-      } else {
-        this.createDropList()
-      }
+      if (this.dropListBox) { this.removeDropList() } else { this.createDropList() }
     },
     createDropList () {
-      if (this.readonly) {
-        return
-      }
+      if (this.readonly) { return }
       this.removeDropList()
       this.dropListBox = new (Vue.extend(DropListBox))({
         parent: this.$root,
@@ -148,7 +105,8 @@ export default {
           className: this.variant,
           list: this.listCreated,
           value: this.value,
-          direction: this.direction
+          direction: this.direction,
+          theme: this.theme
         }
       }
       ).$mount()
@@ -156,9 +114,7 @@ export default {
       this.focus = true
     },
     removeDropList () {
-      if (!this.dropListBox) {
-        return
-      }
+      if (!this.dropListBox) { return }
 
       this.dropListBox.$destroy()
       this.dropListBox = null
@@ -183,17 +139,11 @@ export default {
     change (val) {
       this.removeDropList()
       const v = !val || val.value === undefined ? val : val.value
-      if (this.artificial) {
-        this.$emit('select', v)
-      }
-      if (this.selected === val || (this.selected && this.selected.value !== undefined && this.selected.value === val.value)) {
-        return
-      }
+      if (this.artificial) { this.$emit('select', v) }
+      if (this.selected === val || (this.selected && this.selected?.value !== undefined && this.selected?.value === val?.value)) { return }
       this.selected = val
       this.$emit('input', v)
-      if (this.artificial) {
-        this.$emit('change', v)
-      }
+      if (this.artificial) { this.$emit('change', v) }
     },
     update () {
       let val = ''
@@ -201,11 +151,7 @@ export default {
 
       if (list) {
         val = _.find(list, item => (item.value || item) === this.value)
-        if (!val && !this.placeholder) {
-          [val] = list
-        } else if (!val) {
-          [val] = list
-        }
+        if (!val && !this.placeholder) { [val] = list }
       }
 
       this.change(val)

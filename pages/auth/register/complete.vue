@@ -2,14 +2,12 @@
   <div register-complete-page>
     <div class="contents-holder">
       <img src="~/assets/imgs/icon/ico-success-check.svg" alt="success check">
-      <h2 class="title">
-        회원 가입이 완료되었습니다.
-      </h2>
+      <h2 class="title" v-html="isInfluencer ? '프로필을 완성하고<br>더욱 많은 고객을 만나보세요!':'회원 가입이 완료되었습니다.'" />
       <p class="message">
-        가입 완료되었습니다. 지금 바로 마케팅 추천을 받으세요!
+        {{ isInfluencer ? '전문분야와 포트폴리오 등록시 더 많은 고객과 매칭됩니다.' : '가입 완료되었습니다. 지금 바로 마케팅 추천을 받으세요!' }}
       </p>
       <cl-button type="purple" @click="$router.push('/auth/login')">
-        로그인하기
+        {{ isInfluencer ? '프로필 완성하기' : '로그인하기' }}
       </cl-button>
     </div>
   </div>
@@ -20,7 +18,12 @@ import ClButton from '@/components/common/ClButton'
 
 export default {
   name: 'RegisterCompletePage',
-  components: { ClButton }
+  components: { ClButton },
+  computed: {
+    isInfluencer () {
+      return this.$route.query.type === 'influencer'
+    }
+  }
 }
 </script>
 

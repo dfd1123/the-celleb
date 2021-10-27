@@ -4,6 +4,9 @@
       <div class="logo" @click="$router.push('/')">
         <img src="~/assets/imgs/icon/color-logo.svg" alt="the celleb">
       </div>
+      <p v-if="isInfluencer" class="sub-info">
+        인플루언서 전용 회원가입
+      </p>
       <div class="inp-box-holder">
         <ValidationObserver ref="validator">
           <ValidationProvider v-slot="{errors}" rules="required|email" name="아이디(이메일)" class="inp-box">
@@ -22,18 +25,26 @@
             <TextInput v-model="nickname" :class="{'error': errors.length > 0}" placeholder="닉네임을 입력해주세요." />
             <ValidationErrors :errors="errors" />
           </ValidationProvider>
-          <ValidationProvider v-slot="{errors}" rules="required" name="사업자등록번호" class="inp-box">
-            <TextInput v-model="companyRegistNum" type="number" :class="{'error': errors.length > 0}" placeholder="사업자등록번호를 입력해주세요." />
-            <ValidationErrors :errors="errors" />
-          </ValidationProvider>
-          <ValidationProvider v-slot="{errors}" rules="required" name="대표자명" class="inp-box">
-            <TextInput v-model="ceoName" :class="{'error': errors.length > 0}" placeholder="대표자명을 입력해주세요." />
-            <ValidationErrors :errors="errors" />
-          </ValidationProvider>
+          <template v-if="!isInfluencer">
+            <ValidationProvider v-slot="{errors}" rules="required" name="사업자등록번호" class="inp-box">
+              <TextInput v-model="companyRegistNum" type="number" :class="{'error': errors.length > 0}" placeholder="사업자등록번호를 입력해주세요." />
+              <ValidationErrors :errors="errors" />
+            </ValidationProvider>
+            <ValidationProvider v-slot="{errors}" rules="required" name="대표자명" class="inp-box">
+              <TextInput v-model="ceoName" :class="{'error': errors.length > 0}" placeholder="대표자명을 입력해주세요." />
+              <ValidationErrors :errors="errors" />
+            </ValidationProvider>
+          </template>
           <ValidationProvider v-slot="{errors}" rules="required|url" name="운영중인 SNS주소" class="inp-box">
             <TextInput v-model="snsUrl" :class="{'error': errors.length > 0}" placeholder="운영중인 SNS주소를 입력해주세요." />
             <ValidationErrors :errors="errors" />
           </ValidationProvider>
+          <template v-if="isInfluencer">
+            <ValidationProvider v-slot="{errors}" rules="required" name="인플루언서 이름" class="inp-box">
+              <TextInput v-model="influencerName" :class="{'error': errors.length > 0}" placeholder="인플루언서 이름을 입력해주세요." />
+              <ValidationErrors :errors="errors" />
+            </ValidationProvider>
+          </template>
         </ValidationObserver>
       </div>
       <div class="agree-list">
@@ -76,6 +87,7 @@ export default {
       nickname: '',
       ceoName: '',
       snsUrl: '',
+      influencerName: '',
       allAgree: false,
       useTermAgree: false,
       privacyAgree: false,
@@ -141,10 +153,11 @@ export default {
 
 [register-page]{ .abs; .lt(0, 0); .z(1); .w(100%); .min-h(100%); .p(50,0); .bgc(#fafbff); .flex-center;
   .contents-holder { .max-w(561); .w(100%); .p(41, 40); .bgc(#FFFFFF); .br(12); box-shadow: 3px 3px 12px 0 rgba(0, 0, 0, 0.04);
-    .logo { .mt(10.5); .mb(49.3); .tc; .pointer;
+    .logo { .mt(10.5); .mb(21.3); .tc; .pointer;
       > img { .h(27); }
     }
-    .inp-box-holder{
+    .sub-info { .fs(18,21); .c(@title-black); .tc; }
+    .inp-box-holder{ .mt(44);
       .inp-box{
         [text-input]{ .wh(100%, 56);
           > input { .wh(100%, 56); .p(0,20); .fs(20,56);  }

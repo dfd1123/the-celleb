@@ -1,8 +1,9 @@
 <template>
-  <div order-card @click="$emit('click')">
+  <div order-user-card @click="$emit('click')">
     <div class="main-info">
-      <div class="product-img">
-        <img src="~/assets/imgs/sample/product-order-sample.jpg" alt="product-image">
+      <div class="user-profile">
+        <Avatar />
+        <span class="nickname">닉네임</span>
       </div>
       <div class="product-info">
         <div class="order-info">
@@ -16,21 +17,10 @@
           공동구매를 빠르고 효울적으로 도와드립니다.
         </p>
         <div class="detail-info">
-          <span v-if="manage" class="manage-record">판매완료<b>10건</b></span>
-          <span v-else class="receipt-price-date">결제일 21.10.10 12:03</span>
+          <span class="receipt-price-date">발송 예정일 21.10.10 12:03</span>
           <span v-if="payMethod" class="paymethod">결제방법 : 신용카드</span>
         </div>
         <div class="sub-info">
-          <div v-if="manage" class="manage">
-            관리
-            <div class="pop-over">
-              <ul>
-                <li v-for="item in showStatusList" :key="`${item.value}`">
-                  {{ item.label }}
-                </li>
-              </ul>
-            </div>
-          </div>
           <span v-if="tradingStatement" class="trading-state">거래명세서</span>
           <span v-if="slipOut" class="trading-state">전표출력</span>
           <!--          <span class="option-name">네이버쇼핑라이브 30일 <small>(1개)</small></span>-->
@@ -42,38 +32,24 @@
 </template>
 
 <script>
+import Avatar from '@/components/common/Avatar'
+
 export default {
-  name: 'OrderCard',
+  name: 'OrderUserCard',
+  components: { Avatar },
   props: {
     tradingStatement: { type: Boolean, default: false },
     slipOut: { type: Boolean, default: false },
     payMethod: { type: Boolean, default: false },
-    status: { type: String, default: '' },
-    manage: { type: Boolean, default: false }
-  },
-  data () {
-    return {
-      statusList: [
-        { label: '판매시작', value: 'sales-ing' },
-        { label: '판매일시중지', value: 'sales-stop' },
-        { label: '서비스편집', value: 'service-edit' },
-        { label: '서비스삭제', value: 'service-delete' }
-      ],
-      selectStatus: null
-    }
+    status: { type: String, default: '' }
   },
   computed: {
     statusTag () {
       if (this.status === 'refund-complete') {
         return '환불완료'
-      } else if (this.status === 'wait-apply') {
-        return '승인대기중'
       }
 
       return '주문완료'
-    },
-    showStatusList () {
-      return this.statusList.filter(item => item.value !== this.status)
     }
   }
 }
@@ -82,10 +58,11 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj';
 
-[order-card]{ .mb(29); .p(38, 40, 28); .br(7); .bgc(#fff); box-shadow: 3px 3px 12px 0 rgba(0, 0, 0, 0.04);
-  .main-info{ .rel; .pl(229);
-    .product-img { .abs; .lt(0,0); .z(1); .wh(191,131);
-      >img { .wh(100%); object-position: center; object-fit: cover; }
+[order-user-card]{ .mb(29); .p(38, 40, 28); .br(7); .bgc(#fff); box-shadow: 3px 3px 12px 0 rgba(0, 0, 0, 0.04);
+  .main-info{ .rel; .pl(200);
+    .user-profile { .abs; .lt(0,0); .z(1); .wh(110); .m(0, 19);
+      [avatar]{ .wh(100%); }
+      .nickname { .block; .mt(13); .fs(16,19); .c(@gray); .tc; }
     }
     .product-info { .min-h(157.3);
       .order-info {
@@ -97,26 +74,10 @@ export default {
       .name{ .mt(17); .mb(10); .fs(24,29); .c(@title-black); .medium; }
       .description { .min-h(44); .fs(18,22); .c(@gray); .regular; .ellipsis(2); }
       .detail-info{ .crop;
-        .manage-record { .fs(18,21); .c(@gray);
-          >b{ .ml(7); }
-        }
         .receipt-price-date { .fl; .block; .mt(10); .fs(15,19); .c(#aaa); }
         .paymethod{ .fr; .fs(18,21); .c(@gray); }
       }
-      .sub-info { .clear; .mt(23.3); .p(22, 0); .-t(#ebebeb);
-        .manage{ .rel; .ib; .w(86); .p(0,10); .fs(15, 31); .c(#888); .tc; .br(5); .bgc(#f1f1f1);
-          .pop-over{ .hide; .abs; .lt(-15,17); .z(1); .pt(30);
-            &::before{ .cnt; .abs; .lt(39%,24); .z(3); .wh(20); .br(5); .bgc(#fff); transform:rotate(45deg);  }
-            >ul{ .rel; .z(1); .w(118); .p(17, 0); .bgc(#fff); .br(7);  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16);
-              >li{  .block; .w(100%); .fs(15,19); .p(7,0); .pointer;
-                &:hover{ .bgc(#fafafa); }
-              }
-            }
-          }
-          &:hover{
-            .pop-over{ .block; }
-          }
-        }
+      .sub-info { .crop; .mt(23.3); .p(22, 0); .-t(#ebebeb);
         .trading-state{ .ib; .p(0,10); .fs(15, 31); .c(#888); .br(5); .bgc(#f1f1f1); }
         .option-name { .fl; .mr(10); .fs(18, 24); .c(@gray);
           small { .fs(18,31); .c(#999); }
