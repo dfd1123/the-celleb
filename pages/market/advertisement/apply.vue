@@ -10,7 +10,7 @@
         </h2>
         <span class="sub">{{ product.sub }}</span>
         <p class="description" v-html="product.description" />
-        <cl-button type="purple" class="ad-apply-btn">
+        <cl-button type="purple" class="ad-apply-btn" @click="adverPurchaseModal">
           {{ product.name }} 광고 신청하기
         </cl-button>
       </div>
@@ -52,6 +52,7 @@
 <script>
 import ClButton from '@/components/common/ClButton'
 import { numberFormat } from '@/utils/numberUtils'
+import AdverPurchaseModal from '@/components/market/modal/AdverPurchaseModal'
 
 export default {
   name: 'MarketAdvertisementApplyPage',
@@ -90,7 +91,11 @@ export default {
 
       return product
     }
-
+  },
+  methods: {
+    adverPurchaseModal () {
+      this.$modal(AdverPurchaseModal, { product: this.product })
+    }
   }
 }
 </script>

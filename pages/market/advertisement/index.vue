@@ -13,7 +13,7 @@
         </li>
         <li>
           <p>광고신청을 통해서 더 많은 고객을 만나보세요.</p>
-          <cl-button type="line-purple" class="ad-apply-btn">
+          <cl-button type="line-purple" class="ad-apply-btn" @click="$router.push('/market/advertisement/apply?type=master')">
             광고신청하기
           </cl-button>
         </li>
