@@ -2,20 +2,20 @@
   <div buy-control-panel>
     <div class="product-info">
       <h1 class="name">
-        더셀럽
+        {{ item.title }}
       </h1>
       <p class="description">
-        공동구매를 빠르고 효율적으로 도와드립니다.
+        {{ item.simple_intro }}
       </p>
       <div class="price-info">
-        <em>1,000,000 원~</em>
+        <em>{{ minimumPrice }} 원~</em>
         <span>VAT 포함 가격</span>
       </div>
     </div>
     <div class="detail-product-info">
-      <accordion-view v-for="i in 3" :key="`detail-prd-${i}`" v-model="openProductIndex" name="detail-prd">
+      <accordion-view v-for="option in options" :key="`detail-prd-${option.id}`" v-model="openProductIndex" name="detail-prd">
         <template #title>
-          <b class="name">MICRO</b>
+          <b class="name">{{ option.name }}</b>
           <span class="price">1,000,000원</span>
         </template>
         <div>
@@ -46,13 +46,29 @@
 <script>
 import AccordionView from '@/components/common/AccordionView'
 import ClButton from '@/components/common/ClButton'
+import { numberFormat } from '~/utils/numberUtils'
 
 export default {
   name: 'BuyControlPanel',
   components: { AccordionView, ClButton },
+  props: {
+    item: {
+      type: Object,
+      required: true
+    }
+  },
   data () {
     return {
       openProductIndex: 0
+    }
+  },
+  computed: {
+    minimumPrice () { return numberFormat(this.item.minimum_price || 0) },
+    options () {
+      if (this.item.options) {
+        return Object.keys(this.item.options).map(option => ({ ...this.item.options[option], id: option }))
+      }
+      return []
     }
   }
 }

@@ -27,6 +27,7 @@ export default {
   plugins: [
     { src: '@/plugins/dialogNModal', mode: 'client' },
     { src: '@/plugins/toast', mode: 'client' },
+    { src: '@/plugins/api' },
     { src: '@/plugins/validation' }
   ],
 

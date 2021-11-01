@@ -1,10 +1,10 @@
 export default [
   {
-    path: '/product/:categoryId/list',
-    name: 'product-categoryId-list'
+    path: '/product/:channelId/list',
+    name: 'product-channelId-list'
   },
   {
-    path: '/product/:categoryId/:productId',
-    name: 'product-categoryId-productId'
+    path: '/product/:channelId/:productId',
+    name: 'product-channelId-productId'
   }
 ]

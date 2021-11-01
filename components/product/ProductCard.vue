@@ -1,25 +1,25 @@
 <template>
   <div product-card>
     <div class="card-holder">
-      <router-link to="/product/youtube/1">
+      <router-link :to="`/product/${item.channel_id}/${item.id}`">
         <div class="prod-img-box">
-          <img :src="item.image || sampleProductImg" :alt="item.name || 'sample image'">
+          <img :src="productImg" :alt="item.title || 'sample image'">
         </div>
         <div class="prod-info-box">
           <h2 class="name">
-            {{ item.name || '업체이름' }}
+            {{ item.title || '업체이름' }}
           </h2>
           <p class="description">
-            인스타그램 최적화 계정으로 활성화 관리해드립니다.
+            {{ item.simple_intro }}
           </p>
         </div>
       </router-link>
       <div class="prod-price-box">
-        <em class="price">30,000<i>원</i></em>
+        <em class="price">{{ minimumPrice }}<i>원</i></em>
         <div class="about-reason">
           <HearButton />
-          <span class="score">4.9</span>
-          <span class="review-cnt">(320)</span>
+          <span class="score">{{ item.rating }}</span>
+          <span class="review-cnt">({{ item.review_cnt }})</span>
         </div>
       </div>
     </div>
@@ -29,6 +29,7 @@
 <script>
 import sampleProductImg from '@/assets/imgs/sample/product1.jpg'
 import HearButton from '@/components/common/HearButton'
+import { numberFormat } from '~/utils/numberUtils'
 
 export default {
   name: 'ProductCard',
@@ -36,16 +37,20 @@ export default {
   props: {
     item: {
       type: Object,
-      default: () => ({
-        // eslint-disable-next-line no-undef
-        image: '',
-        name: '업체이름'
-      })
+      required: true
     }
   },
   data () {
     return {
       sampleProductImg
+    }
+  },
+  computed: {
+    productImg () {
+      return this.item.images[0] || sampleProductImg
+    },
+    minimumPrice () {
+      return numberFormat(this.item.minimum_price || 0)
     }
   }
 }

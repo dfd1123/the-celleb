@@ -9,5 +9,7 @@ export default function (to, from, savedPosition) {
         selector: to.hash
       })
     }
+
+    resolve({ x: 0, y: 0 })
   })
 }

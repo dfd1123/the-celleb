@@ -1,6 +1,6 @@
 <template>
   <div product-card-wrap :class="[type]">
-    <ProductCard v-for="(item, index) in list" :key="`item-${index}`" :item="{image: require(`~/assets/imgs/sample/product${index + 1}.jpg`)}" />
+    <ProductCard v-for="item in list" :key="`item-${item.id}`" :item="item" />
   </div>
 </template>
 

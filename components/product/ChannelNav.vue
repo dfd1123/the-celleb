@@ -8,7 +8,7 @@
 import SlideTabNav from '@/components/common/menu/SlideTabNav'
 
 export default {
-  name: 'CategoryNav',
+  name: 'ChannelNav',
   components: { SlideTabNav },
   data () {
     return {
@@ -17,8 +17,8 @@ export default {
     }
   },
   computed: {
-    categoryId () {
-      return this.$route.params.categoryId
+    channelId () {
+      return this.$route.params.channelId
     },
     menuRouteList () {
       const pathList = ['instagram', 'youtube', 'blog', 'cafe', 'tiktok', 'live-commerce']
@@ -26,7 +26,7 @@ export default {
     }
   },
   watch: {
-    categoryId () {
+    channelId () {
       this.activeIndexUpdate()
     }
   },
@@ -39,8 +39,11 @@ export default {
       this.$router.push(path)
     },
     activeIndexUpdate () {
-      const activeIndex = this.menuRouteList.findIndex(menu => menu.id === this.categoryId)
+      const activeIndex = this.menuRouteList.findIndex(menu => menu.id === this.channelId)
       if (activeIndex !== -1) { this.activeIndex = activeIndex }
+
+      this.$emit('input', this.channelId)
+      this.$emit('input', this.channelId)
     }
   }
 }
