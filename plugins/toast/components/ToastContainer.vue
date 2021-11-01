@@ -43,7 +43,7 @@ export default {
 
 <style lang="less">
 @import '~@/assets/less/proj';
-[toast-container] { .fix; .wf; .lt; .z(6000); .h(0); .fs(14); .c(#000);
+[toast-container] { .fix; .wf; .lt; .z(11000); .h(0); .fs(14); .c(#000);
   >span{ .block; .wh(100%,0); .tc;
     >div{ display:table; .mh-c; .pointer; }
   }

@@ -51,7 +51,7 @@ export default {
     'v-wave/nuxt'
   ],
   styleResources: {
-    less: ['~/assets/less/reset.less', '~/assets/less/fonts.less']
+    less: ['~/assets/less/fonts.less']
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

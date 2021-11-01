@@ -36,6 +36,9 @@ export default {
 @import '~@/assets/less/proj';
 
 [text-area-box]{
+  &.error{
+    textarea{ .-a(#fd3d63); }
+  }
   textarea{ .wh(100%); .p(24); .fs(16,24); .c(@title-black); .-a(#d9d9d9); .br(5); resize: none; transition: border 0.2s;
     &:focus{ .-a(@strong-purple); }
     &::placeholder{ .c(#ccc); }

@@ -65,5 +65,8 @@ export default {
   &.light-gray{
     button{ .c(#fff); .bgc(#ccc); }
   }
+  &.gray{
+    button{ .c(#888); .bgc(#f1f1f1); }
+  }
 }
 </style>

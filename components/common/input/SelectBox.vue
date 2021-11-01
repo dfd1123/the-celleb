@@ -154,7 +154,7 @@ export default {
         if (!val && !this.placeholder) { [val] = list }
       }
 
-      this.change(val)
+      if (this.value !== val) { this.change(val) }
     }
   }
 }
@@ -178,8 +178,8 @@ export default {
     &.down { }
     &.up { }
   }
-  &.error {
-    &::before { .cnt; .abs; .lb(0, 0); .z(2); .w(100%); .-b(#FF9900); }
+  &.error { .-a(#fd3d63) !important;
+    // &::before { .cnt; .abs; .lb(0, 0); .z(2); .w(100%); .-b(#FF9900); }
   }
   // &:hover { background: #666; color: #FFF; .-a(#666); }
 

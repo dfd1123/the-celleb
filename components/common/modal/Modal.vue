@@ -8,7 +8,7 @@
             <slot name="title" />
           </h6>
           <button v-if="closeBtn" class="close-btn" @click="close">
-            <img src="~/assets/imgs/icon/ico-close.svg" alt="close">
+            <img src="~/assets/imgs/icon/ico-modal-close.svg" alt="close">
           </button>
         </div>
         <div class="body">
@@ -43,7 +43,7 @@ export default {
     .contents { .p(39, 50); .bgc(#fff); .tl; .br(7); box-shadow: 3px 3px 12px 0 rgba(0, 0, 0, 0.04); }
     .header { .rel; .mb(31);
       .title { .fs(28,33); .c(@title-black); .semi-bold; }
-      .close-btn { .abs; .rt(0,4); .z(1);
+      .close-btn { .abs; .rt(0,0); .z(1);
         > img{ .vam; }
       }
     }

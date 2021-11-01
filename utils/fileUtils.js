@@ -59,17 +59,17 @@ export const imageFileUpload = async (e) => {
  * @param {Event} e
  * @returns {*[]}
  */
-export const multiImageUpload = (e) => {
+export const multiImageUpload = async (e) => {
   const result = []
   const files = _get(e, 'target.files', null)
 
-  Array.from(files).forEach(async (file) => {
-    if (file) {
-      await validateImageFile(file, e)
-      const dataUrl = await readAsDataURLAsync(file)
-      result.push({ file, dataUrl })
+  for (let i = 0; i < Array.from(files).length; i++) {
+    if (files[i]) {
+      await validateImageFile(files[i], e)
+      const dataUrl = await readAsDataURLAsync(files[i])
+      result.push({ file: files[i], dataUrl })
     }
-  })
+  }
 
   return result
 }
