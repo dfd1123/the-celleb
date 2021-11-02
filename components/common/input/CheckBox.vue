@@ -1,5 +1,5 @@
 <template>
-  <div check-box :class="{disabled}">
+  <div check-box :class="{disabled, button}">
     <input
       :id="`check-box${uid}`"
       v-model="model"
@@ -10,7 +10,7 @@
     >
     <label :for="`check-box${uid}`" class="checkbox" :style="`transform: scale(${sizeRatio})`" />
     <label :for="`check-box${uid}`">
-      <span v-html="label" />
+      <span v-wave="button" v-html="label" />
     </label>
   </div>
 </template>
@@ -23,7 +23,8 @@ export default {
     val: { type: [String, Number, Boolean], default: true },
     value: { type: [String, Number, Boolean, Array], default: false },
     sizeRatio: { type: Number, default: 1 },
-    disabled: { type: Boolean, default: false }
+    disabled: { type: Boolean, default: false },
+    button: { type: Boolean, default: false }
   },
   data () {
     return {
@@ -73,6 +74,19 @@ export default {
 
 [check-box] { .rel; .ib; .vam; .tl;
   &.md-checkbox-inline { .ib; }
+  &.button {
+    label.checkbox { .hide; }
+    label{ .ib;
+      >span{ .ib; .p(10); .c(#aaa); .-a(#d9d9d9); .br(5); }
+    }
+    input[type="checkbox"] {
+      &:checked {
+        ~ label{
+          >span{ .c(@purple); .-a(@purple); }
+        }
+      }
+    }
+  }
 
   label.checkbox { .ib; .wh(1.25em); .vat; .mr(5); .pl(1); clear: both; .pointer;
     &:not(:empty) { .pl(0.75em); }

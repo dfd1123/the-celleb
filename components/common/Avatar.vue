@@ -1,6 +1,10 @@
 <template>
   <div avatar>
     <img :src="image" :alt="alt">
+    <label v-if="edit" class="profile-img-edit-btn">
+      <img src="~/assets/imgs/icon/ico-camera.svg" alt="edit porfile">
+      <input type="file" accept="image/*" @change="profileImageChange">
+    </label>
     <div v-if="tootip" class="my-menu">
       <span />
       <ul>
@@ -21,17 +25,37 @@
 
 <script>
 import defaultProfileImg from '@/assets/imgs/default/account.png'
+import { imageFileUpload } from '@/utils/fileUtils'
 
 export default {
   name: 'Avatar',
   props: {
     src: { type: String, default: '' },
     alt: { type: String, default: 'profile-image' },
-    tootip: { type: Boolean, default: false }
+    tootip: { type: Boolean, default: false },
+    edit: { type: Boolean, default: false }
+  },
+  data () {
+    return {
+      uploadImage: null
+    }
   },
   computed: {
     image () {
-      if (!this.src) { return defaultProfileImg } else { return this.src }
+      if (this.uploadImage) {
+        return this.uploadImage.dataUrl
+      } else if (!this.src) {
+        return defaultProfileImg
+      }
+
+      return this.src
+    }
+  },
+  methods: {
+    async profileImageChange (e) {
+      this.uploadImage = await imageFileUpload(e)
+
+      this.$emit('change', this.uploadImage)
     }
   }
 }
@@ -53,6 +77,10 @@ export default {
         }
       }
     }
+  }
+  .profile-img-edit-btn{ .abs; .rb(2,2); .z(1); .ib; .wh(28); .bgc(@strong-purple); .br(50%); .pointer;
+    >img{ .wh(20); .m(4); .vam; }
+    >input{ .hide; }
   }
   &:hover{
     .my-menu{ visibility: visible; .o(1); }
