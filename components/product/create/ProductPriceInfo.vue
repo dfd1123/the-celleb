@@ -139,55 +139,55 @@
         <div class="select-inp-li">
           <em class="name">MICRO</em>
           <div class="select-area">
-            <ValidationProvider v-slot="{errors}" rules="requiredSelect" name="금액" class="select-inp">
-              <SelectBox v-model="priceInfo.micro.quickWork.addPrice" :class="{'error': errors.length > 0}" placeholder="최소 1,000" />
+            <ValidationProvider v-slot="{errors}" rules="required" name="금액" class="select-inp">
+              <TextInput v-model="priceInfo.micro.quickWork.addPrice" type="number" :class="['add-price', {'error': errors.length > 0}]" placeholder="최소 1,000" />
               <ValidationErrors :errors="errors" />
             </ValidationProvider>
 
             <span>원 추가시</span>
 
             <ValidationProvider v-slot="{errors}" rules="requiredSelect" name="작업일수" class="select-inp">
-              <SelectBox v-model="priceInfo.micro.quickWork.workDay" :class="{'error': errors.length > 0}" placeholder="선택해주세요" />
+              <SelectBox v-model="priceInfo.micro.quickWork.workDay" :list="workDayList" :class="{'error': errors.length > 0}" placeholder="선택해주세요" />
               <ValidationErrors :errors="errors" />
             </ValidationProvider>
 
-            <span>일 안에 작업</span>
+            <span>안에 작업</span>
           </div>
         </div>
         <div v-if="isPackage" class="select-inp-li">
           <em class="name">MEGA</em>
           <div class="select-area">
-            <ValidationProvider v-slot="{errors}" rules="requiredSelect" name="금액" class="select-inp">
-              <SelectBox v-model="priceInfo.mega.quickWork.addPrice" :class="{'error': errors.length > 0}" placeholder="최소 1,000" />
+            <ValidationProvider v-slot="{errors}" rules="required" name="금액" class="select-inp">
+              <TextInput v-model="priceInfo.mega.quickWork.addPrice" type="number" :class="['add-price', {'error': errors.length > 0}]" placeholder="최소 1,000" />
               <ValidationErrors :errors="errors" />
             </ValidationProvider>
 
             <span>원 추가시</span>
 
             <ValidationProvider v-slot="{errors}" rules="requiredSelect" name="작업일수" class="select-inp">
-              <SelectBox v-model="priceInfo.mega.quickWork.workDay" :class="{'error': errors.length > 0}" placeholder="선택해주세요" />
+              <SelectBox v-model="priceInfo.mega.quickWork.workDay" :list="workDayList" :class="{'error': errors.length > 0}" placeholder="선택해주세요" />
               <ValidationErrors :errors="errors" />
             </ValidationProvider>
 
-            <span>일 안에 작업</span>
+            <span>안에 작업</span>
           </div>
         </div>
         <div v-if="isPackage" class="select-inp-li">
           <em class="name">STAR</em>
           <div class="select-area">
-            <ValidationProvider v-slot="{errors}" rules="requiredSelect" name="금액" class="select-inp">
-              <SelectBox v-model="priceInfo.star.quickWork.addPrice" :class="{'error': errors.length > 0}" placeholder="최소 1,000" />
+            <ValidationProvider v-slot="{errors}" rules="required" name="금액" class="select-inp">
+              <TextInput v-model="priceInfo.star.quickWork.addPrice" type="number" :class="['add-price', {'error': errors.length > 0}]" placeholder="최소 1,000" />
               <ValidationErrors :errors="errors" />
             </ValidationProvider>
 
             <span>원 추가시</span>
 
             <ValidationProvider v-slot="{errors}" rules="requiredSelect" name="작업일수" class="select-inp">
-              <SelectBox v-model="priceInfo.star.quickWork.workDay" :class="{'error': errors.length > 0}" placeholder="선택해주세요" />
+              <SelectBox v-model="priceInfo.star.quickWork.workDay" :list="workDayList" :class="{'error': errors.length > 0}" placeholder="선택해주세요" />
               <ValidationErrors :errors="errors" />
             </ValidationProvider>
 
-            <span>일 안에 작업</span>
+            <span>안에 작업</span>
           </div>
         </div>
       </div>
@@ -201,19 +201,19 @@
         <div v-for="(addEdit, index) in priceInfo.addEdit" :key="`addEdit${index}`" class="select-inp-li">
           <em class="name" />
           <div class="select-area">
-            <ValidationProvider v-slot="{errors}" rules="requiredSelect" name="금액" class="select-inp">
-              <SelectBox v-model="addEdit.addPrice" :class="{'error': errors.length > 0}" placeholder="최소 1,000" />
+            <ValidationProvider v-slot="{errors}" rules="required" name="금액" class="select-inp">
+              <TextInput v-model="addEdit.addPrice" type="number" :class="['add-price', {'error': errors.length > 0}]" placeholder="최소 1,000" />
               <ValidationErrors :errors="errors" />
             </ValidationProvider>
 
             <span>원 추가시</span>
 
             <ValidationProvider v-slot="{errors}" rules="requiredSelect" name="작업일수" class="select-inp">
-              <SelectBox v-model="addEdit.editCnt" :class="{'error': errors.length > 0}" placeholder="선택해주세요" />
+              <SelectBox v-model="addEdit.editCnt" :list="editCntList" :class="{'error': errors.length > 0}" placeholder="선택해주세요" />
               <ValidationErrors :errors="errors" />
             </ValidationProvider>
 
-            <span>회 추가</span>
+            <span>추가</span>
           </div>
         </div>
       </div>
@@ -241,15 +241,15 @@
           </div>
           <div class="inp-box">
             <span class="label">추가금액</span>
-            <ValidationProvider v-slot="{errors}" rules="requiredSelect" name="맞춤옵션 추가금액" :vid="`optionPrice${index}`" class="inp">
-              <SelectBox v-model="option.addPrice" :class="{'error': errors.length > 0}" placeholder="최소 1,000" /><span>원 추가시</span>
+            <ValidationProvider v-slot="{errors}" rules="required" name="맞춤옵션 추가금액" :vid="`optionPrice${index}`" class="inp">
+              <TextInput v-model="option.addPrice" type="number" :class="['add-price', {'error': errors.length > 0}]" placeholder="최소 1,000" /><span>원 추가시</span>
               <ValidationErrors :errors="errors" />
             </ValidationProvider>
           </div>
           <div class="inp-box">
             <span class="label">추가 작업일</span>
             <ValidationProvider v-slot="{errors}" rules="requiredSelect" name="맞춤옵션 추가 작업일" :vid="`optionWorkDay${index}`" class="inp">
-              <SelectBox v-model="option.workDay" :class="{'error': errors.length > 0}" placeholder="선택해주세요" /><span>회 추가</span>
+              <SelectBox v-model="option.workDay" :list="workDayList" :class="{'error': errors.length > 0}" placeholder="선택해주세요" /><span>추가</span>
               <ValidationErrors :errors="errors" />
             </ValidationProvider>
           </div>
@@ -339,7 +339,7 @@ export default {
     }
   },
   computed: {
-    workDayList () { return Array.from({ length: 10 }).map((_, index) => ({ label: `${index}일`, value: index })) },
+    workDayList () { return Array.from({ length: 10 }).map((_, index) => ({ label: `${index + 1}일`, value: index + 1 })) },
     editCntList () { return Array.from({ length: 10 }).map((_, index) => ({ label: `${index}회`, value: index })) }
   },
   methods: {
@@ -412,6 +412,9 @@ export default {
         [check-box] { .fr; }
     }
     .body{ .p(30,28,40); .-t(#efefef,2);
+      [text-input]{
+        &.add-price{ .ib; .vam; .max-w(185); .mr(12); }
+      }
       .select-inp-li{ .crop;
         &:last-child { .mb(0); }
         .name{ .fl; .w(156); .min-h(10); .fs(20,48); .c(@gray); .semi-bold; }
