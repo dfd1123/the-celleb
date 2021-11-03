@@ -1,6 +1,7 @@
 <template>
   <div text-area-box :class="{disabled}">
-    <textarea v-model="model" :placeholder="placeholder" :disabled="disabled" />
+    <textarea v-model="model" :placeholder="placeholder" :disabled="disabled" :maxlength="max" />
+    <span v-if="max" class="char-length">{{ charLength }}/{{ max }}</span>
   </div>
 </template>
 
@@ -9,12 +10,18 @@ export default {
   name: 'TextAreaBox',
   props: {
     value: { type: String, default: '' },
+    max: { type: Number, default: undefined },
     placeholder: { type: String, default: '' },
     disabled: { type: Boolean, default: false }
   },
   data () {
     return {
       model: ''
+    }
+  },
+  computed: {
+    charLength () {
+      return this.model.length
     }
   },
   watch: {

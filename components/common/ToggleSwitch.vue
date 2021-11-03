@@ -1,6 +1,6 @@
 <template>
   <label toggle-switch :class="{'active': model}">
-    <input v-model="model" type="checkbox">
+    <input v-model="model" type="checkbox" @change="update">
     <span class="slide" />
   </label>
 </template>
@@ -22,11 +22,15 @@ export default {
   watch: {
     value: 'updateModel'
   },
+  mounted () {
+    this.updateModel()
+  },
   methods: {
     updateModel () {
       this.model = this.value
     },
     update () {
+      this.$emit('input', this.model)
       this.$emit('change', this.model)
     }
   }

@@ -19,7 +19,7 @@
                 <span class="label">
                   패키지로 설정
                 </span>
-                <ToggleSwitch />
+                <ToggleSwitch v-model="isPackage" />
               </div>
               <cl-button type="purple" class="submit-btn">
                 제출하기
@@ -28,6 +28,7 @@
           </div>
           <ValidationObserver ref="validator">
             <ProductBasicInfo v-if="stepIndex === 0" />
+            <ProductPriceInfo v-else-if="stepIndex === 1" :is-package="isPackage" :price-info="priceInfo" />
           </ValidationObserver>
         </div>
         <div class="btn-holder">
@@ -54,7 +55,57 @@ export default {
   data () {
     return {
       stepIndex: 0,
-      stepList: ['기본정보', '가격설정', '서비스 설정', '이미지', '요청사항']
+      stepList: ['기본정보', '가격설정', '서비스 설정', '이미지', '요청사항'],
+      isPackage: true,
+      priceInfo: {
+        micro: {
+          title: '',
+          description: '',
+          price: null,
+          workDay: null,
+          editCnt: null,
+          quickWork: {
+            addPrice: null,
+            workDay: null
+          }
+        },
+        mega: {
+          title: '',
+          description: '',
+          price: null,
+          workDay: null,
+          editCnt: null,
+          quickWork: {
+            addPrice: null,
+            workDay: null
+          }
+        },
+        star: {
+          title: '',
+          description: '',
+          price: null,
+          workDay: null,
+          editCnt: null,
+          quickWork: {
+            addPrice: null,
+            workDay: null
+          }
+        },
+        addEdit: [{
+          addPrice: null,
+          editCnt: null
+        },
+        {
+          addPrice: null,
+          editCnt: null
+        }],
+        customOption: [{
+          title: '',
+          description: '',
+          addPrice: null,
+          workDay: null
+        }]
+      }
     }
   },
   computed: {
@@ -66,6 +117,9 @@ export default {
     routeQueryStep () {
       this.stepIndex = this.routeQueryStep
     }
+  },
+  mounted () {
+    this.stepIndex = this.routeQueryStep
   },
   methods: {
     async goStep () {
@@ -91,7 +145,7 @@ export default {
 @import '~assets/less/proj.less';
 
 [product-create-page]{
- .inner-holder{ .min-h(998); .pt(83);
+ .inner-holder{ .min-h(998); .pt(83); .pb(107);
    .contents-holder{ .rel; .pl(326);
      .step-view{ .abs; .lt(0,0); .z(1); .w(296); .p(40); .bgc(#fff); .br(7); box-shadow: 3px 3px 12px 0 rgba(0, 0, 0, 0.04);
       >ul{
@@ -112,7 +166,7 @@ export default {
       }
      }
      .contents {
-       .hd{ .h(51); .mb(32);
+       > .hd{ .h(51); .mb(32);
          .tit{ .fs(28,33); .c(@title-black); .semi-bold; }
          .control-box{ .abs; .rt(0,-10); .z(1);
            .switch-box{ .ib; .vam; .mr(15); .p(12, 20); .br(7); .bgc(#fff); .no-drag; box-shadow: 3px 3px 12px 0 rgba(0, 0, 0, 0.06);
