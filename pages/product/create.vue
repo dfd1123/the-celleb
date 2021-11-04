@@ -21,14 +21,17 @@
                 </span>
                 <ToggleSwitch v-model="isPackage" />
               </div>
-              <cl-button type="purple" class="submit-btn">
+              <cl-button type="purple" class="submit-btn" @click="submit">
                 제출하기
               </cl-button>
             </div>
           </div>
           <ValidationObserver ref="validator">
-            <ProductBasicInfo v-if="stepIndex === 0" />
+            <ProductBasicInfo v-if="stepIndex === 0" :basic-info="basicInfo" />
             <ProductPriceInfo v-else-if="stepIndex === 1" :is-package="isPackage" :price-info="priceInfo" />
+            <ProductDescription v-else-if="stepIndex === 2" :description-info="descriptionInfo" />
+            <ProductImageInfo v-else-if="stepIndex === 3" :image-info="imageInfo" />
+            <ProductRequestInfo v-else-if="stepIndex === 4" />
           </ValidationObserver>
         </div>
         <div class="btn-holder">
@@ -48,15 +51,25 @@
 import ToggleSwitch from '@/components/common/ToggleSwitch'
 import ClButton from '@/components/common/ClButton'
 import ProductBasicInfo from '@/components/product/create/ProductBasicInfo'
+import ProductPriceInfo from '@/components/product/create/ProductPriceInfo'
+import ProductDescription from '@/components/product/create/ProductDescription'
+import ProductImageInfo from '@/components/product/create/ProductImageInfo'
+import ProductRequestInfo from '@/components/product/create/ProductRequestInfo'
+import SubmitApplyModal from '@/components/product/modal/SubmitApplyModal'
 
 export default {
   name: 'ProductCreatePage',
-  components: { ToggleSwitch, ClButton, ProductBasicInfo },
+  components: { ToggleSwitch, ClButton, ProductBasicInfo, ProductPriceInfo, ProductDescription, ProductImageInfo, ProductRequestInfo },
   data () {
     return {
-      stepIndex: 0,
+      stepIndex: -1,
       stepList: ['기본정보', '가격설정', '서비스 설정', '이미지', '요청사항'],
       isPackage: true,
+      basicInfo: {
+        title: '',
+        category: '',
+        channel: ''
+      },
       priceInfo: {
         micro: {
           title: '',
@@ -105,7 +118,15 @@ export default {
           addPrice: null,
           workDay: null
         }]
-      }
+      },
+      descriptionInfo: {
+        description: ''
+      },
+      imageInfo: {
+        mainImage: null,
+        subImages: []
+      },
+      requestInfoList: []
     }
   },
   computed: {
@@ -125,17 +146,46 @@ export default {
     async goStep () {
       await this.$validate(this.$refs.validator)
 
-      if (this.stepIndex > 4) {
-        // this.$alert({ title: '프로필 저장 완료', message: '새롭게 저장된 프로필을 확인해보세요!' })
-      } else {
-        this.stepIndex += 1
-        this.$router.push({ path: this.$route.path, query: { step: this.stepIndex } })
+      if (this.stepIndex >= 4) {
+        this.submit()
+        return false
+      } else if (this.stepIndex === 3) {
+        if (!this.imageInfo.mainImage) {
+          this.$toast('메인 이미지는 반드시 업로드 하셔야 합니다.', { type: 'fail' })
+          return false
+        } else if (!this.imageInfo.subImages.length) {
+          this.$toast('상세 이미지는 1개 이상 업로드 하셔야 합니다.', { type: 'fail' })
+          return false
+        }
       }
+
+      this.stepIndex += 1
+      this.$router.push({ path: this.$route.path, query: { step: this.stepIndex } })
     },
     async tempStore () {
       await this.$validate(this.$refs.validator)
 
       this.$toast('입력하신 정보가 임시 저장 되었습니다.', { type: 'success' })
+    },
+    async submit () {
+      await this.$validate(this.$refs.validator)
+
+      if (this.stepIndex === 3) {
+        if (!this.imageInfo.mainImage) {
+          this.$toast('메인 이미지는 반드시 업로드 하셔야 합니다.', { type: 'fail' })
+          return false
+        } else if (!this.imageInfo.subImages.length) {
+          this.$toast('상세 이미지는 1개 이상 업로드 하셔야 합니다.', { type: 'fail' })
+          return false
+        }
+      }
+
+      await this.$modal(SubmitApplyModal)
+
+      setTimeout(async () => {
+        await this.$alert({ title: '서비스 등록 완료', message: '새롭게 등록된 서비스를 확인해보세요!' })
+        this.$router.push('/market/sales-service')
+      }, 300)
     }
   }
 }

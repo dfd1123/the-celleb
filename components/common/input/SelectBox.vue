@@ -154,7 +154,7 @@ export default {
         if (!val && !this.placeholder) { [val] = list }
       }
 
-      if (this.value !== val) { this.change(val) }
+      if (val !== undefined) { this.change(val) }
     }
   }
 }

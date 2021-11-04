@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
+import validateErrors from './validateErrors'
 import ValidationErrors from '@/plugins/validation/components/ValidationErrors'
 import { getCharLength, getByteLength } from '@/utils/commonUtils'
 
@@ -23,6 +24,7 @@ const init = () => {
     required,
     requiredNoname: required,
     requiredSelect: required,
+    selectedImage: required,
     byteLength: {
       params: ['min', 'max'],
       validate: (value, { min, max }) => getByteLength(value) >= min && getByteLength(value) <= max
@@ -55,6 +57,10 @@ const init = () => {
       params: ['max'],
       validate: (value, { max }) => value.length <= max
     },
+    imageMinLength: {
+      params: ['min'],
+      validate: (value, { min }) => value.filter(v => v.dataUrl || v.src).length >= min
+    },
     minMax: {
       params: ['min', 'max'],
       validate: (value, { min, max }) => parseInt(value, 10) >= parseInt(min, 10) && parseInt(value, 10) <= parseInt(max, 10)
@@ -66,10 +72,6 @@ const init = () => {
     afterDate: {
       params: ['startTime'],
       validate: (value, { startTime }) => value > 0 && startTime > 0 && value > startTime
-    },
-    selectedImage: {
-      params: ['key'],
-      validate: (value, { key }) => value[key] && value[key].length > 0
     },
     notEqual: {
       params: ['other'],
@@ -123,7 +125,7 @@ Vue.component('ValidationProvider', ValidationProvider)
 Vue.component('ValidationObserver', ValidationObserver)
 Vue.component('ValidationErrors', ValidationErrors)
 
-export default ({ app }, inject) => {
+export default ({ app, $toast }, inject) => {
   init()
 
   app.$validate = async function (validator, errorCallback) {
@@ -132,7 +134,10 @@ export default ({ app }, inject) => {
     return new Promise((resolve, reject) => {
       if (!result) {
         if (errorCallback) { errorCallback(validator) }
-        console.log(Object.values(validator.errors).filter(a => a.length))
+        const error = Object.values(validator.errors).filter(a => a.length)[0][0]
+        const name = validateErrors.names[error._field_] ?? error._field_
+        const msg = validateErrors.rules[error._rule_].replace('{_field_}', name)
+        if (this) { this.$toast(msg, { type: 'fail' }) }
         // eslint-disable-next-line prefer-promise-reject-errors
         reject()
         // throw Object.values(validator.errors).filter(a => a.length)[0][0]
