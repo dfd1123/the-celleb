@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     qnaModalOpen () {
-      this.$modal(QnaSubmitModal)
+      this.$modal(QnaSubmitModal, { store: this.store })
     }
   }
 }

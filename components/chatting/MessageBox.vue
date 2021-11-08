@@ -2,7 +2,7 @@
   <div message-box>
     <SelectBox v-model="selectedCategory" :list="messageCategoryList" variant="message-cate" />
     <ul class="message-list-wrap">
-      <MessageItem v-for="i in 5" :key="`chat-${i}`" :active="String(i) === value" @click="chattingItemSelect(String(i))" />
+      <MessageItem v-for="i in 1" :key="`chat-${i}`" :active="String(i) === value" @click="chattingItemSelect(String(i))" />
     </ul>
   </div>
 </template>

@@ -2,22 +2,22 @@
   <div order-card @click="$emit('click')">
     <div class="main-info">
       <div class="product-img">
-        <img src="~/assets/imgs/sample/product-order-sample.jpg" alt="product-image">
+        <img :src="item.image" alt="product-image">
       </div>
       <div class="product-info">
         <div class="order-info">
-          <em :class="['status', status]">{{ statusTag }}</em>
-          <span class="order-no">주문번호 200709522</span>
+          <em :class="['status', item.status]">{{ statusTag }}</em>
+          <span class="order-no">주문번호 {{ item.order_no }}</span>
         </div>
         <h6 class="name">
-          더 셀럽
+          {{ item.title || '-' }}
         </h6>
         <p class="description">
-          공동구매를 빠르고 효울적으로 도와드립니다.
+          {{ item.simple_intro }}
         </p>
         <div class="detail-info">
           <span v-if="manage" class="manage-record">판매완료<b>10건</b></span>
-          <span v-else class="receipt-price-date">결제일 21.10.10 12:03</span>
+          <span v-else class="receipt-price-date">결제일 {{ receiptDate }}</span>
           <span v-if="payMethod" class="paymethod">결제방법 : 신용카드</span>
         </div>
         <div class="sub-info">
@@ -34,7 +34,7 @@
           <span v-if="tradingStatement" class="trading-state">거래명세서</span>
           <span v-if="slipOut" class="trading-state">전표출력</span>
           <!--          <span class="option-name">네이버쇼핑라이브 30일 <small>(1개)</small></span>-->
-          <b class="price">989,500 원</b>
+          <b class="price">{{ commaPrice }} 원</b>
         </div>
       </div>
     </div>
@@ -42,9 +42,13 @@
 </template>
 
 <script>
+import moment from 'moment'
+import { numberFormat } from '@/utils/numberUtils'
+
 export default {
   name: 'OrderCard',
   props: {
+    item: { type: Object, default: () => ({}) },
     tradingStatement: { type: Boolean, default: false },
     slipOut: { type: Boolean, default: false },
     payMethod: { type: Boolean, default: false },
@@ -64,16 +68,32 @@ export default {
   },
   computed: {
     statusTag () {
-      if (this.status === 'refund-complete') {
-        return '환불완료'
-      } else if (this.status === 'wait-apply') {
-        return '승인대기중'
+      if (this.item.status === 'remain_req') {
+        return '요청사항 미작성'
+      } else if (this.item.status === 'ing') {
+        return '진행중'
+      } else if (this.item.status === 'edit_req') {
+        return '수정요청'
+      } else if (this.item.status === 'shipping') {
+        return '발송중'
+      } else if (this.item.status === 'complete') {
+        return '주문완료'
+      } else if (this.item.status === 'un_review') {
+        return '리뷰 미작성'
+      } else if (this.item.status === 'cancel') {
+        return '주문취소'
       }
 
-      return '주문완료'
+      return ''
+    },
+    receiptDate () {
+      return moment(this.item.created_at).format('YY.MM.DD HH:mm')
+    },
+    commaPrice () {
+      return numberFormat(this.item.price)
     },
     showStatusList () {
-      return this.statusList.filter(item => item.value !== this.status)
+      return this.statusList.filter(item => item.value !== this.item.status)
     }
   }
 }
@@ -90,7 +110,7 @@ export default {
     .product-info { .min-h(157.3);
       .order-info {
         .status{ .ib; .p(0,10); .fs(15,31); .c(@purple); .vam; .-a(@purple); .br(5);
-          &.refund-complete{ .c(#e94c6f); .-a(#e94c6f); }
+          &.refund-complete, &.cancel{ .c(#e94c6f); .-a(#e94c6f); }
         }
         .order-no { .ib; .ml(16); .fs(15,31); .c(#999); .vam; }
       }

@@ -36,7 +36,7 @@ export default {
   methods: {
     route () {
       const path = this.menuRouteList[this.activeIndex].path
-      this.$router.push(path)
+      this.$router.push({ path, query: this.$route.query })
     },
     activeIndexUpdate () {
       const activeIndex = this.menuRouteList.findIndex(menu => menu.id === this.channelId)

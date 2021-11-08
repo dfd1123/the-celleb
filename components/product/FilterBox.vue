@@ -3,7 +3,7 @@
     <ul>
       <li v-for="filter in filterList" :key="`filter-${filter.id}`">
         <label>
-          <input v-model="model" type="checkbox" :value="filter.id" @change="change">
+          <input v-model="model" type="radio" :value="filter.id" @change="change">
           <span>{{ filter.name }}</span>
         </label>
       </li>
@@ -15,11 +15,11 @@
 export default {
   name: 'FilterBox',
   props: {
-    value: { type: Array, default: () => [] }
+    value: { type: String, default: () => null }
   },
   data () {
     return {
-      model: [],
+      model: null,
       filterList: [
         { name: '공동구매', id: 'groupBuy' },
         { name: '체험단', id: 'experienceGroup' },

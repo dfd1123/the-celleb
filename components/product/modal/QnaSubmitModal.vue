@@ -5,15 +5,15 @@
     </template>
     <div class="store-info">
       <div class="store-profile">
-        <img src="~/assets/imgs/sample/store-profile-img.jpg" alt="store image">
+        <img :src="store.image" alt="store image">
       </div>
       <div class="main-info">
         <h6 class="name">
-          더셀럽
+          {{ store.influencer_name || '-' }}
         </h6>
         <span class="average-response-time">평균응답시간 : 10분 이내</span>
         <p class="description">
-          안녕하세요. 스마트플레이스 최적화 관리 및 효과적인 공동구매 진행해 드립니다. 항상 노력하는 전문가가 되겠습니다. 감사합니다.
+          {{ store.intro || '-' }}
         </p>
       </div>
     </div>
@@ -40,7 +40,7 @@
       </cl-button>
     </div>
     <p class="sub-intro">
-      * 5초 마케팅을 통해 결제하면 거래 완료 시까지 에스크로 방식으로 대금을 안전하게
+      * 더셀럽을 통해 결제하면 거래 완료 시까지 에스크로 방식으로 대금을 안전하게
       보호 받을 수 있습니다.
     </p>
     <input v-show="false" ref="fileUploader" type="file" @change="fileUploadHandler">
@@ -56,9 +56,20 @@ import { fileUpload } from '@/utils/fileUtils'
 export default {
   name: 'QnaSubmitModal',
   components: { Modal, TextAreaBox, ClButton },
+  props: {
+    options: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   data () {
     return {
       fileName: ''
+    }
+  },
+  computed: {
+    store () {
+      return this.options.store || {}
     }
   },
   methods: {

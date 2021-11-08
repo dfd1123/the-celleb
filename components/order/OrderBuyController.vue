@@ -6,15 +6,15 @@
     <div class="price-list-holder">
       <div class="price-li">
         <span class="label">총 서비스 금액</span>
-        <span class="value"><b>1,000,000원</b></span>
+        <span class="value"><b>{{ commaTotalPrice }}원</b></span>
       </div>
       <div class="price-li">
         <span class="label">쿠폰</span>
-        <span class="value">0원</span>
+        <span class="value">{{ commaCouponPrice }}원</span>
       </div>
       <div class="price-li">
         <span class="label">캐시</span>
-        <span class="value">0원</span>
+        <span class="value">{{ commaCashPrice }}원</span>
       </div>
     </div>
     <div class="total-price">
@@ -22,7 +22,7 @@
         총 결제금액
         <small>(VAT 포함)</small>
       </span>
-      <span class="value"><b>1,000,000원</b></span>
+      <span class="value"><b>{{ commaReceiptPrice }}원</b></span>
     </div>
     <cl-button type="purple" class="buy-btn" @click="buyClickHandler">
       구매하기
@@ -32,6 +32,7 @@
 
 <script>
 import ClButton from '@/components/common/ClButton'
+import { numberFormat } from '@/utils/numberUtils'
 
 export default {
   name: 'OrderBuyController',
@@ -40,20 +41,43 @@ export default {
     totalPrice: {
       type: Number,
       default: 0
+    },
+    couponPrice: {
+      type: Number,
+      default: 0
+    },
+    cash: {
+      type: Number,
+      default: 0
+    },
+    item: {
+      type: Object,
+      default: () => ({})
     }
   },
   computed: {
     productId () {
       return this.$route.params.productId || ''
+    },
+    receiptPrice () {
+      return this.totalPrice - this.couponPrice - this.cash
+    },
+    commaTotalPrice () {
+      return numberFormat(this.totalPrice)
+    },
+    commaCouponPrice () {
+      return numberFormat(this.couponPrice)
+    },
+    commaCashPrice () {
+      return numberFormat(this.cash)
+    },
+    commaReceiptPrice () {
+      return numberFormat(this.receiptPrice)
     }
   },
   methods: {
-    async buyClickHandler () {
-      const result = await this.$confirm({ title: '결제하시겠습니까?', message: '네이버쇼핑라이브 -989,500원' })
-
-      if (result) {
-        await this.$router.push(`/order/${this.productId}/complete`)
-      }
+    buyClickHandler () {
+      this.$emit('buy', this.receiptPrice)
     }
   }
 }

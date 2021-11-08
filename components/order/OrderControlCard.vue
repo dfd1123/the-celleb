@@ -19,10 +19,10 @@
             <th>가격</th>
           </tr>
           <tr>
-            <td>{{ item.category_name }}</td>
+            <td>{{ option.id }}</td>
             <td>{{ option.work_day }}일</td>
             <td>
-              <IntegerSelect v-model="amount" :min="1" :write="false" />
+              <IntegerSelect v-model="amount" :min="1" :write="false" @input="changePrice" />
             </td>
             <td><b>{{ totalPrice }}원</b></td>
           </tr>
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import sampleOrderProduct from '@/assets/imgs/sample/product-order-sample.jpg'
+import sampleOrderProduct from 'static/images/product-order-sample.jpg'
 import IntegerSelect from '@/components/common/input/IntegerSelect'
 import { numberFormat } from '@/utils/numberUtils'
 
@@ -58,7 +58,7 @@ export default {
       if (!this.item.options) { return {} }
       const option = this.item.options[this.$route.query.option] || {}
 
-      return { ...option, commaPrice: numberFormat(option.price) }
+      return { ...option, id: this.$route.query.option, commaPrice: numberFormat(option.price) }
     },
     totalPrice () {
       return numberFormat((this.option.price || 0) * this.amount)
@@ -71,11 +71,15 @@ export default {
   },
   mounted () {
     this.syncProductInfo()
+    this.changePrice()
   },
   methods: {
     syncProductInfo () {
       this.item = this.product
       this.item.amount = 1
+    },
+    changePrice () {
+      this.$emit('change-price', (this.option.price || 0) * this.amount)
     }
   }
 }
@@ -97,7 +101,7 @@ export default {
   .sub-info {
     table { .w(100%); border-collapse: collapse;
       tr {
-        th, td { .tc;
+        th, td { .tc; text-transform: uppercase;
           &:nth-of-type(1) { .w(40%); .tl; }
           &:nth-of-type(2) { .w(15%); }
           &:nth-of-type(3) { .w(20%); }

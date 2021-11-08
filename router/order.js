@@ -1,7 +1,11 @@
 export default [
   {
-    path: '/order/:productId',
-    name: 'order-productId'
+    path: '/order/:orderId',
+    name: 'order-orderId'
+  },
+  {
+    path: '/order/:orderId/detail',
+    name: 'order-orderId-detail'
   },
   {
     path: '/order/:productId/complete',

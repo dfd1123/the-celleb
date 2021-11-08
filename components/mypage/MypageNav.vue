@@ -17,37 +17,37 @@
           <ul>
             <li>
               <router-link to="/mypage/purchase?type=all">
-                전체 (3)
+                전체 ({{ allOrderCnt }})
               </router-link>
             </li>
             <li>
-              <router-link to="/mypage/purchase?type=reqNotWrite">
-                요청사항 미작성 (0)
+              <router-link to="/mypage/purchase?type=remain_req">
+                요청사항 미작성 ({{ remainReqCnt }})
               </router-link>
             </li>
             <li>
               <router-link to="/mypage/purchase?type=ing">
-                진행중 (2)
+                진행중 ({{ ingCnt }})
               </router-link>
             </li>
             <li>
-              <router-link to="/mypage/purchase?type=editReq">
-                수정 요청 (1)
+              <router-link to="/mypage/purchase?type=edit_req">
+                수정 요청 ({{ editReqCnt }})
               </router-link>
             </li>
             <li>
-              <router-link to="/mypage/purchase?type=delivering">
-                발송중 (1)
+              <router-link to="/mypage/purchase?type=shipping">
+                발송중 ({{ shippingCnt }})
               </router-link>
             </li>
             <li>
               <router-link to="/mypage/purchase?type=complete">
-                완료 (2)
+                완료 ({{ completeCnt }})
               </router-link>
             </li>
             <li>
-              <router-link to="/mypage/purchase?type=reviewNoWrite">
-                평가 미작성 (0)
+              <router-link to="/mypage/purchase?type=un_review">
+                평가 미작성 ({{ unReviewCnt }})
               </router-link>
             </li>
             <li>
@@ -91,7 +91,8 @@ export default {
   components: { Avatar, AccordionView },
   data () {
     return {
-      accordionOpen: false
+      accordionOpen: false,
+      orders: []
     }
   },
   computed: {
@@ -100,10 +101,40 @@ export default {
     },
     userInfo () {
       return this.$store.state.auth?.myInfo || {}
+    },
+    allOrderCnt () {
+      return this.orders.length
+    },
+    remainReqCnt () {
+      return this.orders.filter(order => order.status === 'remain_req').length
+    },
+    ingCnt () {
+      return this.orders.filter(order => order.status === 'ing').length
+    },
+    editReqCnt () {
+      return this.orders.filter(order => order.status === 'edit_req').length
+    },
+    shippingCnt () {
+      return this.orders.filter(order => order.status === 'shipping').length
+    },
+    completeCnt () {
+      return this.orders.filter(order => order.status === 'complete').length
+    },
+    unReviewCnt () {
+      return this.orders.filter(order => order.status === 'un_review').length
+    },
+    cancelCnt () {
+      return this.orders.filter(order => order.status === 'cancel').length
     }
   },
   mounted () {
     this.accordionOpen = this.$route.name === 'mypage-purchase'
+    this.getOrderInfo()
+  },
+  methods: {
+    async getOrderInfo () {
+      this.orders = await this.$api.get('/orders')
+    }
   }
 }
 </script>

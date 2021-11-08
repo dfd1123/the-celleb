@@ -3,9 +3,17 @@
     <h2 class="tit">
       구매관리
     </h2>
-    <SearchControlBox :start-date="startDate" :end-date="endDate" :search-text="searchText" @change-date="changeDate" />
-    <div v-if="true" class="order-list-holder">
-      <OrderCard trading-statement @click="productClick(1)" />
+    <SearchControlBox
+      :start-date="startDate"
+      :end-date="endDate"
+      @change-date="changeDate"
+      @input="changeSearchText"
+      @search="getOrderList"
+    />
+    <div v-if="orders.length" class="order-list-holder">
+      <template v-if="orders[0].id">
+        <OrderCard v-for="order in orders" :key="`order-${order.id}`" :item="order" trading-statement @click="productClick(order.id)" />
+      </template>
     </div>
     <no-data v-else main-msg="내역이 없습니다" />
     <div class="caution-list">
@@ -36,7 +44,8 @@ export default {
     return {
       startDate: null,
       endDate: null,
-      searchText: ''
+      searchText: '',
+      orders: []
     }
   },
   computed: {
@@ -44,10 +53,26 @@ export default {
       return this.$route.query.type || ''
     }
   },
+  watch: {
+    type: 'getOrderList'
+  },
+  mounted () {
+    this.getOrderList()
+  },
   methods: {
+    async getOrderList () {
+      this.orders = Array.from({ length: 2 }).map(() => ({}))
+      let orders = (await this.$api.get('orders')).filter(order => this.type === 'all' ? order : order.status === this.type)
+      if (this.startDate && this.endDate) { orders = orders.filter(order => this.startDate <= order.created_at && order.created_at <= this.endDate) }
+      orders = orders.filter(order => order.title.replace(/ /g, '').includes(this.searchText.replace(/ /g, '')))
+      this.orders = orders
+    },
     changeDate ({ startDate, endDate }) {
       this.startDate = startDate
       this.endDate = endDate
+    },
+    changeSearchText (text) {
+      this.searchText = text
     },
     productClick (id) {
       this.$router.push(`/order/${id}/detail`)

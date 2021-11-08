@@ -5,7 +5,7 @@
       <h2 class="page-tit">
         {{ pageTitle }}
       </h2>
-      <FilterBox v-model="applyFilters" />
+      <FilterBox v-model="purpose" />
       <div class="orderby-controller">
         <span class="total-cnt">{{ showItemCnt }}개의 서비스</span>
         <SelectBox v-model="orderBy" :list="orderByList" />
@@ -37,7 +37,9 @@ export default {
         { label: '가격순', value: 'minimum_price', order: 'asc' }
       ],
       orderBy: '',
-      applyFilters: [],
+      purpose: '',
+      min: 0,
+      max: 0,
       itemList: null
     }
   },
@@ -73,7 +75,9 @@ export default {
         }
         return 0
       })
-      if (this.applyFilters.length) { showItemList = showItemList.filter(item => this.applyFilters.includes(item.purpose)) }
+      if (this.purpose) { showItemList = showItemList.filter(item => this.purpose === item.purpose) }
+      if (this.min) { showItemList = showItemList.filter(item => this.min <= item.minimum_price) }
+      if (this.max) { showItemList = showItemList.filter(item => this.max >= item.minimum_price) }
 
       this.routeQueryReplace()
 
@@ -91,15 +95,15 @@ export default {
     },
     matchOptions () {
       this.orderBy = this.$route.query.orderBy ?? 'recommend'
-      const applyFilters = this.$route.query.purpose || []
-      console.log(applyFilters)
-      if (!Array.isArray(applyFilters)) { this.applyFilters = [applyFilters] }
+      this.purpose = this.$route.query.purpose
+      this.min = this.$route.query.min
+      this.max = this.$route.query.max
     },
     routeQueryReplace () {
       if (this.$route.name === 'product-channelId-list') {
         this.$router.replace({
           path: this.$route.path,
-          query: { ...this.$route.query, orderBy: this.orderBy, purpose: this.applyFilters }
+          query: { ...this.$route.query, orderBy: this.orderBy, purpose: this.purpose }
         }).catch(() => {
         })
       }

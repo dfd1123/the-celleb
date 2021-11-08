@@ -6,10 +6,10 @@
         <h5>결제가 완료되었습니다!</h5>
       </div>
       <div class="product-card-holder">
-        <OrderProductCard />
+        <OrderProductCard :order="order" />
       </div>
       <div class="btn-holder">
-        <cl-button type="purple">
+        <cl-button type="purple" @click="$router.push('/mypage/purchase?type=all')">
           주문내역 보기
         </cl-button>
       </div>
@@ -23,12 +23,25 @@ import ClButton from '@/components/common/ClButton'
 
 export default {
   name: 'Complete',
-  components: { OrderProductCard, ClButton }
+  components: { OrderProductCard, ClButton },
+  computed: {
+    order () {
+      return {
+        order_no: '200709522',
+        title: this.$route.query.title,
+        simple_intro: this.$route.query.simple_intro,
+        image: this.$route.query.image,
+        amount: this.$route.query.amount,
+        option: this.$route.query.option,
+        totalPrice: this.$route.query.totalPrice
+      }
+    }
+  }
 }
 </script>
 
 <style lang="less">
-@import '~@/assets/less/proj';
+@import '~assets/less/proj.less';
 
 [order-complete-page] { .bgc(#fafbff);
   .complete-holder{ .w(843); .mh-c; .pt(132.4); .pb(220);

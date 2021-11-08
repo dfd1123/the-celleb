@@ -20,7 +20,7 @@
         </template>
         <div>
           <h6 class="title">
-            공동구매를 도와드립니다.
+            {{ option.intro }}
             <button>계정 관리</button>
           </h6>
           <ul class="sub-info">

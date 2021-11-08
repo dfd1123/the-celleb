@@ -1,26 +1,61 @@
 <template>
   <div order-detail-page>
-    <div class="inner-holder">
+    <div v-if="order" class="inner-holder">
       <h2 class="tit">
         구매 상세내역
       </h2>
       <div class="product-list">
-        <OrderCard trading-statement />
+        <OrderCard :item="order" trading-statement />
       </div>
       <div class="order-detail-card order-complete">
         <div class="box">
           <b>주문이 접수되었습니다.</b><br>
-          <p>(업체이름) 님이 주문을 확인하였으며, 곧 작업이 시작됩니다!</p><br>
-          <span>작업 완료 예정일 : 20.07.10 12:03</span>
+          <p>(더셀럽) 님이 주문을 확인하였으며, 곧 작업이 시작됩니다!</p><br>
+          <span>작업 완료 예정일 : 21.10.20 12:30</span>
         </div>
       </div>
-      <div class="row2">
+      <div v-if="order.status === 'complete'" class="order-detail-card order-complete-download">
+        <div class="box">
+          <b>주문이 완료되었습니다.</b><br>
+          <span>21.10.30 15:30</span><br>
+          <cl-button type="line-purple">
+            파일 열기
+          </cl-button>
+        </div>
+      </div>
+      <template v-else-if="order.status === 'cancel'">
+        <div class="order-detail-card order-cancel-request-complete">
+          <div class="box">
+            <b>주문 취소 신청하였습니다.</b><br>
+            <p>(취소 사유)로 인해 거래를 취소합니다.</p><br>
+          </div>
+        </div>
+        <div class="order-detail-card order-cancel-complete">
+          <div class="box">
+            <b>주문 취소가 완료되었습니다.</b><br>
+            <cl-button type="purple" @click="$router.push('/product/instagram/list')">
+              더 많은 마케팅 보기
+            </cl-button>
+          </div>
+        </div>
+      </template>
+      <div v-if="order.status === 'complete'" class="review-write-box">
+        <p class="subject">
+          평가 남기기
+        </p>
+        <RatingStar active-color="#f87676" :star-size="25" />
+        <TextAreaBox placeholder="작업물에 대한 솔직한 평가를 남겨주세요!" />
+        <cl-button type="purple">
+          평가 작성완료
+        </cl-button>
+      </div>
+      <div v-if="order.status !== 'complete' && order.status !== 'cancel'" class="row2">
         <div class="order-detail-card order-qna">
           <div class="box">
             <p class="main-msg">
               문의사항이 있다면?
             </p><br>
-            <cl-button type="line-purple">
+            <cl-button type="line-purple" @click="qnaSubmitModalOpen">
               문의하기
             </cl-button>
           </div>
@@ -37,39 +72,6 @@
           </div>
         </div>
       </div>
-      <div class="order-detail-card order-complete-download">
-        <div class="box">
-          <b>주문이 완료되었습니다.</b><br>
-          <span>20.07.10 12:03</span><br>
-          <cl-button type="line-purple">
-            파일 열기
-          </cl-button>
-        </div>
-      </div>
-      <div class="order-detail-card order-cancel-request-complete">
-        <div class="box">
-          <b>주문 취소 신청하였습니다.</b><br>
-          <p>(취소 사유)로 인해 거래를 취소합니다.</p><br>
-        </div>
-      </div>
-      <div class="order-detail-card order-cancel-complete">
-        <div class="box">
-          <b>주문 취소 신청하였습니다.</b><br>
-          <cl-button type="purple">
-            더 많은 마케팅 보기
-          </cl-button>
-        </div>
-      </div>
-      <div class="review-write-box">
-        <p class="subject">
-          평가 남기기
-        </p>
-        <RatingStar active-color="#f87676" :star-size="25" />
-        <TextAreaBox placeholder="작업물에 대한 솔직한 평가를 남겨주세요!" />
-        <cl-button type="purple">
-          평가 작성완료
-        </cl-button>
-      </div>
     </div>
   </div>
 </template>
@@ -79,15 +81,41 @@ import OrderCard from '@/components/order/OrderCard'
 import ClButton from '@/components/common/ClButton'
 import RatingStar from '@/components/common/RatingStar'
 import TextAreaBox from '@/components/common/input/TextAreaBox'
+import QnaSubmitModal from '@/components/product/modal/QnaSubmitModal'
 
 export default {
   name: 'OrderDetailPage',
-  components: { OrderCard, ClButton, RatingStar, TextAreaBox }
+  components: { OrderCard, ClButton, RatingStar, TextAreaBox },
+  data () {
+    return {
+      order: null,
+      item: null,
+      store: null
+    }
+  },
+  computed: {
+    orderId () {
+      return this.$route.params.orderId
+    }
+  },
+  mounted () {
+    this.getOrderInfo()
+  },
+  methods: {
+    async getOrderInfo () {
+      this.order = await this.$api.get(`/orders/${this.orderId}`)
+      this.item = await this.$api.get(`/products/${this.order.product_id}`)
+      this.store = await this.$api.get(`/users/${this.item.inf_Id}`)
+    },
+    qnaSubmitModalOpen () {
+      this.$modal(QnaSubmitModal, { store: this.store })
+    }
+  }
 }
 </script>
 
 <style lang="less">
-@import '~@/assets/less/proj';
+@import '~assets/less/proj.less';
 
 [order-detail-page] { .pt(84); .pb(191);
   .tit{ .mb(31); .fs(28,33); .c(@title-black); }

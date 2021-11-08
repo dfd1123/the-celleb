@@ -5,9 +5,9 @@
         주문하기
       </h2>
       <div class="order-info-holder">
-        <div class="change-order-info">
+        <ValidationObserver ref="validator" class="change-order-info">
           <div class="article-box order-card-holder">
-            <OrderControlCard v-if="item" :product="item" />
+            <OrderControlCard v-if="item" :product="item" @change-price="changePrice" />
           </div>
           <div class="article-box coupon-use-holder">
             <h4 class="sub-tit">
@@ -33,10 +33,13 @@
               결제 방법
             </h4>
             <div class="radio-holder">
-              <RadioBox v-model="payMethod" label="신용카드" val="credit-card" />
-              <RadioBox v-model="payMethod" label="실시간 계좌이체" val="realtime-bank-transfer" />
-              <RadioBox v-model="payMethod" label="무통장입금" val="deposit-without-bank" />
-              <RadioBox v-model="payMethod" label="휴대폰" val="phone-bank" />
+              <ValidationProvider v-slot="{errors}" rules="requiredSelect" name="결제방법">
+                <RadioBox v-model="payMethod" label="신용카드" val="credit-card" />
+                <RadioBox v-model="payMethod" label="실시간 계좌이체" val="realtime-bank-transfer" />
+                <RadioBox v-model="payMethod" label="무통장입금" val="deposit-without-bank" />
+                <RadioBox v-model="payMethod" label="휴대폰" val="phone-bank" />
+                <ValidationErrors :errors="errors" />
+              </ValidationProvider>
             </div>
           </div>
           <div class="article-box tax-bill-holder">
@@ -55,8 +58,15 @@
               현금영수증 / 신용카드 영수증은 개인 소득 공제용으로만 사용하실 수 있습니다.
             </p>
           </div>
-        </div>
-        <OrderBuyController v-if="item" :total-price="(option.price || 0) * (item.amount || 1)" />
+        </ValidationObserver>
+        <OrderBuyController
+          v-if="item"
+          :item="item"
+          :total-price="totalPrice"
+          :coupon-price="selectCoupon ? 10000 : 0"
+          :cash="useCash"
+          @buy="buyClickHandler"
+        />
       </div>
     </div>
   </div>
@@ -105,6 +115,7 @@ export default {
       taxBillPossible: true,
       hasCash: 500,
       useCash: 0,
+      totalPrice: 0,
       item: null
     }
   },
@@ -122,10 +133,6 @@ export default {
       const option = this.item.options[this.$route.query.option] || {}
 
       return { ...option, commaPrice: numberFormat(option.price) }
-    },
-    totalPrice () {
-      const amount = this.item ? this.item.amount : 1
-      return (this.option.price || 0) * amount
     }
   },
   mounted () {
@@ -137,6 +144,28 @@ export default {
     },
     allUseCash () {
       this.useCash = this.hasCash
+    },
+    changePrice (price) {
+      this.totalPrice = price
+    },
+    async buyClickHandler (receiptPrice) {
+      await this.$validate(this.$refs.validator)
+
+      const result = await this.$confirm({ title: '결제하시겠습니까?', message: `${this.$route.query.option.toUpperCase()} - ${numberFormat(receiptPrice)}원` })
+
+      if (result) {
+        await this.$router.push({
+          path: '/order/25/complete',
+          query: {
+            title: this.item.title,
+            simple_intro: this.item.simple_intro,
+            image: this.item.images[0],
+            amount: this.item.amount,
+            option: this.$route.query.option.toUpperCase(),
+            totalPrice: receiptPrice
+          }
+        })
+      }
     }
   }
 }
@@ -184,6 +213,7 @@ export default {
         .cant-taxbill{ .max-w(515); .fs(15,24); .c(#aaa); .regular; }
       }
     }
+    [order-buy-controller] { .fr; }
   }
 }
 </style>

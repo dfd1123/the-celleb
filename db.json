@@ -671,9 +671,92 @@
     {
       "id": 1,
       "order_no": "112123128",
-      "status": "remain-request",
-      "title": "더 셀럽"
-
+      "product_id": 1,
+      "status": "ing",
+      "od_status": "refund-complete",
+      "title": "더 셀럽",
+      "simple_intro": "공동구매를 빠르고 효울적으로 도와드립니다.",
+      "image": "/images/product-order-sample.jpg",
+      "payMethod": "신용카드",
+      "price": 989500,
+      "created_at": 1633834980000
+    },
+    {
+      "id": 2,
+      "order_no": "112123129",
+      "product_id": 1,
+      "status": "ing",
+      "od_status": "wait-apply",
+      "title": "더 셀럽",
+      "simple_intro": "공동구매를 빠르고 효울적으로 도와드립니다.",
+      "image": "/images/product-order-sample.jpg",
+      "payMethod": "신용카드",
+      "price": 450000,
+      "created_at": 1633834980000
+    },
+    {
+      "id": 3,
+      "order_no": "112123130",
+      "product_id": 1,
+      "status": "edit_req",
+      "od_status": "complete",
+      "title": "더 셀럽",
+      "simple_intro": "공동구매를 빠르고 효울적으로 도와드립니다.",
+      "image": "/images/product-order-sample.jpg",
+      "payMethod": "신용카드",
+      "price": 320000,
+      "created_at": 1633834980000
+    },
+    {
+      "id": 4,
+      "order_no": "112123131",
+      "product_id": 1,
+      "status": "shipping",
+      "od_status": null,
+      "title": "더 셀럽",
+      "simple_intro": "공동구매를 빠르고 효울적으로 도와드립니다.",
+      "image": "/images/product-order-sample.jpg",
+      "payMethod": "신용카드",
+      "price": 100000,
+      "created_at": 1633834980000
+    },
+    {
+      "id": 5,
+      "order_no": "112123132",
+      "product_id": 1,
+      "status": "complete",
+      "od_status": null,
+      "title": "더 셀럽",
+      "simple_intro": "공동구매를 빠르고 효울적으로 도와드립니다.",
+      "image": "/images/product-order-sample.jpg",
+      "payMethod": "신용카드",
+      "price": 989500,
+      "created_at": 1633834980000
+    },
+    {
+      "id": 6,
+      "order_no": "112123133",
+      "product_id": 1,
+      "status": "complete",
+      "od_status": null,
+      "title": "더 셀럽",
+      "simple_intro": "공동구매를 빠르고 효울적으로 도와드립니다.",
+      "image": "/images/product-order-sample.jpg",
+      "price": 80000,
+      "created_at": 1633834980000
+    },
+    {
+      "id": 7,
+      "order_no": "112123134",
+      "product_id": 1,
+      "status": "cancel",
+      "od_status": null,
+      "title": "더 셀럽",
+      "simple_intro": "공동구매를 빠르고 효울적으로 도와드립니다.",
+      "image": "/images/product-order-sample.jpg",
+      "payMethod": "신용카드",
+      "price": 58000,
+      "created_at": 1633834980000
     }
   ],
   "profile": { "name": "typicode" }

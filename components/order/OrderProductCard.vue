@@ -2,23 +2,23 @@
   <div order-producr-card>
     <div class="main-info">
       <div class="product-img">
-        <img src="~/assets/imgs/sample/product-order-sample.jpg" alt="product-image">
+        <img :src="order.image" alt="product-image">
       </div>
       <div class="product-info">
         <div class="order-info">
           <em class="status">주문완료</em>
-          <span class="order-no">주문번호 200709522</span>
+          <span class="order-no">주문번호 {{ order.order_no }}</span>
         </div>
         <h6 class="name">
-          더 셀럽
+          {{ order.title }}
         </h6>
         <p class="description">
-          공동구매를 빠르고 효울적으로 도와드립니다.
+          {{ order.simple_intro }}
         </p>
-        <span class="receipt-price-date">결제일 21.10.10 12:03</span>
+        <span class="receipt-price-date">결제일 {{ receiptDate }}</span>
         <div class="sub-info">
-          <span class="option-name">네이버쇼핑라이브 30일 <small>(1개)</small></span>
-          <b class="price">989,500원</b>
+          <span class="option-name">{{ order.option }} 30일 <small>({{ order.amount }}개)</small></span>
+          <b class="price">{{ commaTotalPrice }}원</b>
         </div>
       </div>
     </div>
@@ -26,8 +26,24 @@
 </template>
 
 <script>
+import moment from 'moment'
+import { numberFormat } from '@/utils/numberUtils'
 export default {
-  name: 'OrderProductCard'
+  name: 'OrderProductCard',
+  props: {
+    order: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+  computed: {
+    receiptDate () {
+      return moment().format('YY.MM.DD HH:mm')
+    },
+    commaTotalPrice () {
+      return numberFormat(this.order.totalPrice)
+    }
+  }
 }
 </script>
 

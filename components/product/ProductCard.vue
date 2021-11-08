@@ -68,7 +68,7 @@ export default {
   }
   .prod-info-box { .pt(21); .pb(16);
     .name { .mb(7); .fs(20, 24); .c(@black); .medium; .ellipsis; }
-    .description { .fs(16, 23); .c(@gray); .ellipsis(2); }
+    .description { .h(46); .fs(16, 23); .c(@gray); .ellipsis(2); }
   }
   .prod-price-box { .crop; .p(10, 0); .-t(#EEEEEE, 2);
     .price { .fl; .fs(20, 35); }
