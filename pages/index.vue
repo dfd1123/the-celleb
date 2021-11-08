@@ -50,7 +50,7 @@ export default {
         { label: '500만원~1,000만원', value: '5000000|10000000' },
         { label: '1,000만원 이상', value: '10000000' }
       ],
-      bottomCategoryList: [{ label: '인스타그램', value: 'instagram' }, { label: '유튜브', value: 'youtube' }, { label: '네이버 블로그', value: 'blog' }, { label: '네이버 카페', value: 'cafe' }, { label: '틱톡', value: 'tiktok' }, { label: '라이브커머스', value: 'liveCommerce' }],
+      bottomCategoryList: [{ label: '인스타그램', value: 'instagram' }, { label: '유튜브', value: 'youtube' }, { label: '네이버 블로그', value: 'blog' }, { label: '네이버 카페', value: 'instagram' }, { label: '틱톡', value: 'youtube' }, { label: '라이브커머스', value: 'blog' }],
       purposeList: [
         { label: '공동구매', value: 'groupBuy' },
         { label: '체험단', value: 'experienceGroup' },
