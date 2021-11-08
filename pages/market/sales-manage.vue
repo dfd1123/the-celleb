@@ -5,18 +5,20 @@
     </h2>
     <div class="search-control-holder">
       <div class="left">
-        <SelectBox class="select-service" placeholder="서비스를 선택해주세요." />
-        <SelectBox class="nickname" placeholder="닉네임" />
+        <SelectBox v-model="service" :list="serviceList" class="select-service" placeholder="서비스를 선택해주세요." />
+        <SelectBox v-model="nickname" :list="nicknameList" class="nickname" placeholder="닉네임" />
       </div>
       <div class="right">
-        <CheckBox class="use-tax-bill" label="세금계산서" />
-        <cl-button type="purple" class="search-btn">
+        <CheckBox v-model="canBil" :val="true" class="use-tax-bill" label="세금계산서" />
+        <cl-button type="purple" class="search-btn" @click="getOrderList">
           검색
         </cl-button>
       </div>
     </div>
-    <div v-if="true" class="order-list-holder">
-      <OrderUserCard v-for="i in 3" :key="`${i}`" trading-statement />
+    <div v-if="orders.length" class="order-list-holder">
+      <template v-if="orders[0].id">
+        <OrderUserCard v-for="order in orders" :key="`order-${order.id}`" :item="order" trading-statement @click="productClick(order.id)" />
+      </template>
     </div>
     <no-data v-else main-msg="내역이 없습니다" />
   </div>
@@ -31,7 +33,42 @@ import NoData from '@/components/common/NoData'
 
 export default {
   name: 'SalesManagePage',
-  components: { SelectBox, CheckBox, ClButton, OrderUserCard, NoData }
+  components: { SelectBox, CheckBox, ClButton, OrderUserCard, NoData },
+  data () {
+    return {
+      serviceList: [{ label: '전체', value: '' }, { label: '인스타그램', value: 'instagram' }, { label: '유튜브', value: 'youtube' }, { label: '네이버 블로그', value: 'blog' }, { label: '네이버 카페', value: 'cafe' }, { label: '틱톡', value: 'tiktok' }, { label: '라이브커머스', value: 'liveCommerce' }],
+      nicknameList: [{ label: '전체', value: '' }, { label: '알파브라더스', value: '알파브라더스' }],
+      service: '',
+      nickname: '',
+      canBil: false,
+      orders: []
+    }
+  },
+  computed: {
+    type () {
+      return this.$route.query.type || ''
+    }
+  },
+  watch: {
+    type: 'getOrderList'
+  },
+  mounted () {
+    this.getOrderList()
+  },
+  methods: {
+    async getOrderList () {
+      this.orders = Array.from({ length: 2 }).map(() => ({}))
+      let orders = (await this.$api.get('orders')).filter(order => this.type === 'all' ? order : order.status === this.type)
+      orders = orders.filter(order => order.channel_id.includes(this.service))
+      orders = orders.filter(order => order.buyer_name.includes(this.nickname))
+      orders = orders.filter(order => this.canBil ? order.can_bil === true : order)
+
+      this.orders = orders
+    },
+    productClick (id) {
+      this.$router.push(`/order/${id}/detail`)
+    }
+  }
 }
 </script>
 

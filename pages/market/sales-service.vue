@@ -25,12 +25,21 @@
         </cl-button>
       </div>
     </div>
-    <cl-button type="white" class="add-service">
+    <cl-button type="white" class="add-service" @click="$router.push('/product/create')">
       <img src="~/assets/imgs/icon/ico-plus.svg" alt="plus">
       <span>서비스 등록하기</span>
     </cl-button>
-    <div v-if="true" class="order-list-holder">
-      <OrderCard v-for="i in 4" :key="i" manage status="sales-ing" />
+    <div v-if="products.length" class="order-list-holder">
+      <template v-if="products[0].id">
+        <OrderCard
+          v-for="product in products"
+          :key="`product-${product.id}`"
+          :item="product"
+          manage
+          status="sales-ing"
+          @click="productClick(product)"
+        />
+      </template>
     </div>
     <no-data v-else main-msg="내역이 없습니다" />
   </div>
@@ -44,7 +53,32 @@ import NoData from '@/components/common/NoData'
 
 export default {
   name: 'SalesServicePage',
-  components: { ClButton, ToggleSwitch, OrderCard, NoData }
+  components: { ClButton, ToggleSwitch, OrderCard, NoData },
+  data () {
+    return {
+      products: []
+    }
+  },
+  computed: {
+    type () {
+      return this.$route.query.type || ''
+    }
+  },
+  watch: {
+    type: 'getProductList'
+  },
+  mounted () {
+    this.getProductList()
+  },
+  methods: {
+    async getProductList () {
+      this.products = Array.from({ length: 2 }).map(() => ({}))
+      this.products = (await this.$api.get('products')).filter(order => this.type === 'all' ? order : order.status === this.type)
+    },
+    productClick (product) {
+      this.$router.push(`/product/${product.channel_id}/${product.id}`)
+    }
+  }
 }
 </script>
 

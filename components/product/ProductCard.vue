@@ -15,7 +15,7 @@
         </div>
       </router-link>
       <div class="prod-price-box">
-        <em class="price">{{ minimumPrice }}<i>원</i></em>
+        <em class="price">{{ minimumPrice }}<i>원</i> ~</em>
         <div class="about-reason">
           <HearButton />
           <span class="score">{{ item.rating }}</span>

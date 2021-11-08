@@ -34,17 +34,31 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      store: null
+    }
+  },
   computed: {
     portfolioImage () {
       return this.item.images[0] || ''
+    },
+    influencerId () {
+      return this.$route.params.id
     }
   },
+  mounted () {
+    this.getStoreInfo()
+  },
   methods: {
+    async getStoreInfo () {
+      this.store = await this.$api.get(`/users/${this.influencerId}`)
+    },
     portfolioModalOpen () {
       this.$modal(PortfolioModal)
     },
     portfolioEditModalOpen () {
-      this.$modal(PortfolioInfoSubmitModal)
+      this.$modal(PortfolioInfoSubmitModal, { portfolio: {} })
     }
   }
 }

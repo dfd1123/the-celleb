@@ -1,7 +1,7 @@
 <template>
   <div influencer-portfolio-page>
-    <div class="inner-holder">
-      <InfluencerPanel />
+    <div v-if="store" class="inner-holder">
+      <InfluencerPanel :store="store" />
       <div class="add-btn">
         <cl-button type="line" @click="portfolioCreateModalOpen">
           <img src="~/assets/imgs/icon/ico-plus.svg" alt="plus">
@@ -29,7 +29,23 @@ import PortfolioInfoSubmitModal from '@/components/influencer/modal/PortfolioInf
 export default {
   name: 'InfluencerPortfolio',
   components: { InfluencerPanel, ClButton, PortfolioCard },
+  data () {
+    return {
+      store: null
+    }
+  },
+  computed: {
+    influencerId () {
+      return this.$route.params.id
+    }
+  },
+  mounted () {
+    this.getStoreInfo()
+  },
   methods: {
+    async getStoreInfo () {
+      this.store = await this.$api.get(`/users/${this.influencerId}`)
+    },
     portfolioCreateModalOpen () {
       this.$modal(PortfolioInfoSubmitModal)
     }

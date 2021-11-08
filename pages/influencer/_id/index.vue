@@ -1,7 +1,7 @@
 <template>
   <div brand-view-page>
-    <div class="inner-holder">
-      <InfluencerPanel />
+    <div v-if="store" class="inner-holder">
+      <InfluencerPanel :store="store" />
       <div class="white-box introduce-box">
         <h5 class="sub-tit">
           소개
@@ -23,8 +23,8 @@
         <div class="item-list-holder">
           <ProductCardWrap :list="itemList" />
         </div>
-        <div class="more-btn">
-          <cl-button type="line">
+        <div v-if="totalItemLength > itemList.length" class="more-btn">
+          <cl-button type="line" @click="getProductList">
             <img src="~/assets/imgs/icon/ico-plus.svg" alt="plus">
             <span>더보기</span>
           </cl-button>
@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="more-btn">
-          <cl-button type="line">
+          <cl-button type="line" @click="$router.push(`${$route.path}/portfolio`)">
             <img src="~/assets/imgs/icon/ico-plus.svg" alt="plus">
             <span>더보기</span>
           </cl-button>
@@ -143,15 +143,31 @@ export default {
   components: { InfluencerPanel, ProductCardWrap, ClButton },
   data () {
     return {
-      itemList: []
+      store: null,
+      totalItemLength: 0,
+      itemList: [],
+      cursor: 0
+    }
+  },
+  computed: {
+    influencerId () {
+      return this.$route.params.id
     }
   },
   mounted () {
+    this.getStoreInfo()
     this.getProductList()
   },
   methods: {
+    async getStoreInfo () {
+      this.store = await this.$api.get(`/users/${this.influencerId}`)
+    },
     async getProductList () {
-      this.itemList = (await this.$api.get('/products')).slice(0, 4)
+      const totalProductList = (await this.$api.get('/products') || [])
+      this.totalItemLength = totalProductList.length
+      this.itemList = totalProductList.slice(0, this.cursor + 4)
+      const addCursor = totalProductList.length - this.itemList.length >= 4 ? 4 : totalProductList.length - this.itemList.length
+      this.cursor += addCursor
     },
     portfolioModalOpen () {
 

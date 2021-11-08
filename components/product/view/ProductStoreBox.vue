@@ -1,9 +1,9 @@
 <template>
   <div product-store-box>
-    <div class="store-profile">
+    <div class="store-profile" @click="$router.push(`/influencer/${store.id}`)">
       <img :src="store.image" alt="store-profile">
     </div>
-    <p class="name">
+    <p class="name" @click="$router.push(`/influencer/${store.id}`)">
       {{ store.influencer_name || '-' }}
     </p>
     <cl-button type="line" class="qna-btn" @click="qnaModalOpen">
@@ -40,10 +40,10 @@ export default {
 @import '~@/assets/less/proj';
 
 [product-store-box] { .p(40); .bgc(#FFFFFF); .-a(#D9D9D9); .br(7);
-  .store-profile { .wh(96); .mh-c; .br(50%);
+  .store-profile { .wh(96); .mh-c; .br(50%); .pointer;
     > img { .wh(100%); .vam; object-fit: cover; object-position: center; }
   }
-  .name { .mt(19); .mb(31); .fs(24, 29); .c(@title-black); .tc; }
+  .name { .mt(19); .mb(31); .fs(24, 29); .c(@title-black); .tc; .pointer; }
   [cl-button] { .w(100%);
     &.qna-btn {
       > button { .wh(100%, 60); .fs(20); .c(@gray); }

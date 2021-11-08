@@ -52,7 +52,7 @@ export default {
       &.hdHide{
         >.page-body{ .mt(0); .pt(0); }
       }
-      >.page-body{ .min-h(100vh); .mt(-131.3); .pt(131.3); .mb(-240.39); .pb(240.39); .bgc(#fafbff); }
+      >.page-body{ .min-h(100vh); .mt(-84); .pt(84); .mb(-240.39); .pb(240.39); .bgc(#fafbff); }
     }
   }
 }

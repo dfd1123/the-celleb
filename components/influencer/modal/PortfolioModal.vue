@@ -51,9 +51,26 @@ import QnaSubmitModal from '@/components/product/modal/QnaSubmitModal'
 export default {
   name: 'PortfolioModal',
   components: { Modal, Swiper, SwiperSlide, ClButton },
+
+  data () {
+    return {
+      store: null
+    }
+  },
+  computed: {
+    influencerId () {
+      return this.$route.params.id
+    }
+  },
+  mounted () {
+    this.getStoreInfo()
+  },
   methods: {
+    async getStoreInfo () {
+      this.store = await this.$api.get(`/users/${this.influencerId}`)
+    },
     qnaSubmitModalOpen () {
-      this.$modal(QnaSubmitModal)
+      this.$modal(QnaSubmitModal, { store: this.store })
     },
     close () {
       this.$emit('close')

@@ -1,13 +1,15 @@
 <template>
-  <div order-card @click="$emit('click')">
+  <div order-card @click="cardClick">
     <div class="main-info">
       <div class="product-img">
-        <img :src="item.image" alt="product-image">
+        <img v-if="manage" :src="item.images[0]" alt="product-image">
+        <img v-else :src="item.image" alt="product-image">
       </div>
       <div class="product-info">
         <div class="order-info">
-          <em :class="['status', item.status]">{{ statusTag }}</em>
-          <span class="order-no">주문번호 {{ item.order_no }}</span>
+          <em v-if="manage" :class="['status', item.service_status]">{{ serviceStatusTag }}</em>
+          <em v-else :class="['status', item.status]">{{ statusTag }}</em>
+          <span v-if="!manage" class="order-no">주문번호 {{ item.order_no }}</span>
         </div>
         <h6 class="name">
           {{ item.title || '-' }}
@@ -16,17 +18,17 @@
           {{ item.simple_intro }}
         </p>
         <div class="detail-info">
-          <span v-if="manage" class="manage-record">판매완료<b>10건</b></span>
+          <span v-if="manage" class="manage-record">판매완료<b>{{ item.sales_cnt || '1' }}건</b></span>
           <span v-else class="receipt-price-date">결제일 {{ receiptDate }}</span>
-          <span v-if="payMethod" class="paymethod">결제방법 : 신용카드</span>
+          <span v-if="payMethod" class="paymethod">결제방법 : {{ item.payMethod }}</span>
         </div>
         <div class="sub-info">
           <div v-if="manage" class="manage">
             관리
             <div class="pop-over">
               <ul>
-                <li v-for="item in showStatusList" :key="`${item.value}`">
-                  {{ item.label }}
+                <li v-for="sStatus in showStatusList" :key="`${sStatus.value}`">
+                  {{ sStatus.label }}
                 </li>
               </ul>
             </div>
@@ -34,7 +36,7 @@
           <span v-if="tradingStatement" class="trading-state">거래명세서</span>
           <span v-if="slipOut" class="trading-state">전표출력</span>
           <!--          <span class="option-name">네이버쇼핑라이브 30일 <small>(1개)</small></span>-->
-          <b class="price">{{ commaPrice }} 원</b>
+          <b class="price">{{ commaPrice }} 원 {{ manage? '~' : '' }}</b>
         </div>
       </div>
     </div>
@@ -86,14 +88,36 @@ export default {
 
       return ''
     },
+    serviceStatusTag () {
+      if (this.item.status === 'ing') {
+        return '판매중'
+      } else if (this.item.status === 'reject') {
+        return '미승인'
+      } else if (this.item.status === 'wait') {
+        return '승인 대기중'
+      } else if (this.item.status === 'stop') {
+        return '판매중지'
+      }
+
+      return '판매중'
+    },
     receiptDate () {
       return moment(this.item.created_at).format('YY.MM.DD HH:mm')
     },
     commaPrice () {
-      return numberFormat(this.item.price)
+      return numberFormat(this.item.price || this.item.minimum_price)
     },
     showStatusList () {
       return this.statusList.filter(item => item.value !== this.item.status)
+    }
+  },
+  methods: {
+    cardClick (e) {
+      const { target } = e
+      const ignoreTargets = [...this.$el.querySelectorAll('.manage .pop-over > ul > li'), this.$el.querySelector('.manage'), this.$el.querySelector('.manage .pop-over'), this.$el.querySelector('.manage .pop-over > ul')]
+      if (ignoreTargets.includes(target)) { return false }
+
+      this.$emit('click')
     }
   }
 }

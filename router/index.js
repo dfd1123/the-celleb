@@ -4,6 +4,7 @@ import product from './product'
 import order from './order'
 import faq from './faq'
 import mypage from './mypage'
+import market from './market'
 import cash from './cash'
 
 const routeLists = [
@@ -13,6 +14,7 @@ const routeLists = [
   ...order,
   ...faq,
   ...mypage,
+  ...market,
   ...cash
 ]
 

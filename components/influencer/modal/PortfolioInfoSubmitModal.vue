@@ -1,7 +1,7 @@
 <template>
   <modal portfolio-info-submit-modal close-btn @close="close" @resolve="resolve">
     <template #title>
-      포트폴리오 등록
+      포트폴리오 {{ isEdit ? '수정':'등록' }}
     </template>
     <ValidationObserver ref="validator">
       <div class="form-holder">
@@ -18,14 +18,14 @@
           <div class="inp-box">
             <ValidationProvider v-slot="{errors}" rules="required" name="서비스">
               <span class="label">서비스 선택</span>
-              <SelectBox v-model="service" :class="{'error': errors.length > 0}" placeholder="선택해주세요" />
+              <SelectBox v-model="service" :list="serviceList" :class="{'error': errors.length > 0}" placeholder="선택해주세요" />
               <ValidationErrors :errors="errors" />
             </ValidationProvider>
           </div>
           <div class="inp-box">
             <ValidationProvider v-slot="{errors}" rules="required" name="업종">
               <span class="label">포트폴리오 관련 업종</span>
-              <SelectBox v-model="sector" :class="{'error': errors.length > 0}" placeholder="선택해주세요" />
+              <SelectBox v-model="sector" :list="purposeList" :class="{'error': errors.length > 0}" placeholder="선택해주세요" />
               <ValidationErrors :errors="errors" />
             </ValidationProvider>
           </div>
@@ -62,7 +62,7 @@
         임시저장
       </cl-button>
       <cl-button type="purple" @click="submit">
-        등록하기
+        {{ isEdit ? '수정하기':'등록하기' }}
       </cl-button>
     </div>
   </modal>
@@ -79,6 +79,14 @@ import ClButton from '@/components/common/ClButton'
 export default {
   name: 'PortfolioInfoSubmitModal',
   components: { Modal, TextInput, SelectBox, TextAreaBox, ImageUploader, ClButton },
+  props: {
+    options: {
+      type: Object,
+      default: () => ({
+        portfolio: null
+      })
+    }
+  },
   data () {
     return {
       title: '',
@@ -86,10 +94,25 @@ export default {
       sector: '',
       description: '',
       mainImage: null,
-      detailImage: []
+      detailImage: [],
+      serviceList: [{ label: '인스타그램', value: 'instagram' }, { label: '유튜브', value: 'youtube' }, { label: '네이버 블로그', value: 'blog' }, { label: '네이버 카페', value: 'cafe' }, { label: '틱톡', value: 'tiktok' }, { label: '라이브커머스', value: 'liveCommerce' }],
+      purposeList: [
+        { label: '공동구매', value: 'groupBuy' },
+        { label: '체험단', value: 'experienceGroup' },
+        { label: '콘텐츠', value: 'contents' },
+        { label: '홍보', value: 'marketing' }
+      ]
+    }
+  },
+  computed: {
+    isEdit () {
+      return Boolean(this.options.portfolio !== null)
     }
   },
   methods: {
+    initData () {
+      this.title = this.options.portfolio.title
+    },
     async submit () {
       const validate = await this.validation()
 
@@ -107,10 +130,8 @@ export default {
     },
     async validation () {
       await this.$validate(this.$refs.validator)
-      let images = this.mainImage ? this.detailImage.unshift(this.mainImage) : this.detailImage
-      images = images.filter(image => image.dataUrl || image.src).length > 4 ? images : null
 
-      if (!images) {
+      if (!this.mainImage || !this.detailImage.length) {
         this.$toast('이미지를 모두 등록해주세요.', { type: 'fail' })
         return false
       }

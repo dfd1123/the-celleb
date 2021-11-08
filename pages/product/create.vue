@@ -184,7 +184,7 @@ export default {
 
       setTimeout(async () => {
         await this.$alert({ title: '서비스 등록 완료', message: '새롭게 등록된 서비스를 확인해보세요!' })
-        this.$router.push('/market/sales-service')
+        this.$router.push('/market/sales-service?type=all')
       }, 300)
     }
   }

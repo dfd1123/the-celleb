@@ -1,14 +1,14 @@
 <template>
   <header header>
-    <div class="top-hd">
-      <ul class="inner-holder">
-        <li>
-          <router-link to="#">
-            브랜드사 전용 서비스
-          </router-link>
-        </li>
-      </ul>
-    </div>
+    <!--    <div class="top-hd">-->
+    <!--      <ul class="inner-holder">-->
+    <!--        <li>-->
+    <!--          <router-link to="#">-->
+    <!--            브랜드사 전용 서비스-->
+    <!--          </router-link>-->
+    <!--        </li>-->
+    <!--      </ul>-->
+    <!--    </div>-->
     <div class="main-hd inner-holder">
       <div class="logo">
         <router-link :to="{path:'/' , query:{}}">
@@ -25,6 +25,9 @@
         <template v-if="isLogin">
           <router-link to="/mypage">
             마이페이지
+          </router-link>
+          <router-link v-if="isInfluencer" to="/market">
+            내 서비스 관리
           </router-link>
 
           <Avatar :src="userInfo.image" tootip />
@@ -58,6 +61,9 @@ export default {
   computed: {
     userInfo () {
       return this.$store.state.auth?.myInfo
+    },
+    isInfluencer () {
+      return this.isLogin ? this.userInfo.type === 'influencer' : false
     },
     isLogin () {
       return Boolean(this.userInfo?.id)

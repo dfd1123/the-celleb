@@ -41,7 +41,7 @@ export default {
 @import '~@/assets/less/proj';
 
 [store-avatar]{ .rel; .wh(42); .no-drag;
-  >img{ .wh(100%); object-fit: cover; .br(50%); }
+  >img{ .wh(100%); object-fit: cover; .-a(#d9d9d9); .br(50%); .crop; }
   .my-menu { visibility: hidden; .abs; .lt(-30.5,45); .z(1); .w(103); .pt(10); .mt(-10); .o(0); transition: opacity 0.2s;
     span{ .abs; .lt(0,-5); .z(1); .w(100%); .tc;
       &::after { .cnt; .ib; .-b(#fff,5); .-l(transparent,5); .-r(transparent,5); }

@@ -52,7 +52,7 @@
             </li>
             <li>
               <router-link to="/mypage/purchase?type=cancel">
-                취소 (1)
+                취소 ({{ cancelCnt }})
               </router-link>
             </li>
           </ul>

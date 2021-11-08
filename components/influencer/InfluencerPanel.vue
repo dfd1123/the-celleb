@@ -1,11 +1,11 @@
 <template>
   <div influencer-panel>
     <div class="profile">
-      <StoreAvatar />
+      <StoreAvatar :src="store.image" />
       <div class="info">
         <div class="name">
           <h4>
-            더셀럽
+            {{ store.nickname }}
           </h4>
           <button @click="influencerProfileEdit">
             프로필 수정
@@ -14,13 +14,13 @@
         <div class="rating-info">
           <RatingStar :value="5.0" active-color="#f87676" :star-size="18" readonly />
           <em class="score">5.0</em>
-          <span>(300개의 평가)</span>
+          <span>(30개의 평가)</span>
         </div>
       </div>
     </div>
     <ul class="store-info">
       <li>
-        <b>150개</b>
+        <b>7개</b>
         <span>작업 수</span>
       </li>
       <li>
@@ -45,6 +45,12 @@ export default {
   components: {
     StoreAvatar,
     RatingStar
+  },
+  props: {
+    store: {
+      type: Object,
+      required: true
+    }
   },
   methods: {
     influencerProfileEdit () {

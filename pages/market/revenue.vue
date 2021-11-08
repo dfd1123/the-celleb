@@ -3,8 +3,8 @@
     <div class="tit">
       <h2>수익 관리</h2>
       <div class="bank-info">
-        <span>예금주 : 업체명</span>
-        <span>출금계좌 : 한국은행 1234-56789</span>
+        <span>예금주 : 더셀럽</span>
+        <span>출금계좌 : 국민은행 910-8885-7406</span>
       </div>
     </div>
     <div class="panel-box">
@@ -15,7 +15,7 @@
             <p class="value">
               1,000,000<span>원</span>
             </p>
-            <cl-button type="line-purple" class="withdrawal-btn">
+            <cl-button type="line-purple" class="withdrawal-btn" @click="withdrawalRequest">
               출금 신청
             </cl-button>
           </div>
@@ -59,29 +59,29 @@
         <SlideTabNav v-model="revenueSelectedTab" :menu-list="revenueMenuList" />
         <div class="select-type-box">
           <a href="#">수수료가 궁금하세요?</a>
-          <SelectBox :list="selectBoxList" />
+          <SelectBox v-model="revenueStatus" :list="selectBoxList" />
         </div>
       </div>
       <div class="list-box">
         <ul>
-          <li v-for="i in 4" :key="i" class="revenue-li">
-            <span :class="['status', {'ing': i < 3}]">{{ 3 > i ? '진행중':'완료' }}</span>
+          <li v-for="revenue in showRevenueList" :key="revenue.id" class="revenue-li">
+            <span :class="['status', revenue.status]">{{ revenue.status === 'ing' ? '진행중':'완료' }}</span>
             <div class="detail-info">
               <span class="revenue">수익금
-                <em>240,000</em>
+                <em>{{ revenue.price }}</em>
                 <i>원</i>
               </span>
               <div class="sub-info">
-                <span class="order-no">#20072390</span>
-                <span>주문 접수일 : 21.08.07</span>
-                <span>실 거래 금액 : 300,000원</span>
+                <span class="order-no">#{{ revenue.id }}</span>
+                <span>주문 접수일 : {{ revenue.date }}</span>
+                <span>실 거래 금액 : {{ revenue.dealPrice }}원</span>
               </div>
             </div>
           </li>
         </ul>
       </div>
     </div>
-    <cl-button type="white" class="more-btn">
+    <cl-button v-if="revenueList.length < 5" type="white" class="more-btn" @click="addRevenue">
       <img src="~/assets/imgs/icon/ico-plus.svg" alt="plus">
       <span>더보기</span>
     </cl-button>
@@ -116,10 +116,17 @@ export default {
   components: { ClButton, BarChart, ToggleTab, SlideTabNav, SelectBox },
   data () {
     return {
-      selectBoxList: [{ label: '전체', value: 'all' }, { label: '진행중', value: 'ing' }, { label: '완료', value: 'complete' }],
+      selectBoxList: [{ label: '전체', value: 'all' }, { label: '진행중', value: 'ing' }, { label: '완료', value: 'end' }],
       revenueMenuList: ['수익금 내역', '출금내역', '월별 수수료 세금계산서'],
       revenueSelectedTab: 0,
       selectedTab: 0,
+      revenueStatus: 'all',
+      revenueList: [
+        { id: '20072399', status: 'ing', price: '240,000', dealPrice: '1,050,000', date: '21.08.07' },
+        { id: '20072393', status: 'ing', price: '130,000', dealPrice: '810,000', date: '21.08.07' },
+        { id: '20072391', status: 'end', price: '430,000', dealPrice: '680,000', date: '21.08.05' },
+        { id: '20072390', status: 'end', price: '220,000', dealPrice: '250,000', date: '21.08.04' }
+      ],
       graphTabs: ['일별', '월별'],
       barChartData: {
         labels: ['2020.03', '2020.04', '2020.05', '2020.06', '2020.07', '2020.08'],
@@ -154,6 +161,21 @@ export default {
           ]
         }
       }
+    }
+  },
+  computed: {
+    showRevenueList () {
+      return this.revenueStatus !== 'all' ? this.revenueList.filter(revenue => revenue.status === this.revenueStatus) : this.revenueList
+    }
+  },
+  methods: {
+    withdrawalRequest () {
+      this.$alert({ title: '출금신청이 완료되었습니다.', message: '출금 완료까지 다소 시간이 소요될수 있습니다.' })
+    },
+    addRevenue () {
+      this.revenueList.push(
+        { id: '20072389', status: 'end', price: '100,000', dealPrice: '30,000', date: '21.08.02' }
+      )
     }
   }
 }

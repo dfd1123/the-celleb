@@ -24,7 +24,7 @@ export default {
 [market-container]{ .pt(84); .pb(204); .bgc(#fafbff);
   .my-page-holder{ .clear;
     .container{ .fr; .w(816);
-      [order-card] { .pointer; }
+      [order-card], [order-user-card] { .pointer; }
     }
   }
 }
