@@ -20,7 +20,7 @@
           메시지
         </router-link>
         <router-link to="/product/instagram/list">
-          업체검색
+          서비스 검색
         </router-link>
         <template v-if="isLogin">
           <router-link to="/mypage">

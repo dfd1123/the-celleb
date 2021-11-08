@@ -11,7 +11,7 @@
     {
       "id": 1,
       "inf_Id": 1,
-      "inf_name": "업체이름",
+      "inf_name": "더셀럽",
       "title": "서비스 이름",
       "images": ["/images/product1.jpg"],
       "simple_intro": "인스타그램 최적화 계정으로 활성화 관리해드립니다.",
@@ -545,6 +545,52 @@
       "relation_product_ids": [1,3,5,7,9,10,11,12],
       "createdAt": 1629730800000,
       "updatedAt": 1629730800000
+    },
+    {
+      "id": 13,
+      "inf_Id": 1,
+      "inf_name": "업체이름121212",
+      "title": "서비스 이름121212",
+      "images": ["/images/product12.jpg"],
+      "simple_intro": "인스타그램 최적화 계정으로 활성화 관리해드립니다.",
+      "description": "수정 1회는 무료입니다. 의뢰시 요청사항이 아닌 경우에 대하여 수정을 요청할 경우 재작업과 동일하게 취급이 됩니다. 수정 1회는 무료입니다. 의뢰시 요청사항이 아닌 경우에 대하여 수정을 요청할 경우 재작업과 동일하게 취급이 됩니다. 수정 1회는 무료입니다. 의뢰시 요청사항이 아닌 경우에 대하여 수정을 요청할 경우 재작업과 동일하게 취급이 됩니다. 수정 1회는 무료입니다. 의뢰시 요청사항이 아닌 경우에 대하여 수정을 요청할 경우 재작업과 동일하게 취급이 됩니다. 수정 1회는 무료입니다. 의뢰시 요청사항이 아닌 경우에 대하여 수정을 요청할 경우 재작업과 동일하게 취급이 됩니다.",
+      "minimum_price": 65000,
+      "rating": 4.9,
+      "review_cnt": 300,
+      "channel_id": "instagram",
+      "channel_name": "인스타그램",
+      "category_id": 1,
+      "category_name": "건강기능식품",
+      "purpose": "groupBuy",
+      "can_bil": true,
+      "recommend": 12,
+      "hit": 100,
+      "options": {
+        "micro": {
+          "price": 30000,
+          "intro": "공동구매를 도와드립니다.",
+          "edit_cnt": 1,
+          "as_term": 30,
+          "work_day": 30
+        },
+        "mega": {
+          "price": 60000,
+          "intro": "공동구매를 도와드립니다.",
+          "edit_cnt": 2,
+          "as_term": 60,
+          "work_day": 20
+        },
+        "star": {
+          "price": 100000,
+          "intro": "공동구매를 도와드립니다.",
+          "edit_cnt": 3,
+          "as_term": 90,
+          "work_day": 10
+        }
+      },
+      "relation_product_ids": [1,3,5,7,9,10,11,12],
+      "createdAt": 1629730800000,
+      "updatedAt": 1629730800000
     }
   ],
   "reviews": [
@@ -619,6 +665,15 @@
     },
     { "id": 1, "product_id": 8, "name": "김**", "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
       "createdAt": 1632150000000, "updatedAt": 1632150000000
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "order_no": "112123128",
+      "status": "remain-request",
+      "title": "더 셀럽"
+
     }
   ],
   "profile": { "name": "typicode" }

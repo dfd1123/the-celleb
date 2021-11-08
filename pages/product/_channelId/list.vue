@@ -3,11 +3,11 @@
     <ChannelNav v-model="channel" />
     <div class="inner-holder">
       <h2 class="page-tit">
-        인스타그램
+        {{ pageTitle }}
       </h2>
       <FilterBox v-model="applyFilters" />
       <div class="orderby-controller">
-        <span class="total-cnt">30,250개의 업체</span>
+        <span class="total-cnt">{{ showItemCnt }}개의 서비스</span>
         <SelectBox v-model="orderBy" :list="orderByList" />
       </div>
       <NoData v-if="itemList && showItemCnt === 0" main-msg="조회된 업체 및 서비스가 없습니다." />
@@ -42,6 +42,18 @@ export default {
     }
   },
   computed: {
+    pageTitle () {
+      const titleObj = {
+        instagram: '인스타그램',
+        youtube: '유튜브',
+        blog: '네이버 블로그',
+        cafe: '네이버 카페',
+        tiktok: '틱톡',
+        liveCommerce: '라이브 커머스'
+      }
+
+      return titleObj[this.channel]
+    },
     showItemList () {
       if (!this.itemList) { return Array.from({ length: 8 }).map(() => ({})) }
       let showItemList = this.itemList.filter(item => item.channel_id === this.channel)
@@ -79,8 +91,9 @@ export default {
     },
     matchOptions () {
       this.orderBy = this.$route.query.orderBy ?? 'recommend'
-      this.applyFilters = this.$route.query.purpose || []
-      if (!Array.isArray(this.applyFilters)) { this.applyFilters = [this.applyFilters] }
+      const applyFilters = this.$route.query.purpose || []
+      console.log(applyFilters)
+      if (!Array.isArray(applyFilters)) { this.applyFilters = [applyFilters] }
     },
     routeQueryReplace () {
       if (this.$route.name === 'product-channelId-list') {
