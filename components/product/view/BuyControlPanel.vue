@@ -15,8 +15,8 @@
     <div class="detail-product-info">
       <accordion-view v-for="option in options" :key="`detail-prd-${option.id}`" v-model="openProductIndex" name="detail-prd">
         <template #title>
-          <b class="name">{{ option.name }}</b>
-          <span class="price">1,000,000원</span>
+          <b class="name">{{ option.id }}</b>
+          <span class="price">{{ option.commaPrice }}원</span>
         </template>
         <div>
           <h6 class="title">
@@ -24,11 +24,11 @@
             <button>계정 관리</button>
           </h6>
           <ul class="sub-info">
-            <li><img src="~/assets/imgs/icon/ico-as.svg" alt="as">AS 보증기간 30일</li>
-            <li><img src="~/assets/imgs/icon/ico-calendar.svg" alt="calender">작업일 30일</li>
-            <li><img src="~/assets/imgs/icon/ico-setting.svg" alt="setting">수정 횟수 1회</li>
+            <li><img src="~/assets/imgs/icon/ico-as.svg" alt="as">AS 보증기간 {{ option.as_term }}일</li>
+            <li><img src="~/assets/imgs/icon/ico-calendar.svg" alt="calender">작업일 {{ option.work_day }}일</li>
+            <li><img src="~/assets/imgs/icon/ico-setting.svg" alt="setting">수정 횟수 {{ option.edit_cnt }}회</li>
           </ul>
-          <cl-button type="purple" class="buy-btn">
+          <cl-button type="purple" class="buy-btn" @click="goBuy(option.id)">
             구매하기
           </cl-button>
         </div>
@@ -66,9 +66,14 @@ export default {
     minimumPrice () { return numberFormat(this.item.minimum_price || 0) },
     options () {
       if (this.item.options) {
-        return Object.keys(this.item.options).map(option => ({ ...this.item.options[option], id: option }))
+        return Object.keys(this.item.options).map(option => ({ ...this.item.options[option], id: option, commaPrice: numberFormat(this.item.options[option].price) }))
       }
       return []
+    }
+  },
+  methods: {
+    goBuy (option) {
+      this.$router.push({ path: `/order/${this.item.id}`, query: { option } })
     }
   }
 }
@@ -96,7 +101,7 @@ export default {
       }
       .view-wrapper {
         > label { .crop; .p(22, 32); .bgc(#FFFFFF); .-b; .no-drag;
-          > .name { .fl; .fs(18, 21); .c(@title-black); .bold; }
+          > .name { .fl; .fs(18, 21); .c(@title-black); .bold;     text-transform: uppercase; }
           > .price { .fr; .fs(18, 21); .c(@purple); .bold; }
         }
         .context {

@@ -43,7 +43,8 @@ export default {
   },
   computed: {
     showItemList () {
-      let showItemList = (this.itemList || []).filter(item => item.channel_id === this.channel)
+      if (!this.itemList) { return Array.from({ length: 8 }).map(() => ({})) }
+      let showItemList = this.itemList.filter(item => item.channel_id === this.channel)
       showItemList.sort((a, b) => {
         const order = this.orderByList.find(item => item.value === this.orderBy).order
 
@@ -62,16 +63,33 @@ export default {
       })
       if (this.applyFilters.length) { showItemList = showItemList.filter(item => this.applyFilters.includes(item.purpose)) }
 
+      this.routeQueryReplace()
+
       return showItemList
     },
     showItemCnt () { return this.showItemList.length || 0 }
   },
   mounted () {
+    this.matchOptions()
     this.getItemList()
   },
   methods: {
     async getItemList () {
       this.itemList = await this.$api.get('/products')
+    },
+    matchOptions () {
+      this.orderBy = this.$route.query.orderBy ?? 'recommend'
+      this.applyFilters = this.$route.query.purpose || []
+      if (!Array.isArray(this.applyFilters)) { this.applyFilters = [this.applyFilters] }
+    },
+    routeQueryReplace () {
+      if (this.$route.name === 'product-channelId-list') {
+        this.$router.replace({
+          path: this.$route.path,
+          query: { ...this.$route.query, orderBy: this.orderBy, purpose: this.applyFilters }
+        }).catch(() => {
+        })
+      }
     }
   }
 }

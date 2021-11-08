@@ -1,9 +1,9 @@
 {
   "users": [
-    { "id": 1, "email": "celleb@naver.com", "password": "qwer1234!", "image": null, "type": "brand", "business_number": "1234567890", "ceo_name": "김셀럽", "influencer_name": null, "sns": "https://www.instagram.com/explore/tags/%EB%8D%94%EC%85%80%EB%9F%BD/",
+    { "id": 1, "email": "celleb@naver.com", "password": "qwer1234!", "nickname": "더셀럽", "image": "/images/the-celleb-logo.png", "type": "influencer", "business_number": "1234567890", "ceo_name": "김셀럽", "influencer_name": "더셀럽", "intro": "안녕하세요. 더셀럽입니다. 스마트플레이스 최적화 관리 및 효과적인 공동구매 진행해 드립니다. 항상 노력하는 전문가가 되겠습니다. 감사합니다. (연락처 : 문의 남기기를 클릭해주세요.)", "sns": "https://www.instagram.com/explore/tags/%EB%8D%94%EC%85%80%EB%9F%BD/",
       "createdAt": 1603465200000, "updatedAt": 1603465200000
     },
-    { "id": 2, "email": "alpha@naver.com", "password": "qwer1234!", "image": "/images/AB_Logo.svg", "type": "influencer", "business_number": "1234567890", "ceo_name": "채중규", "influencer_name": "알파브라더스", "sns": "https://www.instagram.com/alphabrothers_official/",
+    { "id": 2, "email": "alpha@naver.com", "password": "qwer1234!", "nickname": "알파브라더스", "image": "/images/AB_Logo.svg", "type": "brand", "business_number": "1234567890", "ceo_name": "채중규", "influencer_name": null, "sns": "https://www.instagram.com/alphabrothers_official/",
       "createdAt": 1635001200000, "updatedAt": 1635001200000
     }
   ],
@@ -56,7 +56,7 @@
     },
     {
       "id": 2,
-      "inf_Id": 2,
+      "inf_Id": 1,
       "inf_name": "업체이름",
       "title": "서비스 이름",
       "images": ["/images/product2.jpg"],
@@ -102,7 +102,7 @@
     },
     {
       "id": 3,
-      "inf_Id": 3,
+      "inf_Id": 1,
       "inf_name": "업체이름",
       "title": "서비스 이름",
       "images": ["/images/product3.jpg"],
@@ -148,7 +148,7 @@
     },
     {
       "id": 4,
-      "inf_Id": 4,
+      "inf_Id": 1,
       "inf_name": "업체이름",
       "title": "서비스 이름",
       "images": ["/images/product4.jpg"],
@@ -194,7 +194,7 @@
     },
     {
       "id": 5,
-      "inf_Id": 5,
+      "inf_Id": 1,
       "inf_name": "업체이름",
       "title": "서비스 이름",
       "images": ["/images/product5.jpg"],
@@ -240,7 +240,7 @@
     },
     {
       "id": 6,
-      "inf_Id": 6,
+      "inf_Id": 1,
       "inf_name": "업체이름",
       "title": "서비스 이름",
       "images": ["/images/product6.jpg"],
@@ -286,7 +286,7 @@
     },
     {
       "id": 7,
-      "inf_Id": 7,
+      "inf_Id": 1,
       "inf_name": "업체이름",
       "title": "서비스 이름",
       "images": ["/images/product7.jpg"],
@@ -318,7 +318,7 @@
     },
     {
       "id": 8,
-      "inf_Id": 8,
+      "inf_Id": 1,
       "inf_name": "업체이름",
       "title": "서비스 이름",
       "images": ["/images/product8.jpg"],
@@ -364,7 +364,7 @@
     },
     {
       "id": 9,
-      "inf_Id": 9,
+      "inf_Id": 1,
       "inf_name": "업체이름",
       "title": "서비스 이름",
       "images": ["/images/product9.jpg"],
@@ -410,7 +410,7 @@
     },
     {
       "id": 10,
-      "inf_Id": 10,
+      "inf_Id": 1,
       "inf_name": "업체이름",
       "title": "서비스 이름",
       "images": ["/images/product10.jpg"],
@@ -456,7 +456,7 @@
     },
     {
       "id": 11,
-      "inf_Id": 11,
+      "inf_Id": 1,
       "inf_name": "업체이름",
       "title": "서비스 이름",
       "images": ["/images/product11.jpg"],
@@ -502,7 +502,7 @@
     },
     {
       "id": 12,
-      "inf_Id": 12,
+      "inf_Id": 1,
       "inf_name": "업체이름",
       "title": "서비스 이름",
       "images": ["/images/product12.jpg"],

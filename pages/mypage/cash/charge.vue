@@ -30,9 +30,9 @@
       <div class="paymethod-holder">
         <span class="label">결제수단</span>
         <div class="select-area">
-          <RadioBox v-model="payMethod" label="신용카드" val="creditCard" />
-          <RadioBox v-model="payMethod" label="실시간 계좌이체" val="realTimeDeposit" />
-          <RadioBox v-model="payMethod" label="무통장입금" val="noAccountDeposit" />
+          <RadioBox v-model="payMethod" label="신용카드" val="신용카드" />
+          <RadioBox v-model="payMethod" label="실시간 계좌이체" val="실시간 계좌이체" />
+          <RadioBox v-model="payMethod" label="무통장입금" val="무통장입금" />
         </div>
       </div>
       <cl-button type="purple" class="charge-btn" :disabled="!showChargePrice || !payMethod" @click="charge">
@@ -70,7 +70,7 @@ export default {
       const result = await this.$confirm({ title: '결제하시겠습니까?', message: `캐시충전 - ${this.showChargePrice}` })
 
       if (result) {
-        this.$router.push('/cash/charge/complete')
+        this.$router.push({ path: '/cash/charge/complete', query: { price: this.chargePrice, payMethod: this.payMethod } })
       }
     }
   }

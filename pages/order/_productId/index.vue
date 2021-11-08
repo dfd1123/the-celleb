@@ -7,7 +7,7 @@
       <div class="order-info-holder">
         <div class="change-order-info">
           <div class="article-box order-card-holder">
-            <OrderControlCard v-for="(product, index) in productList" :key="`product-${index}`" :product="product" />
+            <OrderControlCard v-if="item" :product="item" />
           </div>
           <div class="article-box coupon-use-holder">
             <h4 class="sub-tit">
@@ -56,7 +56,7 @@
             </p>
           </div>
         </div>
-        <OrderBuyController />
+        <OrderBuyController v-if="item" :total-price="(option.price || 0) * (item.amount || 1)" />
       </div>
     </div>
   </div>
@@ -105,9 +105,7 @@ export default {
       taxBillPossible: true,
       hasCash: 500,
       useCash: 0,
-      productList: [
-        { price: 1000000, amount: 1 }
-      ]
+      item: null
     }
   },
   computed: {
@@ -115,9 +113,28 @@ export default {
       const hasCash = this.hasCash ?? 0
       const useCash = this.useCash ?? 0
       return numberFormat(hasCash - useCash)
+    },
+    itemId () {
+      return this.$route.params.productId
+    },
+    option () {
+      if (!this.item) { return {} }
+      const option = this.item.options[this.$route.query.option] || {}
+
+      return { ...option, commaPrice: numberFormat(option.price) }
+    },
+    totalPrice () {
+      const amount = this.item ? this.item.amount : 1
+      return (this.option.price || 0) * amount
     }
   },
+  mounted () {
+    this.getItemInfo()
+  },
   methods: {
+    async getItemInfo () {
+      this.item = await this.$api.get(`/products/${this.itemId}`)
+    },
     allUseCash () {
       this.useCash = this.hasCash
     }

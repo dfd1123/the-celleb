@@ -2,7 +2,7 @@
   <div payment-page>
     <SearchControlBox :start-date="startDate" :end-date="endDate" :search-text="searchText" @change-date="changeDate" />
     <div v-if="true" class="product-list">
-      <OrderCard slip-out pay-method />
+      <OrderCard slip-out pay-method @click="$router.push('/order/1/detail')" />
       <OrderCard slip-out pay-method status="refund-complete" />
     </div>
     <NoData v-else main-msg="내역이 없습니다" />

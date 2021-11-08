@@ -2,9 +2,9 @@
   <div mypage-nav>
     <div class="user-info">
       <div class="profile-image">
-        <Avatar />
+        <Avatar :src="userInfo.image" />
       </div>
-      <span class="name">더셀럽 님</span>
+      <span class="name">{{ userInfo.nickname }} 님</span>
     </div>
     <ul class="menu-list">
       <li>
@@ -97,6 +97,9 @@ export default {
   computed: {
     routeName () {
       return this.$route.name || ''
+    },
+    userInfo () {
+      return this.$store.state.auth?.myInfo || {}
     }
   },
   mounted () {

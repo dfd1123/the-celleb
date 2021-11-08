@@ -36,6 +36,12 @@ import ClButton from '@/components/common/ClButton'
 export default {
   name: 'OrderBuyController',
   components: { ClButton },
+  props: {
+    totalPrice: {
+      type: Number,
+      default: 0
+    }
+  },
   computed: {
     productId () {
       return this.$route.params.productId || ''

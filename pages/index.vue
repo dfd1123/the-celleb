@@ -10,12 +10,22 @@
         </h1>
         <div class="search-con">
           <div class="select-box-con">
-            <SelectBox v-wave placeholder="카테고리" />
-            <SelectBox v-wave placeholder="예산" />
-            <SelectBox v-wave placeholder="채널" />
-            <SelectBox v-wave placeholder="목적" />
+            <ValidationObserver ref="validator">
+              <ValidationProvider rules="required" name="카테고리">
+                <SelectBox v-model="category" v-wave :list="topCategoryList" placeholder="카테고리" />
+              </ValidationProvider>
+              <ValidationProvider rules="required" name="예산">
+                <SelectBox v-model="priceRange" v-wave :list="priceRangeList" placeholder="예산" />
+              </ValidationProvider>
+              <ValidationProvider rules="required" name="채널">
+                <SelectBox v-model="channel" v-wave :list="bottomCategoryList" placeholder="채널" />
+              </ValidationProvider>
+              <ValidationProvider rules="required" name="목적">
+                <SelectBox v-model="purpose" v-wave :list="purposeList" placeholder="목적" />
+              </ValidationProvider>
+            </ValidationObserver>
           </div>
-          <button v-wave type="button" class="search-btn">
+          <button v-wave type="button" class="search-btn" @click="search">
             <img src="~/assets/imgs/icon/ico-search.svg" alt="search">
           </button>
         </div>
@@ -29,7 +39,37 @@ import SelectBox from '@/components/common/input/SelectBox'
 
 export default {
   name: 'MainPage',
-  components: { SelectBox }
+  components: { SelectBox },
+  data () {
+    return {
+      topCategoryList: [{ label: '건강 기능식품', value: 1 }, { label: '일반식품', value: 2 }, { label: '가전제품', value: 3 }, { label: '화장품', value: 4 }, { label: '쥬얼리', value: 5 }, { label: '패션', value: 6 }, { label: '육아', value: 7 }],
+      priceRangeList: [
+        { label: '1만원~100만원', value: '10000|1000000' },
+        { label: '100만원~300만원', value: '1000000|3000000' },
+        { label: '300만원~500만원', value: '3000000|5000000' },
+        { label: '500만원~1,000만원', value: '5000000|10000000' },
+        { label: '1,000만원 이상', value: '10000000' }
+      ],
+      bottomCategoryList: [{ label: '인스타그램', value: 'instagram' }, { label: '유튜브', value: 'youtube' }, { label: '네이버 블로그', value: 'blog' }, { label: '네이버 카페', value: 'cafe' }, { label: '틱톡', value: 'tiktok' }, { label: '라이브커머스', value: 'live-commerce' }],
+      purposeList: [
+        { label: '공동구매', value: 'groupBuy' },
+        { label: '체험단', value: 'experienceGroup' },
+        { label: '콘텐츠', value: 'contents' },
+        { label: '홍보', value: 'marketing' }
+      ],
+      category: '',
+      priceRange: '',
+      channel: '',
+      purpose: ''
+    }
+  },
+  methods: {
+    async search () {
+      await this.$validate(this.$refs.validator)
+      const [min, max] = this.priceRange.split('|')
+      this.$router.push({ path: `/product/${this.channel}/list`, query: { purpose: this.purpose, min, max } })
+    }
+  }
 }
 </script>
 

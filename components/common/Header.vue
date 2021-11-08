@@ -11,7 +11,7 @@
     </div>
     <div class="main-hd inner-holder">
       <div class="logo">
-        <router-link to="/">
+        <router-link :to="{path:'/' , query:{}}">
           <img :src="colorLogo" alt="the celleb logo">
         </router-link>
       </div>
@@ -22,18 +22,18 @@
         <router-link to="/product/instagram/list">
           업체검색
         </router-link>
-        <cl-button type="line-purple" class="login-btn" @click="$router.push('/auth/login')">
-          로그인
-        </cl-button>
-        <router-link to="/mypage">
-          마이페이지
-        </router-link>
+        <template v-if="isLogin">
+          <router-link to="/mypage">
+            마이페이지
+          </router-link>
 
-        <Avatar tootip />
-
-        <router-link to="#">
-          <div class="profile" />
-        </router-link>
+          <Avatar :src="userInfo.image" tootip />
+        </template>
+        <template v-else>
+          <cl-button type="line-purple" class="login-btn" @click="$router.push('/auth/login')">
+            로그인
+          </cl-button>
+        </template>
       </nav>
     </div>
   </header>
@@ -53,6 +53,14 @@ export default {
   data () {
     return {
       colorLogo
+    }
+  },
+  computed: {
+    userInfo () {
+      return this.$store.state.auth?.myInfo
+    },
+    isLogin () {
+      return Boolean(this.userInfo?.id)
     }
   }
 }

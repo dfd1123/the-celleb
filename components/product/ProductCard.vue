@@ -9,9 +9,9 @@
           <h2 class="name">
             {{ item.title || '업체이름' }}
           </h2>
-          <p class="description">
+          <div class="description">
             {{ item.simple_intro }}
-          </p>
+          </div>
         </div>
       </router-link>
       <div class="prod-price-box">

@@ -77,10 +77,24 @@ export default {
     async login () {
       await this.$validate(this.$refs.validator)
 
+      const users = await this.$api.get('/users')
+      const info = users.find(user => user.email === this.email)
+
+      if (info) {
+        if (info.password !== this.password) {
+          this.$toast('비밀번호가 일치하지 않습니다.', { type: 'fail' })
+          return false
+        }
+
+        this.$store.commit('auth/setUserInfo', info)
+      } else {
+        this.$toast('존재하지 않은 아이디 입니다.', { type: 'fail' })
+        return false
+      }
+
       this.$router.push('/')
     },
     socialLogin (social) {
-      console.log(social)
       this.$toast('준비중인 서비스 입니다.', { type: 'fail' })
     },
     register (type = 'brand') {

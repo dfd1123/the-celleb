@@ -10,7 +10,7 @@
       </div>
       <div class="control-holder">
         <BuyControlPanel :item="item" />
-        <ProductStoreBox :item="item" />
+        <ProductStoreBox :store="store" />
       </div>
     </div>
     <SlideProductList subject="다른 회원이 함께 본 서비스" class="other-user-relate" />
@@ -44,7 +44,8 @@ export default {
     return {
       selectedTab: 0,
       tabs: ['서비스 설명', '가격 정보', '수정 / 재진행', '취소 / 환불', '서비스 평가'],
-      item: {}
+      item: {},
+      store: {}
     }
   },
   computed: {
@@ -53,7 +54,8 @@ export default {
     },
     channelId () {
       return this.$route.params.channelId
-    }
+    },
+    influencerId () { return this.item.inf_Id }
   },
   mounted () {
     this.getItemInfo()
@@ -61,6 +63,7 @@ export default {
   methods: {
     async getItemInfo () {
       this.item = await this.$api.get(`/products/${this.itemId}`)
+      if (this.influencerId) { this.store = await this.$api.get(`/users/${this.influencerId}`) }
     }
   }
 }

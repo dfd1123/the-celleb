@@ -14,9 +14,9 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/login">
+          <button @click="logout">
             로그아웃
-          </router-link>
+          </button>
         </li>
       </ul>
     </div>
@@ -56,6 +56,10 @@ export default {
       this.uploadImage = await imageFileUpload(e)
 
       this.$emit('change', this.uploadImage)
+    },
+    logout () {
+      this.$store.commit('auth/clearUserInfo')
+      this.$router.push('/')
     }
   }
 }
@@ -65,14 +69,14 @@ export default {
 @import '~@/assets/less/proj';
 
 [avatar]{ .rel; .wh(42); .no-drag;
-  >img{ .wh(100%); object-fit: cover; .br(50%); }
+  >img{ .wh(100%); object-fit: cover; .-a(#d9d9d9); .br(50%); .crop; }
   .my-menu { visibility: hidden; .abs; .lt(-30.5,45); .z(1); .w(103); .pt(10); .mt(-10); .o(0); transition: opacity 0.2s;
     span{ .abs; .lt(0,-5); .z(1); .w(100%); .tc;
       &::after { .cnt; .ib; .-b(#fff,5); .-l(transparent,5); .-r(transparent,5); }
     }
     ul{ .crop; .p(5, 0); .bgc(#fff); .br(10); box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16);
       >li{
-        >a{ .block; .fs(15, 40); .c(#333); .tc; transition: background-color 0.2s;
+        >a, >button{ .block; .w(100%); .fs(15, 40); .c(#333); .tc; transition: background-color 0.2s;
           &:hover{ .bgc(#eee); }
         }
       }

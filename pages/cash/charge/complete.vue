@@ -11,8 +11,8 @@
           캐시충전
         </h4>
         <div class="info">
-          <span class="date">결제일 21.10.10 12:03 | 신용카드</span>
-          <b class="price">1,500,000 원</b>
+          <span class="date">결제일 {{ receiptDate }} | {{ payMethod }}</span>
+          <b class="price">{{ showChargePrice }}</b>
         </div>
       </div>
       <div class="btn-holder">
@@ -25,11 +25,24 @@
 </template>
 
 <script>
+import moment from 'moment'
+import { numberFormat } from '@/utils/numberUtils'
 import ClButton from '@/components/common/ClButton'
 
 export default {
   name: 'ChargeComplete',
   components: { ClButton },
+  computed: {
+    showChargePrice () {
+      return this.$route.query.price ? numberFormat(this.$route.query.price) + ' 원' : ''
+    },
+    payMethod () {
+      return this.$route.query.payMethod || '신용카드'
+    },
+    receiptDate () {
+      return moment().format('YY.MM.DD HH:mm')
+    }
+  },
   methods: {
     goChargeHistory () {
       this.$router.push('/mypage/cash')

@@ -7,10 +7,7 @@
       <ValidationObserver ref="validator">
         <div class="left">
           <div class="profile-img">
-            <Avatar />
-            <button class="profile-img-edit-btn">
-              <img src="~/assets/imgs/icon/ico-camera.svg" alt="edit porfile">
-            </button>
+            <Avatar :src="userInfo.image" edit />
           </div>
           <div class="inp-box">
             <label>이메일</label>
@@ -92,7 +89,14 @@ export default {
       }
 
       return false
+    },
+    userInfo () {
+      return this.$store.state.auth?.myInfo || {}
     }
+  },
+  mounted () {
+    this.email = this.userInfo.email
+    this.nickname = this.userInfo.nickname
   },
   methods: {
     async editInfo () {

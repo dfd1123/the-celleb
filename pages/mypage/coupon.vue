@@ -22,7 +22,7 @@
     </div>
     <div class="coupon-list-holder">
       <p class="subject">
-        사용 가능쿠폰 (2개)
+        사용 가능쿠폰 ({{ couponList.length }}개)
       </p>
       <div v-if="couponList.length" class="coupon-list">
         <CouponCard v-for="(coupon, index) in couponList" :key="`coupon-card-${index}`" :coupon="coupon" />
@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import ClButton from '@/components/common/ClButton'
 import TextInput from '@/components/common/input/TextInput'
 import CouponCard from '@/components/coupon/CouponCard'
@@ -64,7 +65,7 @@ export default {
           id: '더셀럽대박',
           name: '더 셀럽 대박 기원 이벤트 쿠폰',
           remainDate: '25일 남음',
-          endDate: '2020.10.04 18:33까지'
+          endDate: moment().add(25, 'day').format('YYYY.MM.DD HH:mm') + '까지'
         }
       ],
       couponList: [

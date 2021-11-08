@@ -2,29 +2,31 @@
   <div order-control-card>
     <div class="main-info">
       <div class="product-img">
-        <img :src="sampleOrderProduct" alt="order-product">
+        <img v-if="item.id" :src="item.images[0] || sampleOrderProduct" alt="order-product">
       </div>
       <div class="product-info">
-        <h6>더셀럽</h6>
-        <p>공동 구매를 빠르고 효율적으로 도와드립니다.</p>
+        <h6>{{ item.title }}</h6>
+        <p>{{ item.simple_intro }}</p>
       </div>
     </div>
     <div class="sub-info">
       <table>
-        <tr>
-          <th>기본항목</th>
-          <th>작업일</th>
-          <th>수량</th>
-          <th>가격</th>
-        </tr>
-        <tr>
-          <td>네이버 쇼핑라이브</td>
-          <td>30일</td>
-          <td>
-            <IntegerSelect v-model="item.amount" :min="1" :write="false" />
-          </td>
-          <td><b>{{ (item.amount || 0) * (item.price || 0) }}원</b></td>
-        </tr>
+        <tbody>
+          <tr>
+            <th>기본항목</th>
+            <th>작업일</th>
+            <th>수량</th>
+            <th>가격</th>
+          </tr>
+          <tr>
+            <td>{{ item.category_name }}</td>
+            <td>{{ option.work_day }}일</td>
+            <td>
+              <IntegerSelect v-model="amount" :min="1" :write="false" />
+            </td>
+            <td><b>{{ totalPrice }}원</b></td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
@@ -33,6 +35,7 @@
 <script>
 import sampleOrderProduct from '@/assets/imgs/sample/product-order-sample.jpg'
 import IntegerSelect from '@/components/common/input/IntegerSelect'
+import { numberFormat } from '@/utils/numberUtils'
 
 export default {
   name: 'OrderControlCard',
@@ -46,7 +49,24 @@ export default {
   data () {
     return {
       sampleOrderProduct,
-      item: {}
+      item: {},
+      amount: 1
+    }
+  },
+  computed: {
+    option () {
+      if (!this.item.options) { return {} }
+      const option = this.item.options[this.$route.query.option] || {}
+
+      return { ...option, commaPrice: numberFormat(option.price) }
+    },
+    totalPrice () {
+      return numberFormat((this.option.price || 0) * this.amount)
+    }
+  },
+  watch: {
+    amount () {
+      this.item.amount = this.amount
     }
   },
   mounted () {
@@ -55,6 +75,7 @@ export default {
   methods: {
     syncProductInfo () {
       this.item = this.product
+      this.item.amount = 1
     }
   }
 }

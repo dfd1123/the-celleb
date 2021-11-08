@@ -42,6 +42,7 @@ export default {
   methods: {
     drawSlider () {
       const menuEls = document.querySelectorAll('[slide-tab-nav] .menu')
+      if (!menuEls[this.model]) { return false }
       const targetEl = menuEls[this.model].children[0]
 
       if (targetEl.nodeName !== 'A') { return false }

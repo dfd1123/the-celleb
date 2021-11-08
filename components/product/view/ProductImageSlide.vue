@@ -1,8 +1,8 @@
 <template>
   <div product-image-slide class="product-img-slide">
     <swiper>
-      <swiper-slide>
-        <img src="~/assets/imgs/sample/product-big1.png">
+      <swiper-slide v-for="(image, index) in images" :key="`image-${index}`">
+        <img :src="image">
       </swiper-slide>
     </swiper>
   </div>
@@ -17,6 +17,12 @@ export default {
   components: {
     Swiper,
     SwiperSlide
+  },
+  props: {
+    images: {
+      type: Array,
+      default: () => []
+    }
   }
 }
 </script>
@@ -24,6 +30,10 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj';
 
-[product-image-slide]{ .crop; .wh(100%,441); .mb(56); }
+[product-image-slide]{ .crop; .w(100%); .mb(56);
+  .swiper-slide{ .h(441);
+    >img{ .wh(100%); object-fit: cover; object-position: center; }
+  }
+}
 
 </style>

@@ -25,6 +25,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '@/plugins/persistedState' },
     { src: '@/plugins/dialogNModal', mode: 'client' },
     { src: '@/plugins/toast' },
     { src: '@/plugins/api' },

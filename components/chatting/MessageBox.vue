@@ -62,7 +62,7 @@ export default {
 
 [message-box]{ .bgc(#FFFFFF);
   [select-box] { .min-w(168); .h; .m(20, 15); .-a !important;
-    .show-value { .fs(22, 27); .c(@title-black); }
+    .show-value { flex-wrap:nowrap; .w; .fs(22, 27); .c(@title-black); }
     > .angle { .t(5);
       svg path { fill: @title-black; }
     }

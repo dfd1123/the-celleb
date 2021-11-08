@@ -1,9 +1,9 @@
 <template>
   <div my-page-container>
     <div class="inner-holder my-page-holder">
-      <MypageNav />
+      <MypageNav :user-info="userInfo" />
       <div class="container">
-        <nuxt-child />
+        <nuxt-child :user-info="userInfo" />
       </div>
     </div>
   </div>
@@ -14,7 +14,12 @@ import MypageNav from '@/components/mypage/MypageNav'
 
 export default {
   name: 'MyPageContainer',
-  components: { MypageNav }
+  components: { MypageNav },
+  computed: {
+    userInfo () {
+      return this.$store.state.auth?.myInfo
+    }
+  }
 }
 </script>
 
