@@ -68,12 +68,15 @@ export default {
     type: 'getProductList'
   },
   mounted () {
+    if (!this.type) {
+      this.$router.replace({ path: this.$route.path, query: { type: 'all' } }).catch(() => {})
+    }
     this.getProductList()
   },
   methods: {
     async getProductList () {
       this.products = Array.from({ length: 2 }).map(() => ({}))
-      this.products = (await this.$api.get('products')).filter(order => this.type === 'all' ? order : order.status === this.type)
+      this.products = (await this.$api.get('products')).filter(order => this.type === 'all' ? order : order.service_status === this.type)
     },
     productClick (product) {
       this.$router.push(`/product/${product.channel_id}/${product.id}`)
