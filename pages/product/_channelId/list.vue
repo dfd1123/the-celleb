@@ -11,8 +11,8 @@
         <SelectBox v-model="orderBy" :list="orderByList" />
       </div>
       <NoData v-if="itemList && showItemCnt === 0" main-msg="조회된 업체 및 서비스가 없습니다." />
-      <ProductCardWrap v-else :list="showItemList" />
-      <Pagination :chunk-size="12" :total-count="showItemCnt" />
+      <ProductCardWrap v-else :list="showItemList.slice(cursor * 12, (cursor + 1) * (showItemCnt >= 12 ? 12 : 7))" />
+      <Pagination :chunk-size="12" :current-cursor="cursor" :total-count="showItemCnt" @change="changeCursor" />
     </div>
   </div>
 </template>
@@ -40,6 +40,7 @@ export default {
       purpose: '',
       min: 0,
       max: 0,
+      cursor: 0,
       itemList: null
     }
   },
@@ -58,7 +59,9 @@ export default {
     },
     showItemList () {
       if (!this.itemList) { return Array.from({ length: 8 }).map(() => ({})) }
-      let showItemList = this.itemList.filter(item => item.channel_id === this.channel)
+      let channel = this.channel
+      if (this.channel === 'cafe') { channel = 'instagram' } else if (this.channel === 'tiktok') { channel = 'youtube' } else if (this.channel === 'liveCommerce') { channel = 'blog' }
+      let showItemList = this.itemList.filter(item => item.channel_id === channel)
       showItemList.sort((a, b) => {
         const order = this.orderByList.find(item => item.value === this.orderBy).order
 
@@ -107,6 +110,10 @@ export default {
         }).catch(() => {
         })
       }
+    },
+    changeCursor (val) {
+      this.cursor = val
+      document.body.scrollTop = 0
     }
   }
 }

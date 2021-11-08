@@ -49,6 +49,9 @@ export default {
     }
   },
   computed: {
+    userInfo () {
+      return this.$store.state.auth?.myInfo
+    },
     type () {
       return this.$route.query.type || ''
     }
@@ -66,6 +69,7 @@ export default {
     async getOrderList () {
       this.orders = Array.from({ length: 2 }).map(() => ({}))
       let orders = (await this.$api.get('orders')).filter(order => this.type === 'all' ? order : order.status === this.type)
+      orders = orders.filter(order => order.buyer_id === this.userInfo.id)
       if (this.startDate && this.endDate) { orders = orders.filter(order => this.startDate <= order.created_at && order.created_at <= this.endDate) }
       orders = orders.filter(order => order.title.replace(/ /g, '').includes(this.searchText.replace(/ /g, '')))
       this.orders = orders

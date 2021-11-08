@@ -52,6 +52,11 @@ export default {
       orders: []
     }
   },
+  computed: {
+    userInfo () {
+      return this.$store.state.auth?.myInfo
+    }
+  },
   mounted () {
     this.getOrderList()
   },
@@ -59,6 +64,7 @@ export default {
     async getOrderList () {
       this.orders = Array.from({ length: 2 }).map(() => ({}))
       let orders = (await this.$api.get('orders')).filter(order => order.status === 'complete' || order.status === 'cancel')
+      orders = orders.filter(order => order.buyer_id === this.userInfo.id)
       if (this.startDate && this.endDate) { orders = orders.filter(order => this.startDate <= order.created_at && order.created_at <= this.endDate) }
       orders = orders.filter(order => order.title.replace(/ /g, '').includes(this.searchText.replace(/ /g, '')))
       this.orders = orders

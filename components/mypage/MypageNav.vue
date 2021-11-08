@@ -133,7 +133,7 @@ export default {
   },
   methods: {
     async getOrderInfo () {
-      this.orders = await this.$api.get('/orders')
+      this.orders = (await this.$api.get('/orders') || []).filter(order => order.buyer_id === this.userInfo.id)
     }
   }
 }

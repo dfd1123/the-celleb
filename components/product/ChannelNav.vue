@@ -21,8 +21,7 @@ export default {
       return this.$route.params.channelId
     },
     menuRouteList () {
-      // const pathList = ['instagram', 'youtube', 'blog', 'cafe', 'tiktok', 'liveCommerce']
-      const pathList = ['instagram', 'youtube', 'blog', 'instagram', 'youtube', 'blog']
+      const pathList = ['instagram', 'youtube', 'blog', 'cafe', 'tiktok', 'liveCommerce']
       return this.menuList.map((menu, index) => ({ id: pathList[index], name: menu, path: `/product/${pathList[index]}/list` }))
     }
   },

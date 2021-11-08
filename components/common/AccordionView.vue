@@ -132,7 +132,7 @@ export default {
       this.setBodyHeight()
     },
     updateModel () {
-      if (this.value) { this.model = this.value }
+      if (this.value !== null && this.value !== undefined) { this.model = this.value }
     }
   }
 }
