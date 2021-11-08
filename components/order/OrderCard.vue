@@ -128,7 +128,7 @@ export default {
 
 [order-card]{ .mb(29); .p(38, 40, 28); .br(7); .bgc(#fff); box-shadow: 3px 3px 12px 0 rgba(0, 0, 0, 0.04);
   .main-info{ .rel; .pl(229);
-    .product-img { .abs; .lt(0,0); .z(1); .wh(191,131);
+    .product-img { .abs; .lt(0,0); .z(1); .w(191); .min-h(131);
       >img { .wh(100%); object-position: center; object-fit: cover; }
     }
     .product-info { .min-h(157.3);

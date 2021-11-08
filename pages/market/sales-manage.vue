@@ -53,6 +53,9 @@ export default {
     type: 'getOrderList'
   },
   mounted () {
+    if (!this.type) {
+      this.$router.replace({ path: this.$route.path, query: { type: 'all' } }).catch(() => {})
+    }
     this.getOrderList()
   },
   methods: {

@@ -26,7 +26,7 @@
           <router-link to="/mypage">
             마이페이지
           </router-link>
-          <router-link v-if="isInfluencer" to="/market">
+          <router-link v-if="isInfluencer" to="/market/sales-manage?type=all">
             내 서비스 관리
           </router-link>
 
