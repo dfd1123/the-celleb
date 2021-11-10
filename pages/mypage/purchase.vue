@@ -10,12 +10,14 @@
       @input="changeSearchText"
       @search="getOrderList"
     />
-    <div v-if="orders.length" class="order-list-holder">
-      <template v-if="orders[0].id">
-        <OrderCard v-for="order in orders" :key="`order-${order.id}`" :item="order" trading-statement @click="productClick(order.id)" />
-      </template>
+    <div class="contents-holder">
+      <div v-if="orders.length" class="order-list-holder">
+        <template v-if="orders[0].id">
+          <OrderCard v-for="order in orders" :key="`order-${order.id}`" :item="order" trading-statement @click="productClick(order.id)" />
+        </template>
+      </div>
+      <no-data v-else main-msg="내역이 없습니다" />
     </div>
-    <no-data v-else main-msg="내역이 없습니다" />
     <div class="caution-list">
       <p>
         <img src="~/assets/imgs/icon/ico-caution.svg" alt="caution">
@@ -94,6 +96,7 @@ export default {
 [purchase-page]{
   .tit{ .mb(29); .fs(28,33); .c(@title-black); .semi-bold; }
   [search-control-box] { .mt(29); .mb(32); }
+  .contents-holder{ .min-h(416.45); }
   [no-data]{ .mb(80); .bgc(#fff); .br(7); box-shadow: 3px 3px 12px 0 rgba(0, 0, 0, 0.04);
     p.main-msg{ .c(#ccc); }
   }

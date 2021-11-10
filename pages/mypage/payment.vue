@@ -1,5 +1,8 @@
 <template>
   <div payment-page>
+    <h2 class="tit">
+      결제내역
+    </h2>
     <SearchControlBox
       :start-date="startDate"
       :end-date="endDate"
@@ -7,19 +10,21 @@
       @input="changeSearchText"
       @search="getOrderList"
     />
-    <div v-if="orders.length" class="product-list">
-      <template v-if="orders[0].id">
-        <OrderCard
-          v-for="order in orders"
-          :key="`order-${order.id}`"
-          :item="order"
-          slip-out
-          pay-method
-          @click="$router.push(`/order/${order.id}/detail`)"
-        />
-      </template>
+    <div class="contents-holder">
+      <div v-if="orders.length" class="product-list">
+        <template v-if="orders[0].id">
+          <OrderCard
+            v-for="order in orders"
+            :key="`order-${order.id}`"
+            :item="order"
+            slip-out
+            pay-method
+            @click="$router.push(`/order/${order.id}/detail`)"
+          />
+        </template>
+      </div>
+      <NoData v-else main-msg="내역이 없습니다" />
     </div>
-    <NoData v-else main-msg="내역이 없습니다" />
     <div class="caution-list">
       <p>
         <img src="~/assets/imgs/icon/ico-caution.svg" alt="caution">
@@ -84,6 +89,8 @@ export default {
 @import '~@/assets/less/proj';
 
 [payment-page] {
+  .tit{ .mb(29); .fs(28,33); .c(@title-black); .semi-bold; }
+  .contents-holder{ .min-h(416.45); }
   .product-list{ .mt(32);
     [order-card] {
       .main-info{ .pl(0);

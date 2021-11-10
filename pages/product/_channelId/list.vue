@@ -2,22 +2,29 @@
   <div product-list-page>
     <ChannelNav v-model="channel" />
     <div class="inner-holder">
-      <h2 class="page-tit">
+      <h2 v-que="{animation: 'fadeInUp', delay: 200, duration: 900}" class="page-tit">
         {{ pageTitle }}
       </h2>
-      <FilterBox v-model="purpose" />
-      <div class="orderby-controller">
+      <FilterBox v-model="purpose" v-que="{animation: 'fadeInUp', delay: 500, duration: 900}" />
+      <div v-que="{animation: 'fadeInUp', delay: 800, duration: 900}" class="orderby-controller">
         <span class="total-cnt">{{ showItemCnt }}개의 서비스</span>
         <SelectBox v-model="orderBy" :list="orderByList" />
       </div>
-      <NoData v-if="itemList && showItemCnt === 0" main-msg="조회된 업체 및 서비스가 없습니다." />
-      <ProductCardWrap v-else :list="showItemList.slice(cursor * 12, (cursor + 1) * (showItemCnt >= 12 ? 12 : 7))" />
-      <Pagination :chunk-size="12" :current-cursor="cursor" :total-count="showItemCnt" @change="changeCursor" />
+      <div>
+        <NoData v-if="itemList && showItemCnt === 0" main-msg="조회된 업체 및 서비스가 없습니다." />
+        <ProductCardWrap
+          v-else
+          v-que="{animation: 'fadeSlowInUpPx', delay: 900, duration: 900}"
+          :list="showItemList.slice(cursor * 12, (cursor + 1) * (showItemCnt >= 12 ? 12 : 7))"
+        />
+        <Pagination :chunk-size="12" :current-cursor="cursor" :total-count="showItemCnt" @change="changeCursor" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import que from '@/directives/que'
 import ChannelNav from '@/components/product/ChannelNav'
 import FilterBox from '@/components/product/FilterBox'
 import SelectBox from '@/components/common/input/SelectBox'
@@ -28,6 +35,7 @@ import Pagination from '@/components/common/Pagination'
 export default {
   name: 'ProductListPage',
   components: { ChannelNav, FilterBox, SelectBox, ProductCardWrap, NoData, Pagination },
+  directives: { que },
   data () {
     return {
       channel: 'instagram',
@@ -40,7 +48,6 @@ export default {
       purpose: '',
       min: 0,
       max: 0,
-      cursor: 0,
       itemList: null
     }
   },
@@ -57,10 +64,21 @@ export default {
 
       return titleObj[this.channel]
     },
+    cursor () {
+      return Number(this.$route.query.cursor || 0)
+    },
     showItemList () {
-      if (!this.itemList) { return Array.from({ length: 8 }).map(() => ({})) }
+      if (!this.itemList) {
+        return Array.from({ length: 8 }).map(() => ({}))
+      }
       let channel = this.channel
-      if (this.channel === 'cafe') { channel = 'instagram' } else if (this.channel === 'tiktok') { channel = 'youtube' } else if (this.channel === 'liveCommerce') { channel = 'blog' }
+      if (this.channel === 'cafe') {
+        channel = 'instagram'
+      } else if (this.channel === 'tiktok') {
+        channel = 'youtube'
+      } else if (this.channel === 'liveCommerce') {
+        channel = 'blog'
+      }
       let showItemList = this.itemList.filter(item => item.channel_id === channel)
       showItemList.sort((a, b) => {
         const order = this.orderByList.find(item => item.value === this.orderBy).order
@@ -78,15 +96,23 @@ export default {
         }
         return 0
       })
-      if (this.purpose) { showItemList = showItemList.filter(item => this.purpose === item.purpose) }
-      if (this.min) { showItemList = showItemList.filter(item => this.min <= item.minimum_price) }
-      if (this.max) { showItemList = showItemList.filter(item => this.max >= item.minimum_price) }
+      if (this.purpose) {
+        showItemList = showItemList.filter(item => this.purpose === item.purpose)
+      }
+      if (this.min) {
+        showItemList = showItemList.filter(item => this.min <= item.minimum_price)
+      }
+      if (this.max) {
+        showItemList = showItemList.filter(item => this.max >= item.minimum_price)
+      }
 
       this.routeQueryReplace()
 
       return showItemList
     },
-    showItemCnt () { return this.showItemList.length || 0 }
+    showItemCnt () {
+      return this.showItemList.length || 0
+    }
   },
   mounted () {
     this.matchOptions()
@@ -111,9 +137,8 @@ export default {
         })
       }
     },
-    changeCursor (val) {
-      this.cursor = val
-      document.body.scrollTop = 0
+    changeCursor (cursor) {
+      this.$router.push({ path: this.$route.path, query: { ...this.$route.query, cursor } })
     }
   }
 }
@@ -122,13 +147,13 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj';
 
-[product-list-page] { .bgc(#fff);
+[product-list-page] { .bgc(#FFF);
   .page-tit { .mt(57); .mb(31); .fs(28, 33); .c(@black); }
-  .orderby-controller{ .crop; .mt(53); .mb(40);
-    .total-cnt{ .fl; .fs(20,24); .c(@gray); .bold; }
-    [select-box] { .fr; .wh(96,24); .-a !important;
-      input[type="text"]{ .fs(18,24); }
-      >.angle{ .t(2);
+  .orderby-controller { .crop; .mt(53); .mb(40);
+    .total-cnt { .fl; .fs(20, 24); .c(@gray); .bold; }
+    [select-box] { .fr; .wh(96, 24); .-a !important;
+      input[type="text"] { .fs(18, 24); }
+      > .angle { .t(2);
         svg { .w(12);
           path { fill: #AAAAAA; }
         }
@@ -136,7 +161,7 @@ export default {
     }
   }
   [no-data] { .h(600);
-    p.main-msg{ .c(@light-gray); }
+    p.main-msg { .c(@light-gray); }
   }
 }
 </style>

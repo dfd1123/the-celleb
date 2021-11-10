@@ -1,24 +1,41 @@
 <template>
   <div product-view-page>
     <ChannelNav />
-    <div class="inner-holder product-wrap">
+    <div v-if="item" class="inner-holder product-wrap">
       <div class="detail-info">
-        <ProductImageSlide :images="item.images" />
-        <ToggleTab v-model="selectedTab" :tabs="tabs" />
-        <ProductInfoTabItem :value="selectedTab" :item="item" />
-        <ProductReviewWrap />
+        <ProductImageSlide
+          v-que="{animation: 'fadeIn', delay: 200, duration: 600}"
+          :images="item.images "
+        />
+        <div
+          v-que="{animation: 'fadeInUp', delay: 0, duration: 600}"
+        >
+          <ToggleTab v-model="selectedTab" :tabs="tabs" />
+          <ProductInfoTabItem :value="selectedTab" :item="item" />
+        </div>
+        <ProductReviewWrap
+          v-que="{animation: 'fadeSlowInUp', delay: 0, duration: 600}"
+          :item="item"
+        />
       </div>
       <div class="control-holder">
-        <BuyControlPanel :item="item" />
-        <ProductStoreBox :store="store" />
+        <BuyControlPanel
+          v-que="{animation: 'fadeInSlowRight', delay: 350, duration: 600}"
+          :item="item"
+        />
+        <ProductStoreBox
+          v-que="{animation: 'fadeInSlowRight', delay: 500, duration: 600}"
+          :store="store"
+        />
       </div>
     </div>
-    <SlideProductList subject="다른 회원이 함께 본 서비스" class="other-user-relate" />
-    <SlideProductList subject="추천 서비스" />
+    <SlideProductList v-if="item" subject="다른 회원이 함께 본 업체" class="other-user-relate" />
+    <SlideProductList v-if="item" subject="추천 업체" />
   </div>
 </template>
 
 <script>
+import que from '@/directives/que'
 import ProductImageSlide from '@/components/product/view/ProductImageSlide'
 import ProductInfoTabItem from '@/components/product/view/ProductInfoTabItem'
 import ProductReviewWrap from '@/components/product/view/ProductReviewWrap'
@@ -30,6 +47,7 @@ import SlideProductList from '@/components/product/SlideProductList'
 
 export default {
   name: 'ProductViewPage',
+  directives: { que },
   components: {
     ProductImageSlide,
     ProductInfoTabItem,
@@ -44,7 +62,7 @@ export default {
     return {
       selectedTab: 0,
       tabs: ['서비스 설명', '가격 정보', '수정 / 재진행', '취소 / 환불', '서비스 평가'],
-      item: {},
+      item: null,
       store: {}
     }
   },

@@ -83,7 +83,7 @@ export default {
     options: {
       type: Object,
       default: () => ({
-        portfolio: null
+        portfolio: {}
       })
     }
   },
@@ -109,9 +109,18 @@ export default {
       return Boolean(this.options.portfolio !== null)
     }
   },
+  mounted () {
+    this.initData()
+  },
   methods: {
     initData () {
-      this.title = this.options.portfolio.title
+      if (this.isEdit) {
+        this.title = this.options.portfolio.title
+        this.service = this.options.portfolio.service
+        this.sector = this.options.portfolio.sector
+        this.description = this.options.portfolio.description
+        this.mainImage = { src: this.options.portfolio.main_image }
+      }
     },
     async submit () {
       const validate = await this.validation()

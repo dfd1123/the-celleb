@@ -1,8 +1,8 @@
 <template>
   <div brand-view-page>
     <div v-if="store" class="inner-holder">
-      <InfluencerPanel :store="store" />
-      <div class="white-box introduce-box">
+      <InfluencerPanel v-que="{animation: 'fadeSlowInUp', delay: 0, duration: 900}" :store="store" />
+      <div v-que="{animation: 'fadeSlowInUp', delay: 200, duration: 900}" class="white-box introduce-box">
         <h5 class="sub-tit">
           소개
         </h5>
@@ -16,7 +16,7 @@
           성장하고 있습니다.
         </p>
       </div>
-      <div v-if="itemList.length" class="white-box service-box">
+      <div v-if="itemList.length && userInfo.id === 1" v-que="{animation: 'fadeSlowInUp', delay: 400, duration: 900}" class="white-box service-box">
         <h5 class="sub-tit">
           서비스
         </h5>
@@ -30,13 +30,13 @@
           </cl-button>
         </div>
       </div>
-      <div class="white-box portfolio-box">
+      <div v-if="userInfo.id === 1" v-que="{animation: 'fadeSlowInUp', delay: 0, duration: 900}" class="white-box portfolio-box">
         <h5 class="sub-tit">
           포트폴리오
         </h5>
         <div class="portfolio-list-holder">
-          <div v-for="i in 4" :key="`portfolio-${i}`" class="small-portfolio-thumb" @click="portfolioModalOpen">
-            <img :src="`/images/portfolio${i}.jpg`" :alt="`portfolio${i}`">
+          <div v-for="portfolio in portfolioList" :key="`portfolio-${portfolio.id}`" class="small-portfolio-thumb" @click="portfolioModalOpen(portfolio)">
+            <img :src="portfolio.main_image" :alt="`portfolio${portfolio.id}`">
           </div>
         </div>
         <div class="more-btn">
@@ -46,7 +46,7 @@
           </cl-button>
         </div>
       </div>
-      <div class="white-box career-box">
+      <div v-que="{animation: 'fadeSlowInUp', delay: 0, duration: 900}" class="white-box career-box">
         <h5 class="sub-tit">
           경력
         </h5>
@@ -77,7 +77,7 @@
           </li>
         </ul>
       </div>
-      <div class="white-box specialty-box">
+      <div v-que="{animation: 'fadeSlowInUp', delay: 0, duration: 900}" class="white-box specialty-box">
         <h5 class="sub-tit">
           전문분야
         </h5>
@@ -134,29 +134,42 @@
 </template>
 
 <script>
+import que from '@/directives/que'
 import InfluencerPanel from '@/components/influencer/InfluencerPanel'
 import ProductCardWrap from '@/components/product/ProductCardWrap'
 import ClButton from '@/components/common/ClButton'
+import PortfolioModal from '@/components/influencer/modal/PortfolioModal'
 
 export default {
   name: 'BrandViewPage',
   components: { InfluencerPanel, ProductCardWrap, ClButton },
+  directives: { que },
   data () {
     return {
       store: null,
       totalItemLength: 0,
       itemList: [],
+      portfolioList: [],
       cursor: 0
     }
   },
   computed: {
+    userInfo () {
+      return this.$store.state.auth?.myInfo || {}
+    },
     influencerId () {
       return this.$route.params.id
     }
   },
   mounted () {
+    // if (this.userInfo.type !== 'influencer') {
+    //   this.$toast('조회하시려는 유저는 인플루언서가 아닙니다.', { type: 'fail' })
+    //   this.$router.go(-1)
+    //   return false
+    // }
     this.getStoreInfo()
     this.getProductList()
+    this.getPortfolioList()
   },
   methods: {
     async getStoreInfo () {
@@ -169,8 +182,11 @@ export default {
       const addCursor = totalProductList.length - this.itemList.length >= 4 ? 4 : totalProductList.length - this.itemList.length
       this.cursor += addCursor
     },
-    portfolioModalOpen () {
-
+    async getPortfolioList () {
+      this.portfolioList = (await this.$api.get('/portfolios')).slice(0, 4)
+    },
+    portfolioModalOpen (portfolio) {
+      this.$modal(PortfolioModal, { portfolio })
     }
   }
 }

@@ -1,18 +1,14 @@
 <template>
   <div portfolio-card>
     <div class="image" @click="portfolioModalOpen">
-      <img :src="portfolioImage" alt="asdasd">
+      <img :src="item.main_image" alt="asdasd">
     </div>
     <div class="info">
       <h6 class="name" @click="portfolioModalOpen">
-        마케팅 포트폴리오
+        {{ item.title }}
       </h6>
-      <p class="intro" @click="portfolioModalOpen">
-        2017.08 CPA 형태의 광고<br>
-        치아교정 신청 할인 및 분납이벤트 진행<br>
-        DB 3천여개 수집
-      </p>
-      <span class="naver-ad-no" @click="portfolioModalOpen">#214396 네이버 검색광고</span>
+      <p class="intro" @click="portfolioModalOpen" v-html="item.description.replace(/\n/gi, '<br>')" />
+      <span class="naver-ad-no" @click="portfolioModalOpen">#{{ item.naver_no }} 네이버 검색광고</span>
       <cl-button type="gray" class="edit-btn" @click="portfolioEditModalOpen">
         관리
       </cl-button>
@@ -40,9 +36,6 @@ export default {
     }
   },
   computed: {
-    portfolioImage () {
-      return this.item.images[0] || ''
-    },
     influencerId () {
       return this.$route.params.id
     }
@@ -55,10 +48,10 @@ export default {
       this.store = await this.$api.get(`/users/${this.influencerId}`)
     },
     portfolioModalOpen () {
-      this.$modal(PortfolioModal)
+      this.$modal(PortfolioModal, { portfolio: this.item })
     },
     portfolioEditModalOpen () {
-      this.$modal(PortfolioInfoSubmitModal, { portfolio: {} })
+      this.$modal(PortfolioInfoSubmitModal, { portfolio: this.item })
     }
   }
 }

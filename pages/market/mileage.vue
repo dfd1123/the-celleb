@@ -20,11 +20,18 @@
         </li>
       </ul>
     </div>
-    <SearchControlBox :start-date="searchInfo.startDate" :end-date="searchInfo.endDate" :search-list="searchInfo.searchList" />
+    <SearchControlBox
+      :start-date="searchInfo.startDate"
+      :end-date="searchInfo.endDate"
+      :search-list="searchInfo.searchList"
+      @change-date="changeDate"
+      @input="changeStatus"
+      @search="getMileageList"
+    />
     <div class="list-holder">
       <MileageList :list="mileageList" />
     </div>
-    <cl-button type="white" class="more-btn">
+    <cl-button v-if="mileageList.length === 5" type="white" class="more-btn" @click="addMileage">
       <img src="~/assets/imgs/icon/ico-plus.svg" alt="plus">
       <span>더보기</span>
     </cl-button>
@@ -48,6 +55,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import ClButton from '@/components/common/ClButton'
 import SearchControlBox from '@/components/mypage/SearchControlBox'
 import MileageList from '@/components/market/mileage/MileageList'
@@ -58,17 +66,44 @@ export default {
   data () {
     return {
       searchInfo: {
-        startDate: new Date().setDate(new Date().getDate() - 30),
-        endDate: Date.now(),
+        startDate: null,
+        endDate: null,
+        type: 'all',
         searchList: [{ label: '전체', value: 'all' }, { label: '적립', value: 'store' }, { label: '사용', value: 'use' }, { label: '만료', value: 'expire' }, { label: '취소', value: 'cancel' }]
       },
-      mileageList: [
-        { no: '123981232', type: 'store', price: 40000, date: '20.08.21', endDate: '21.09.11' },
-        { no: '587638723', type: 'use', price: 32000, date: '20.07.21', endDate: '21.12.11' },
-        { no: '283742384', type: 'expire', price: 7000, date: '20.06.23', endDate: '21.09.01' },
-        { no: '943582742', type: 'cancel', price: 40000, date: '20.03.09', endDate: '21.03.09' },
-        { no: '823747384', type: 'store', price: 40000, date: '20.01.02', endDate: '21.01.10' }
+      mileageList: []
+    }
+  },
+  mounted () {
+    this.getMileageList()
+  },
+  methods: {
+    getMileageList () {
+      let originMileageList = [
+        { no: '123981232', type: 'store', price: 40000, date: 1597935600000, endDate: 1631286000000 },
+        { no: '587638723', type: 'use', price: 32000, date: 1595257200000, endDate: 1639148400000 },
+        { no: '283742384', type: 'expire', price: 7000, date: 1592838000000, endDate: 1630422000000 },
+        { no: '943582742', type: 'cancel', price: 40000, date: 1583679600000, endDate: 1615215600000 },
+        { no: '823747384', type: 'store', price: 40000, date: 1577890800000, endDate: 1610204400000 }
       ]
+
+      if (this.searchInfo.type !== 'all') { originMileageList = originMileageList.filter(item => item.type === this.searchInfo.type) }
+      if (this.searchInfo.startDate) { originMileageList = originMileageList.filter(item => item.date >= this.searchInfo.startDate) }
+      if (this.searchInfo.endDate) { originMileageList = originMileageList.filter(item => item.date <= this.searchInfo.endDate) }
+
+      this.mileageList = originMileageList.map(mileage => ({ ...mileage, moDate: moment(mileage.date).format('YYYY-MM-DD'), moEndDate: moment(mileage.endDate).format('YYYY-MM-DD') }))
+    },
+    addMileage () {
+      this.mileageList.push(
+        { no: '587638723', type: 'use', price: 32000, date: 1577490800000, endDate: 1609148400000, moDate: moment(1577490800000).format('YYYY-MM-DD'), moEndDate: moment(1609148400000).format('YYYY-MM-DD') }
+      )
+    },
+    changeDate ({ startDate, endDate }) {
+      this.searchInfo.startDate = startDate
+      this.searchInfo.endDate = endDate
+    },
+    changeStatus (type) {
+      this.searchInfo.type = type
     }
   }
 }

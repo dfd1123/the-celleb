@@ -2,20 +2,32 @@
   <li product-review-list>
     <Avatar />
     <div class="info">
-      <p>감사합니다~ 자주 애용할게요~~~</p>
-      <span class="date">20.07.09</span>
-      <RatingStar :value="5.0" active-color="#f87676" :star-size="16" readonly />
+      <p>{{ review.text }}</p>
+      <span class="date">{{ date }}</span>
+      <RatingStar :value="review.rating" active-color="#f87676" :star-size="16" readonly />
     </div>
   </li>
 </template>
 
 <script>
+import moment from 'moment'
 import RatingStar from '@/components/common/RatingStar'
 import Avatar from '@/components/common/Avatar'
 
 export default {
   name: 'ProductReviewItem',
-  components: { RatingStar, Avatar }
+  components: { RatingStar, Avatar },
+  props: {
+    review: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    date () {
+      return moment(this.review.createdAt).format('YY.MM.DD')
+    }
+  }
 }
 </script>
 

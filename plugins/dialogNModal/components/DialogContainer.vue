@@ -33,7 +33,7 @@ export default {
   methods: {
     open () {
       this.isShow = true
-      document.addEventListener('keydown', this.handleKeyUp, true)
+      document.addEventListener('keydown', this.handleKeyUp)
     },
     async close (confirm) {
       this.isShow = false

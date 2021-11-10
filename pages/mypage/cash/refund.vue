@@ -19,7 +19,6 @@
               <div class="rel-box">
                 <ValidationProvider v-slot="{errors}" rules="required" vid="bankName" name="bankName" class="rels">
                   <SelectBox v-model="bankInfo.bankName" :list="bankList" :class="{'error': errors.length > 0}" placeholder="은행" />
-                  <ValidationErrors :errors="errors" />
                 </ValidationProvider>
                 <ValidationProvider v-slot="{errors}" rules="required" name="bankAccountNum" class="rels">
                   <TextInput v-model="bankInfo.accountNum" :class="{'error': errors.length > 0}" />
@@ -124,7 +123,8 @@ export default {
       })
 
       if (result) {
-        this.$router.push('/cash/refund/complete')
+        const { bankName, accountNum, holder } = this.bankInfo
+        this.$router.push({ path: '/cash/refund/complete', query: { bankName, accountNum, holder, price: this.refundPrice } })
       }
     }
   }

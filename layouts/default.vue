@@ -24,7 +24,8 @@ export default {
   components: { Header, Footer },
   data () {
     return {
-      keepAliveLists
+      keepAliveLists,
+      que: null
     }
   },
   computed: {

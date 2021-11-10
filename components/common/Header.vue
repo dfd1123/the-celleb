@@ -87,7 +87,9 @@ export default {
   .main-hd { .clear; .pt(19); .pb(20);
     .logo { .fl; .p(10, 0); }
     nav { .fr;
-      > a { .ib; .m(0, 2.5); .p(0, 12); .fs(16, 42); .c(@gray); .vam; }
+      > a { .ib; .m(0, 2.5); .p(0, 12); .fs(16, 42); .c(@gray); .vam;
+        &.nuxt-link-active{ .semi-bold; }
+      }
       > button { .ib; .vam; }
       [avatar] { .ib; .vam; }
       [cl-button] {

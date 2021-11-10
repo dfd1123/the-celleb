@@ -5,10 +5,10 @@
     </div>
     <div class="wrapper inner-holder">
       <div class="container">
-        <h1 class="main-tit">
+        <h1 v-que="{animation: 'fadeInUp', delay: 200, duration: 900}" class="main-tit">
           '진짜' 셀럽을 잇다, <em>더셀럽</em>
         </h1>
-        <div class="search-con">
+        <div v-que="{animation: 'fadeInUp', delay: 500, duration: 900}" class="search-con">
           <div class="select-box-con">
             <ValidationObserver ref="validator">
               <ValidationProvider rules="required" name="카테고리">
@@ -35,11 +35,13 @@
 </template>
 
 <script>
+import que from '@/directives/que'
 import SelectBox from '@/components/common/input/SelectBox'
 
 export default {
   name: 'MainPage',
   components: { SelectBox },
+  directives: { que },
   data () {
     return {
       topCategoryList: [{ label: '건강 기능식품', value: 1 }, { label: '일반식품', value: 2 }, { label: '가전제품', value: 3 }, { label: '화장품', value: 4 }, { label: '쥬얼리', value: 5 }, { label: '패션', value: 6 }, { label: '육아', value: 7 }],
@@ -82,7 +84,7 @@ export default {
     &::after { .cnt; .abs; .lt(0, 0); .z(1); .wh(100%); .o(0.65); background-image: linear-gradient(116deg, #8E2AE4 2%, #0901F3 100%); }
   }
 
-  .wrapper { .rel; .z(2); display: table; height: calc(100vh - 131px);
+  .wrapper { .rel; .z(2); display: table; height: calc(100vh - 84px);
     .container { display: table-cell; .vam; .mh-c;
       .main-tit { .mb(51); .fs(44, 53); .c(#FFFFFF); .regular; .tc;
         > em { .extra-bold; }

@@ -2,37 +2,52 @@
   <div ad-card>
     <span :class="['status', status]">{{ status === 'complete' ? '광고완료':'광고중' }}</span>
     <div class="ad-info">
-      <span class="date">광고 기간 20/07/28 ~ 20/08/04</span>
+      <span class="date">광고 기간 {{ adverRangeDate }}</span>
       <h6 class="name">
-        플러스 광고 1주
+        {{ item.title }}
       </h6>
       <div class="description-holder">
         <p class="description">
-          공동구매를 빠르고 효율적으로 도와드립니다.
+          {{ item.description }}
         </p>
         <a href="#" class="re-purchase">재구매하기</a>
       </div>
       <div class="price-info">
         <div class="payment">
           <span>
-            결제금액 : 99,000원
+            결제금액 : {{ commaReceiptPrice }}원
           </span>
           <span>
             결제방식 : 카드
-            <a href="#">전표출력</a>
+            <a @click="$toast('준비중인 서비스 입니다.', {type:'fail'})">전표출력</a>
           </span>
         </div>
-        <b class="price">50,000<i>원</i></b>
+        <b class="price">{{ commaPrice }}<i>원</i></b>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
+import { numberFormat } from '@/utils/numberUtils'
+
 export default {
   name: 'AdCard',
   props: {
+    item: { type: Object, required: true },
     status: { type: String, default: 'complete' }
+  },
+  computed: {
+    commaReceiptPrice () {
+      return numberFormat(this.item.receiptPrice || 0)
+    },
+    commaPrice () {
+      return numberFormat(this.item.price || 0)
+    },
+    adverRangeDate () {
+      return `${moment(this.item.startDate).format('YY/MM/DD')} ~ ${moment(this.item.endDate).format('YY/MM/DD')}`
+    }
   }
 }
 </script>

@@ -5,20 +5,16 @@
         <swiper>
           <swiper-slide>
             <div class="pf-img">
-              <img src="/images/portfolio1.jpg" alt="awd">
+              <img :src="portfolio.main_image" alt="awd">
             </div>
           </swiper-slide>
         </swiper>
       </div>
       <div class="info">
         <h2 class="name">
-          포트폴리오 광고
+          {{ portfolio.title }}
         </h2>
-        <p class="description">
-          2017.08 CPA 형태의 광고<br>
-          치아교정 신청 할인 및 분납이벤트 진행<br>
-          DB 3천여개 수집
-        </p>
+        <p class="description" v-html="portfolio.description.replace(/\n/gi, '<br>')" />
         <cl-button type="purple" class="qna-btn" @click="qnaSubmitModalOpen">
           문의하기
         </cl-button>
@@ -51,7 +47,12 @@ import QnaSubmitModal from '@/components/product/modal/QnaSubmitModal'
 export default {
   name: 'PortfolioModal',
   components: { Modal, Swiper, SwiperSlide, ClButton },
-
+  props: {
+    options: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   data () {
     return {
       store: null
@@ -60,6 +61,9 @@ export default {
   computed: {
     influencerId () {
       return this.$route.params.id
+    },
+    portfolio () {
+      return this.options?.portfolio || {}
     }
   },
   mounted () {
@@ -88,8 +92,8 @@ export default {
       .contents{ .p(40); }
       .header{ .mb(0); }
       .body{
-        .portfolio-info-holder{ .crop;
-          .images{ .fl;
+        .portfolio-info-holder{ .crop; .flex-center;
+          .images{ .fl; .mt(34);
             .pf-img{  .wh(439);
               >img{ .wh(100%); object-fit: cover; object-position: center; }
             }

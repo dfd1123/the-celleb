@@ -13,7 +13,7 @@
           포트폴리오
         </h5>
         <div class="portfolio-list-holder">
-          <PortfolioCard v-for="i in 5" :key="`pf-${i}`" :item="{images:[`/images/portfolio${i}.jpg`]}" />
+          <PortfolioCard v-for="portfolio in portfolioList" :key="`pf-${portfolio.id}`" :item="portfolio" />
         </div>
       </div>
     </div>
@@ -31,7 +31,8 @@ export default {
   components: { InfluencerPanel, ClButton, PortfolioCard },
   data () {
     return {
-      store: null
+      store: null,
+      portfolioList: []
     }
   },
   computed: {
@@ -41,10 +42,14 @@ export default {
   },
   mounted () {
     this.getStoreInfo()
+    this.getPortfolioList()
   },
   methods: {
     async getStoreInfo () {
       this.store = await this.$api.get(`/users/${this.influencerId}`)
+    },
+    async getPortfolioList () {
+      this.portfolioList = await this.$api.get('/portfolios')
     },
     portfolioCreateModalOpen () {
       this.$modal(PortfolioInfoSubmitModal)

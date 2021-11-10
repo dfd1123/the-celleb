@@ -18,7 +18,7 @@
         <div class="box">
           <b>주문이 완료되었습니다.</b><br>
           <span>21.10.30 15:30</span><br>
-          <cl-button type="line-purple">
+          <cl-button type="line-purple" @click="orderFileOpen">
             파일 열기
           </cl-button>
         </div>
@@ -45,7 +45,7 @@
         </p>
         <RatingStar active-color="#f87676" :star-size="25" />
         <TextAreaBox placeholder="작업물에 대한 솔직한 평가를 남겨주세요!" />
-        <cl-button type="purple">
+        <cl-button type="purple" @click="reviewSubmit">
           평가 작성완료
         </cl-button>
       </div>
@@ -66,7 +66,7 @@
               거래 중 문제가 발생했다면<br>
               아래 버튼을 클릭하세요!
             </p><br>
-            <cl-button type="line-gray">
+            <cl-button type="line-gray" @click="cancelRequest">
               거래 취소 요청
             </cl-button>
           </div>
@@ -109,6 +109,16 @@ export default {
     },
     qnaSubmitModalOpen () {
       this.$modal(QnaSubmitModal, { store: this.store })
+    },
+    orderFileOpen () {
+      this.$toast('서비스 준비중 입니다.', { type: 'fail' })
+    },
+    reviewSubmit () {
+      this.$alert({ title: '리뷰를 작성하였습니다.' })
+    },
+    async cancelRequest () {
+      await this.$alert({ title: '거래 취소 요청 완료' })
+      this.$router.go(-1)
     }
   }
 }

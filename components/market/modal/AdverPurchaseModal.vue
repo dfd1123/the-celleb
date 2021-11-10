@@ -4,10 +4,10 @@
       {{ product.name }} 광고
     </template>
     <div class="inp-box">
-      <SelectBox placeholder="서비스 선택" />
+      <SelectBox v-model="service" :list="serviceList" placeholder="서비스 선택" />
     </div>
     <div class="inp-box">
-      <SelectBox placeholder="광고기간 선택" />
+      <SelectBox v-model="adRange" :list="adRangeList" placeholder="광고기간 선택" />
     </div>
     <div class="price-info-holder">
       <div class="left">
@@ -17,7 +17,7 @@
       <div class="right">
         <span class="label">전문가 마일리지</span>
         <div class="inp">
-          <TextInput type="number" placeholder="0원" />
+          <TextInput type="number" placeholder="0원" readonly />
           <span class="can-use-point">사용가능: 0원</span>
         </div>
       </div>
@@ -43,6 +43,14 @@ export default {
       default: () => ({})
     }
   },
+  data () {
+    return {
+      serviceList: ['인스타그램', '유튜브', '네이버 블로그', '네이버 카페', '틱톡', '라이브커머스'],
+      adRangeList: [{ label: '1주일', value: 604800000 }, { label: '2주일', value: 1209600000 }, { label: '1개월', value: 2419200000 }, { label: '2개월', value: 4838400000 }, { label: '4개월', value: 4838400000 }, { label: '8개월', value: 9676800000 }, { label: '1년', value: 29030400000 }],
+      service: '',
+      adRange: ''
+    }
+  },
   computed: {
     product () {
       return this.options?.product || {}
@@ -53,7 +61,7 @@ export default {
       const confirm = await this.$confirm({ title: '결제하시겠습니까?', message: `${this.product.name}광고 - ${this.product.commaPrice}원` })
 
       if (confirm) {
-        this.$router.push('/advertisement/1/complete?type=master')
+        this.$router.push({ path: '/advertisement/1/complete', query: { type: this.$route.query.type, service: this.service, adRange: this.adRange } })
         this.$emit('resolve')
       }
     },

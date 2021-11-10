@@ -1,7 +1,14 @@
 <template>
-  <div product-card-wrap :class="[type]">
+  <div
+    product-card-wrap
+    :class="[type]"
+  >
     <template v-if="list.length && list[0].id">
-      <ProductCard v-for="item in list" :key="`item-${item.id}`" :item="item" />
+      <ProductCard
+        v-for="item in list"
+        :key="`item-${item.id}`"
+        :item="item"
+      />
     </template>
     <template v-else>
       <SkeletonProductCard v-for="(item, index) in list" :key="`item-${index}`" :item="item" />

@@ -30,7 +30,8 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj';
 
-[product-image-slide]{ .crop; .w(100%); .mb(56);
+[product-image-slide]{ .crop; .w(100%); .min-h(441); .mb(56);  .bgc(#F9F9F9);
+  .swiper-wrapper{ .bgc(#fff); }
   .swiper-slide{ .h(441);
     >img{ .wh(100%); object-fit: cover; object-position: center; }
   }

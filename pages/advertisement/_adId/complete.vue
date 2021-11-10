@@ -13,8 +13,8 @@
           </h6>
           <div class="bt">
             <div class="detail">
-              <span class="apply-date">신청일 21.10.10 12:03</span>
-              <span class="info">서비스명 | 광고기간</span>
+              <span class="apply-date">신청일 {{ applyDate }}</span>
+              <span class="info">{{ serviceName }} | {{ adRangeDate }}</span>
             </div>
             <b class="price">{{ product.commaPrice }}<i>원</i></b>
           </div>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import ClButton from '@/components/common/ClButton'
 import { numberFormat } from '@/utils/numberUtils'
 
@@ -69,6 +70,16 @@ export default {
       product.commaPrice = numberFormat(product.price)
 
       return product
+    },
+    serviceName () {
+      return this.$route.query.service || '-'
+    },
+    applyDate () {
+      return moment().format('YY.MM.DD')
+    },
+    adRangeDate () {
+      const now = Date.now() + Number(this.$route.query.adRange || 0)
+      return `${moment().format('YY.MM.DD')} ~ ${moment(now).format('YY.MM.DD')}`
     }
   }
 }

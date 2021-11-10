@@ -6,12 +6,14 @@
       "password": "qwer1234!",
       "nickname": "더셀럽",
       "image": "/images/the-celleb-logo.png",
+      "bg-image": "/images/bg-store-3.png",
       "type": "influencer",
       "business_number": "1234567890",
       "ceo_name": "김셀럽",
       "influencer_name": "더셀럽",
       "intro": "안녕하세요. 더셀럽입니다. 스마트플레이스 최적화 관리 및 효과적인 공동구매 진행해 드립니다. 항상 노력하는 전문가가 되겠습니다. 감사합니다. (연락처 : 문의 남기기를 클릭해주세요.)",
       "sns": "https://www.instagram.com/explore/tags/%EB%8D%94%EC%85%80%EB%9F%BD/",
+      "rating": 5.0,
       "createdAt": 1603465200000,
       "updatedAt": 1603465200000
     },
@@ -28,6 +30,142 @@
       "sns": "https://www.instagram.com/alphabrothers_official/",
       "createdAt": 1635001200000,
       "updatedAt": 1635001200000
+    },
+    {
+      "id": 3,
+      "email": "celleb1@naver.com",
+      "password": "qwer1234!",
+      "nickname": "BMS",
+      "image": "/images/store-profile1.png",
+      "bg-image": "/images/bg-store-1.png",
+      "type": "influencer",
+      "business_number": "1234567890",
+      "ceo_name": "BMS",
+      "influencer_name": "BMS",
+      "intro": "스타틍업 마케팅은 스타트업 전문가에게 맡기세요. 항상 노력하는 전문가가 되겠습니다. 감사합니다. (연락처 : 문의 남기기를 클릭해주세요.)",
+      "sns": "https://www.instagram.com/explore/tags/%EB%8D%94%EC%85%80%EB%9F%BD/",
+      "rating": 4.5,
+      "createdAt": 1603465200000,
+      "updatedAt": 1603465200000
+    },
+    {
+      "id": 4,
+      "email": "celleb2@naver.com",
+      "password": "qwer1234!",
+      "nickname": "Souls",
+      "image": "/images/store-profile2.png",
+      "bg-image": "/images/bg-store-2.png",
+      "type": "influencer",
+      "business_number": "1234567890",
+      "ceo_name": "Souls",
+      "influencer_name": "Souls",
+      "intro": "스타틍업 마케팅은 스타트업 전문가에게 맡기세요. 항상 노력하는 전문가가 되겠습니다. 감사합니다. (연락처 : 문의 남기기를 클릭해주세요.)",
+      "sns": "https://www.instagram.com/explore/tags/%EB%8D%94%EC%85%80%EB%9F%BD/",
+      "rating": 4.5,
+      "createdAt": 1603465200000,
+      "updatedAt": 1603465200000
+    },
+    {
+      "id": 5,
+      "email": "celleb3@naver.com",
+      "password": "qwer1234!",
+      "nickname": "아이가미",
+      "image": "/images/store-profile3.png",
+      "bg-image": "/images/bg-store-3.png",
+      "type": "influencer",
+      "business_number": "1234567890",
+      "ceo_name": "Souls",
+      "influencer_name": "Souls",
+      "intro": "스타틍업 마케팅은 스타트업 전문가에게 맡기세요. 항상 노력하는 전문가가 되겠습니다. 감사합니다. (연락처 : 문의 남기기를 클릭해주세요.)",
+      "sns": "https://www.instagram.com/explore/tags/%EB%8D%94%EC%85%80%EB%9F%BD/",
+      "rating": 4.5,
+      "createdAt": 1603465200000,
+      "updatedAt": 1603465200000
+    },
+    {
+      "id": 6,
+      "email": "celleb4@naver.com",
+      "password": "qwer1234!",
+      "nickname": "위킵센",
+      "image": "/images/store-profile4.png",
+      "bg-image": "/images/bg-store-4.png",
+      "type": "influencer",
+      "business_number": "1234567890",
+      "ceo_name": "위킵센",
+      "influencer_name": "위킵센",
+      "intro": "스타틍업 마케팅은 스타트업 전문가에게 맡기세요. 항상 노력하는 전문가가 되겠습니다. 감사합니다. (연락처 : 문의 남기기를 클릭해주세요.)",
+      "sns": "https://www.instagram.com/explore/tags/%EB%8D%94%EC%85%80%EB%9F%BD/",
+      "rating": 4.5,
+      "createdAt": 1603465200000,
+      "updatedAt": 1603465200000
+    },
+    {
+      "id": 7,
+      "email": "celleb5@naver.com",
+      "password": "qwer1234!",
+      "nickname": "휴램프로",
+      "image": "/images/store-profile5.png",
+      "bg-image": "/images/bg-store-5.png",
+      "type": "influencer",
+      "business_number": "1234567890",
+      "ceo_name": "휴램프로",
+      "influencer_name": "휴램프로",
+      "intro": "스타틍업 마케팅은 스타트업 전문가에게 맡기세요. 항상 노력하는 전문가가 되겠습니다. 감사합니다. (연락처 : 문의 남기기를 클릭해주세요.)",
+      "sns": "https://www.instagram.com/explore/tags/%EB%8D%94%EC%85%80%EB%9F%BD/",
+      "rating": 4.5,
+      "createdAt": 1603465200000,
+      "updatedAt": 1603465200000
+    },
+    {
+      "id": 8,
+      "email": "celleb6@naver.com",
+      "password": "qwer1234!",
+      "nickname": "MKS",
+      "image": "/images/store-profile6.png",
+      "bg-image": "/images/bg-store-6.png",
+      "type": "influencer",
+      "business_number": "1234567890",
+      "ceo_name": "MKS",
+      "influencer_name": "MKS",
+      "intro": "스타틍업 마케팅은 스타트업 전문가에게 맡기세요. 항상 노력하는 전문가가 되겠습니다. 감사합니다. (연락처 : 문의 남기기를 클릭해주세요.)",
+      "sns": "https://www.instagram.com/explore/tags/%EB%8D%94%EC%85%80%EB%9F%BD/",
+      "rating": 4.5,
+      "createdAt": 1603465200000,
+      "updatedAt": 1603465200000
+    },
+    {
+      "id": 9,
+      "email": "celleb7@naver.com",
+      "password": "qwer1234!",
+      "nickname": "STELLA & STELLO",
+      "image": "/images/store-profile7.png",
+      "bg-image": "/images/bg-store-7.png",
+      "type": "influencer",
+      "business_number": "1234567890",
+      "ceo_name": "STELLA & STELLO",
+      "influencer_name": "STELLA & STELLO",
+      "intro": "스타틍업 마케팅은 스타트업 전문가에게 맡기세요. 항상 노력하는 전문가가 되겠습니다. 감사합니다. (연락처 : 문의 남기기를 클릭해주세요.)",
+      "sns": "https://www.instagram.com/explore/tags/%EB%8D%94%EC%85%80%EB%9F%BD/",
+      "rating": 4.5,
+      "createdAt": 1603465200000,
+      "updatedAt": 1603465200000
+    },
+    {
+      "id": 10,
+      "email": "celleb8@naver.com",
+      "password": "qwer1234!",
+      "nickname": "INSATALK",
+      "image": "/images/store-profile8.png",
+      "bg-image": "/images/bg-store-8.png",
+      "type": "influencer",
+      "business_number": "1234567890",
+      "ceo_name": "INSATALK",
+      "influencer_name": "INSATALK",
+      "intro": "스타틍업 마케팅은 스타트업 전문가에게 맡기세요. 항상 노력하는 전문가가 되겠습니다. 감사합니다. (연락처 : 문의 남기기를 클릭해주세요.)",
+      "sns": "https://www.instagram.com/explore/tags/%EB%8D%94%EC%85%80%EB%9F%BD/",
+      "rating": 4.5,
+      "createdAt": 1603465200000,
+      "updatedAt": 1603465200000
     }
   ],
   "products": [
@@ -6089,191 +6227,215 @@
       "id": 1,
       "product_id": 1,
       "name": "김**",
+      "rating": 4.0,
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
       "createdAt": 1632409200000,
       "updatedAt": 1632409200000
     },
     {
-      "id": 1,
+      "id": 2,
       "product_id": 1,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 5.0,
       "createdAt": 1632236400000,
       "updatedAt": 1632236400000
     },
     {
-      "id": 1,
+      "id": 3,
       "product_id": 1,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 4.0,
       "createdAt": 1632150000000,
       "updatedAt": 1632150000000
     },
     {
-      "id": 1,
+      "id": 4,
       "product_id": 3,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 4.0,
       "createdAt": 1632409200000,
       "updatedAt": 1632409200000
     },
     {
-      "id": 1,
+      "id": 5,
       "product_id": 3,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 5.0,
       "createdAt": 1632236400000,
       "updatedAt": 1632236400000
     },
     {
-      "id": 1,
+      "id": 6,
       "product_id": 5,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 5.0,
       "createdAt": 1632409200000,
       "updatedAt": 1632409200000
     },
     {
-      "id": 1,
+      "id": 7,
       "product_id": 5,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 5.0,
       "createdAt": 1632150000000,
       "updatedAt": 1632150000000
     },
     {
-      "id": 1,
+      "id": 8,
       "product_id": 5,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 4.0,
       "createdAt": 1632150000000,
       "updatedAt": 1632150000000
     },
     {
-      "id": 1,
+      "id": 9,
       "product_id": 7,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 5.0,
       "createdAt": 1632409200000,
       "updatedAt": 1632409200000
     },
     {
-      "id": 1,
+      "id": 10,
       "product_id": 7,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 4.0,
       "createdAt": 1632236400000,
       "updatedAt": 1632236400000
     },
     {
-      "id": 1,
+      "id": 11,
       "product_id": 7,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 4.0,
       "createdAt": 1632150000000,
       "updatedAt": 1632150000000
     },
     {
-      "id": 1,
+      "id": 12,
       "product_id": 9,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 5.0,
       "createdAt": 1632236400000,
       "updatedAt": 1632236400000
     },
     {
-      "id": 1,
+      "id": 13,
       "product_id": 9,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 4.0,
       "createdAt": 1632150000000,
       "updatedAt": 1632150000000
     },
     {
-      "id": 1,
+      "id": 14,
       "product_id": 10,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 4.0,
       "createdAt": 1632236400000,
       "updatedAt": 1632236400000
     },
     {
-      "id": 1,
+      "id": 15,
       "product_id": 10,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 5.0,
       "createdAt": 1632236400000,
       "updatedAt": 1632236400000
     },
     {
-      "id": 1,
+      "id": 16,
       "product_id": 10,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 4.0,
       "createdAt": 1632150000000,
       "updatedAt": 1632150000000
     },
     {
-      "id": 1,
+      "id": 17,
       "product_id": 10,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 5.0,
       "createdAt": 1632150000000,
       "updatedAt": 1632150000000
     },
     {
-      "id": 1,
+      "id": 18,
       "product_id": 12,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 5.0,
       "createdAt": 1632409200000,
       "updatedAt": 1632409200000
     },
     {
-      "id": 1,
+      "id": 19,
       "product_id": 2,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 5.0,
       "createdAt": 1632409200000,
       "updatedAt": 1632409200000
     },
     {
-      "id": 1,
+      "id": 20,
       "product_id": 4,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 5.0,
       "createdAt": 1632409200000,
       "updatedAt": 1632409200000
     },
     {
-      "id": 1,
+      "id": 21,
       "product_id": 4,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 5.0,
       "createdAt": 1632236400000,
       "updatedAt": 1632236400000
     },
     {
-      "id": 1,
+      "id": 22,
       "product_id": 6,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 5.0,
       "createdAt": 1632150000000,
       "updatedAt": 1632150000000
     },
     {
-      "id": 1,
+      "id": 23,
       "product_id": 8,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 5.0,
       "createdAt": 1632409200000,
       "updatedAt": 1632409200000
     },
     {
-      "id": 1,
+      "id": 24,
       "product_id": 8,
       "name": "김**",
       "text": "너무 좋아요~ 빨리 해주셔서 감사합니다!",
+      "rating": 4.0,
       "createdAt": 1632150000000,
       "updatedAt": 1632150000000
     }
@@ -6412,7 +6574,7 @@
       "created_at": 1633834980000
     }
   ],
-  
+
    "portfolios": [
     {
       "id": 1,
@@ -6432,7 +6594,7 @@
       "service": "blog",
       "sector": "marketing",
       "naver_no": "214396",
-      "created_at": 1633834980000
+      "created_at": 1632834980000
     },
     {
       "id": 3,
@@ -6442,7 +6604,7 @@
       "service": "instagram",
       "sector": "experienceGroup",
       "naver_no": "214396",
-      "created_at": 1633834980000
+      "created_at": 1631834980000
     },
     {
       "id": 4,
@@ -6452,7 +6614,7 @@
       "service": "instagram",
       "sector": "contents",
       "naver_no": "214396",
-      "created_at": 1633834980000
+      "created_at": 1623834980000
     },
     {
       "id": 5,
@@ -6462,7 +6624,7 @@
       "service": "instagram",
       "sector": "groupBuy",
       "naver_no": "214396",
-      "created_at": 1633834980000
+      "created_at": 1613834980000
     },
     {
       "id": 6,
@@ -6472,7 +6634,7 @@
       "service": "instagram",
       "sector": "groupBuy",
       "naver_no": "214396",
-      "created_at": 1633834980000
+      "created_at": 1603834980000
     },
     {
       "id": 7,
@@ -6482,7 +6644,7 @@
       "service": "cafe",
       "sector": "experienceGroup",
       "naver_no": "214396",
-      "created_at": 1633834980000
+      "created_at": 1600834980000
     }
   ],
   "profile": {

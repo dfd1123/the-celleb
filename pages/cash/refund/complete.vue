@@ -11,8 +11,8 @@
           환불신청
         </h4>
         <div class="info">
-          <span class="date">신청일 21.10.10 12:03<br>환불계좌 1234-34-45 (국민은행, 더셀럽)</span>
-          <b class="price">1,500,000 원</b>
+          <span class="date">신청일 {{ refundDate }}<br>환불계좌 {{ refundBankInfo }}</span>
+          <b class="price">{{ commaRefundPrice }} 원</b>
         </div>
       </div>
       <div class="btn-holder">
@@ -25,11 +25,25 @@
 </template>
 
 <script>
+import moment from 'moment'
 import ClButton from '@/components/common/ClButton'
+import { numberFormat } from '@/utils/numberUtils'
 
 export default {
   name: 'RefundComplete',
   components: { ClButton },
+  computed: {
+    refundDate () {
+      return moment().format('YY.MM.DD HH.mm')
+    },
+    refundBankInfo () {
+      const { bankName, accountNum, holder } = this.$route.query
+      return `${accountNum} (${bankName}, ${holder})`
+    },
+    commaRefundPrice () {
+      return numberFormat(this.$route.query.price || 0)
+    }
+  },
   methods: {
     goRefundHistory () {
       this.$router.push('/mypage/cash/refund')
