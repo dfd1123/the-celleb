@@ -2,11 +2,11 @@
   <div product-list-page>
     <ChannelNav v-model="channel" />
     <div class="inner-holder">
-      <h2 v-que="{animation: 'fadeInUp', delay: 200, duration: 900}" class="page-tit">
+      <h2 v-que="{animation: 'fadeInUp', delay: 0, duration: 900}" class="page-tit">
         {{ pageTitle }}
       </h2>
-      <FilterBox v-model="purpose" v-que="{animation: 'fadeInUp', delay: 500, duration: 900}" />
-      <div v-que="{animation: 'fadeInUp', delay: 800, duration: 900}" class="orderby-controller">
+      <FilterBox v-model="purpose" v-que="{animation: 'fadeInUp', delay: 200, duration: 900}" />
+      <div v-que="{animation: 'fadeInUp', delay: 400, duration: 900}" class="orderby-controller">
         <span class="total-cnt">{{ showItemCnt }}개의 서비스</span>
         <SelectBox v-model="orderBy" :list="orderByList" />
       </div>
@@ -14,7 +14,7 @@
         <NoData v-if="itemList && showItemCnt === 0" main-msg="조회된 업체 및 서비스가 없습니다." />
         <ProductCardWrap
           v-else
-          v-que="{animation: 'fadeSlowInUpPx', delay: 900, duration: 900}"
+          v-que="{animation: 'fadeSlowInUpPx', delay: 500, duration: 900}"
           :list="showItemList.slice(cursor * 12, (cursor + 1) * (showItemCnt >= 12 ? 12 : 7))"
         />
         <Pagination :chunk-size="12" :current-cursor="cursor" :total-count="showItemCnt" @change="changeCursor" />
