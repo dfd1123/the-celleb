@@ -92,7 +92,7 @@ export default {
         return false
       }
 
-      this.$router.push('/')
+      this.$router.go(-1)
     },
     socialLogin (social) {
       this.$toast('준비중인 서비스 입니다.', { type: 'fail' })

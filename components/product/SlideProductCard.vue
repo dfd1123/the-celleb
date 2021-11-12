@@ -1,24 +1,26 @@
 <template>
   <div slide-product-card>
-    <div class="image-info">
-      <div class="bg-banner">
-        <img :src="sampleBgBanner" alt="">
+    <router-link :to="`/influencer/${item.id}`">
+      <div class="image-info">
+        <div class="bg-banner">
+          <img :src="item.bg_image" alt="">
+        </div>
+        <div class="profile">
+          <img :src="item.image" alt="">
+        </div>
       </div>
-      <div class="profile">
-        <img :src="sampleProfile" alt="">
+      <div class="detail-info">
+        <h6>{{ item.nickname }}</h6>
+        <p>{{ item.intro }}</p>
       </div>
-    </div>
-    <div class="detail-info">
-      <h6>BMS</h6>
-      <p>스타트업 마케팅은 스타트업 전문가에게 맡기세요. 스타트업 마케팅은 스타트업 전문가에게 맡기세요. 스타트업 마케팅은 스타트업 전문가에게 맡기세요.</p>
-    </div>
-    <div class="sub-info">
-      <span class="count"><em>67</em>회 진행</span>
-      <span class="average">
-        <em>4.5 </em>
-        / 5.0
-      </span>
-    </div>
+      <div class="sub-info">
+        <span class="count"><em>67</em>회 진행</span>
+        <span class="average">
+          <em>{{ item.rating }} </em>
+          / 5.0
+        </span>
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -28,6 +30,12 @@ import sampleProfile from '@/assets/imgs/sample/profile-img1.png'
 
 export default {
   name: 'SlideProductCard',
+  props: {
+    item: {
+      type: Object,
+      required: true
+    }
+  },
   data () {
     return {
       sampleBgBanner,
@@ -46,7 +54,7 @@ export default {
       &::before{ .cnt; .abs; .lt(0,0); .z(1); .wh(100%); .bgc(#828282); .o(0.35); }
       >img{ .wh(100%); object-fit: cover; object-position: center; }
     }
-    .profile{ .abs; .lb(26,-45); .z(1); .wh(90); .-a(#ccc); .bgc(#fff); .br(50%);
+    .profile{ .abs; .lb(26,-45); .z(1); .wh(90); .-a(#ccc); .bgc(#fff); .br(50%); .crop;
       >img{ .wh(100%); object-fit: scale-down; object-position: center; }
     }
   }

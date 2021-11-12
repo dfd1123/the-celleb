@@ -161,15 +161,15 @@ export default {
       return this.$route.params.id
     }
   },
-  mounted () {
-    // if (this.userInfo.type !== 'influencer') {
-    //   this.$toast('조회하시려는 유저는 인플루언서가 아닙니다.', { type: 'fail' })
-    //   this.$router.go(-1)
-    //   return false
-    // }
-    this.getStoreInfo()
+  async mounted () {
+    await this.getStoreInfo()
     this.getProductList()
     this.getPortfolioList()
+
+    if (this.store.type !== 'influencer') {
+      this.$toast('조회하시려는 유저는 인플루언서가 아닙니다.', { type: 'fail' })
+      this.$router.go(-1)
+    }
   },
   methods: {
     async getStoreInfo () {

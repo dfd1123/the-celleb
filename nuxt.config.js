@@ -3,14 +3,15 @@ import routes from './router'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'the-celleb',
+    title: '더셀럽',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'kr'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: '인플루언서 매칭 플랫폼, 더셀럽' },
+      { hid: 'image', name: 'image', content: '/images/thecelleb-main.jpg' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
@@ -36,7 +37,7 @@ export default {
   components: true,
 
   router: {
-    middleware: [],
+    middleware: ['auth'],
     extendRoutes: routes
   },
 

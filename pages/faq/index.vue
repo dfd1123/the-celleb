@@ -84,7 +84,6 @@ export default {
   },
   methods: {
     searchFaq () {
-      console.log('enter')
       this.resultSearchText = this.searchText
     }
   }
@@ -94,8 +93,8 @@ export default {
 <style lang="less">
 @import '~@/assets/less/proj';
 
-[faq-page] { .bgc(#fff);
-  .page-tit { .mt(57); .mb(31); .fs(28, 33); .c(@black); }
+[faq-page] { .pt(57); .bgc(#fff);
+  .page-tit { .mb(31); .fs(28, 33); .c(@black); }
   .search-holder { .wh(100%, 160); .pt(34); .pb(32); .br(5); .-a(#D7D1FF); .bgc(#F9F8FF); box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.06);
     .search-inp { .rel; .w(516); .mh-c; .pr(116);
       [text-input] { .w(400);
@@ -151,6 +150,5 @@ export default {
       > button { .p(0, 27); .fs(16, 48); }
     }
   }
-  [pagination] { .mt(73.6); .mb(181.2); }
 }
 </style>

@@ -9,8 +9,8 @@
       </div>
       <div class="card-list-wrap">
         <swiper ref="slideList" :options="slideOption">
-          <swiper-slide v-for="i in 10" :key="`${i}`">
-            <SlideProductCard />
+          <swiper-slide v-for="store in storeList" :key="`${store.id}`">
+            <SlideProductCard :item="store" />
           </swiper-slide>
         </swiper>
         <button v-wave class="slide-arrow next-btn" @click="slideGo(1)" />
@@ -44,7 +44,8 @@ export default {
         slidesPerView: 4,
         allowSlideNext: true,
         loop: true
-      }
+      },
+      storeList: []
     }
   },
   computed: {
@@ -52,8 +53,15 @@ export default {
       return this.$refs.slideList.$swiper
     }
   },
+  mounted () {
+    this.getStoreList()
+  },
   methods: {
+    async getStoreList () {
+      this.storeList = (await this.$api.get('/users')).filter(user => user.id >= 3).sort(() => Math.random() - Math.random())
+    },
     more () {
+      this.$toast('준비중인 서비스 입니다.', { type: 'fail' })
       this.$emit('more')
     },
     slideGo (index) {

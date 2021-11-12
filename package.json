@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "local": "cross-env NODE_ENV=local nuxt --port 3001",
+    "local": "node server.js & cross-env NODE_ENV=local nuxt --port 3001",
     "dev": "cross-env NODE_ENV=development nuxt",
     "build:prod": "nuxt build",
     "build:dev": "cross-env NODE_ENV=development nuxt build",
     "build:stage": "cross-env NODE_ENV=stage nuxt build",
-    "start:dev": "cross-env NODE_ENV=development nuxt start",
-    "start:stage": "cross-env NODE_ENV=stage nuxt start",
-    "start:prod": "nuxt start",
+    "start:dev": "node server.js & cross-env NODE_ENV=development nuxt start",
+    "start:stage": "node server.js & cross-env NODE_ENV=stage nuxt start",
+    "start:prod": "node server.js & nuxt start",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint": "yarn lint:js"

@@ -2,6 +2,9 @@ export default [
   {
     path: '/market',
     name: 'market',
-    redirect: '/market/sales-manage'
+    redirect: '/market/sales-manage',
+    meta: {
+      auth: true
+    }
   }
 ]
