@@ -28,7 +28,7 @@
             </router-link>
           </div>
           <div class="right">
-            <router-link to="#">
+            <router-link v-show="false" to="#">
               언플루언서 로그인
             </router-link>
           </div>
