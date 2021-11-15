@@ -6,6 +6,7 @@ import faq from './faq'
 import mypage from './mypage'
 import market from './market'
 import cash from './cash'
+import chatting from './chatting'
 
 const routeLists = [
   ...home,
@@ -15,7 +16,8 @@ const routeLists = [
   ...faq,
   ...mypage,
   ...market,
-  ...cash
+  ...cash,
+  ...chatting
 ]
 
 const iterator = (list) => {
