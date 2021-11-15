@@ -11,10 +11,10 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '인플루언서 매칭 플랫폼, 더셀럽' },
-      { hid: 'image', name: 'image', content: '/images/thecelleb-main.jpg' },
+      { hid: 'image', name: 'image', content: 'http://thecelleb.com/images/thecelleb-main.jpg' },
       { hid: 'og:title', property: 'og:title', content: '더셀럽' },
       { hid: 'og:description', property: 'og:description', content: '인플루언서 매칭 플랫폼, 더셀럽' },
-      { hid: 'og:image', property: 'og:image', content: '/images/thecelleb-main.jpg' },
+      { hid: 'og:image', property: 'og:image', content: 'http://thecelleb.com/images/thecelleb-main.jpg' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
