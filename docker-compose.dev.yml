@@ -1,0 +1,10 @@
+version: '3.1'
+services:
+  proxy:
+    command: [nginx-debug, '-g', 'daemon off;']
+  app:
+    build:
+      dockerfile: dockerfile.dev 
+    ports:
+     - '3000:3000'
+     - '3002:3002'
