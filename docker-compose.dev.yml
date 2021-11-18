@@ -1,6 +1,8 @@
 version: '3.1'
 services:
   proxy:
+    volumes:
+     - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
     command: [nginx-debug, '-g', 'daemon off;']
   app:
     build:
