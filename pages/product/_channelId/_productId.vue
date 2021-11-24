@@ -8,7 +8,7 @@
           :images="item.images "
         />
         <div
-          v-que="{animation: 'fadeInUp', delay: 0, duration: 600}"
+          v-que="{animation: 'fadeInUp', delay: 0, duration: 600, ioRatio: 0.1}"
         >
           <ToggleTab v-model="selectedTab" :tabs="tabs" />
           <ProductInfoTabItem :value="selectedTab" :item="item" />
@@ -24,7 +24,7 @@
           :item="item"
         />
         <ProductStoreBox
-          v-que="{animation: 'fadeInSlowRight', delay: 500, duration: 600}"
+          v-que="{animation: 'fadeInSlowRight', delay: 500, duration: 600, ioRatio: 0.1}"
           :store="store"
         />
       </div>
