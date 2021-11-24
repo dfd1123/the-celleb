@@ -5,31 +5,48 @@
         <img src="~/assets/imgs/icon/logo-gray.svg">
       </div>
       <div class="info">
-        <span>
-          <em>TEL:</em>
-          02-1234-5678
+        <span class="dl">
+          <em>상호</em>
+          주식회사 라르크 인터내셔널
+        </span>
+        <span class="dl">
+          <em>대표</em>
+          정민준
         </span>
         <span>
-          <em>FAX:</em>
-          02-1234-5678
+          <em>사업자등록번호</em>
+          822-88-02158
+        </span>
+        <br>
+        <span class="dl">
+          <em>통신판매업 신고</em>
+          제2021-서울강남-03773호 <a href="#">[사업자정보확인]</a>
+        </span>
+        <span>
+          <em>전화</em>
+          070-7733-5799
         </span>
         <br>
         <span>
-          <em>E-mail:</em>
-          THE_CELEBRITY@theseleb.co.kr
+          <em>주소</em>
+          서울특별시 강남구 압구정로8길 20 (신사동) 4층
         </span>
         <br>
         <span>
-          <em>Address:</em>
-          서울특별시 강서구 마곡동 757 두산더랜드파크
+          <em>개인정보관리책임자</em>
+          주식회사 라르크인터내셔널 (hellodolarc-int.com)
         </span>
       </div>
       <div class="contact">
-        <b>1544-1544</b>
-        <span>평일 09:00 ~ 18:00 (점심시간 12:00~13:00)</span>
+        <b>070-7733-5799</b>
+        <span>평일 09:00~18:00  주말 및 공휴일 휴무</span>
+        <div class="sm-link">
+          <a href="#">개인정보처리방침</a>
+          <a href="#">서비스약관</a>
+        </div>
       </div>
     </div>
-    <div class="ft-bottom">
+    <div v-show="false" class="ft-bottom">
       <div class="inner-holder">
         <div class="left">
           <router-link to="#">
@@ -70,15 +87,18 @@ export default {
   .logo{ .abs; .lt(10,0); .z(1); }
   .info{ .pl(276); .pr(332);
     >span{ .fs(15,24); .c(#888);
-      &:nth-of-type(1) {
+      &.dl {
         &::after{ .cnt; .ib; .wh(1,10); .m(0, 5); vertical-align: baseline; .bgc(#888); }
       }
       >em{ .bold; }
     }
   }
   .contact{ .abs; .rt(10,0); .z(1);
-    >b{ .block; .mb(9); .fs(32); .semi-bold; .c(@gray); }
+    >b{ .block; .mb(9); .fs(32); .medium; .c(@gray); }
     >span{ .block; .fs(18,21); .c(#888); }
+    .sm-link{ .mt(16.4);
+      >a { .ib; .mr(16); .fs(13,16); .c(#999); }
+    }
   }
   .ft-bottom{ .crop; .pt(18.4); .-t(#dbdbdb);
     .left{ .fl; }
