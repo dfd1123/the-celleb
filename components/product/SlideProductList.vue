@@ -43,7 +43,8 @@ export default {
       slideOption: {
         slidesPerView: 4,
         allowSlideNext: true,
-        loop: true
+        loop: true,
+        autoplay: true
       },
       storeList: []
     }

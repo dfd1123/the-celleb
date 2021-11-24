@@ -6,7 +6,7 @@
         <RouterView :key="`${$route.name}`" />
       </KeepAlive>
     </div>
-    <Footer v-if="!ftHide" v-show="!isMain" />
+    <Footer v-if="!ftHide" />
   </div>
 </template>
 
@@ -29,9 +29,6 @@ export default {
     }
   },
   computed: {
-    isMain () {
-      return this.$route.name === 'index'
-    },
     hdHide () {
       return Boolean(this.$route.meta.hdHide)
     },
