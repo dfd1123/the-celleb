@@ -41,7 +41,7 @@ export class Api {
 }
 
 export default ({ app }, inject) => {
-  app.$api = new Api(process.env.NODE_ENV === 'development' ? 'http://localhost:3002' : 'http://thecelleb.com/api')
+  app.$api = new Api(process.env.NODE_ENV === 'development' ? 'http://localhost:3002' : 'https://thecelleb.com/api')
 
   inject('api', app.$api)
 }
