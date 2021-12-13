@@ -4,7 +4,7 @@ RUN mkdir -p /home/node/app
 WORKDIR /home/node/app
 COPY package.json package.json
 COPY yarn.lock yarn.lock
-RUN yarn install
+RUN yarn install 
 COPY . .
 RUN yarn build:prod
 CMD yarn start:prod
