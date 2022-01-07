@@ -45,7 +45,7 @@ export default {
         { label: '가격순', value: 'minimum_price', order: 'asc' }
       ],
       orderBy: '',
-      purpose: '',
+      purpose: [],
       min: 0,
       max: 0,
       itemList: null
@@ -96,8 +96,8 @@ export default {
         }
         return 0
       })
-      if (this.purpose) {
-        showItemList = showItemList.filter(item => this.purpose === item.purpose)
+      if (this.purpose.length > 0) {
+        showItemList = showItemList.filter(item => this.purpose.includes(item.purpose))
       }
       if (this.min) {
         showItemList = showItemList.filter(item => this.min <= item.minimum_price)
@@ -124,7 +124,7 @@ export default {
     },
     matchOptions () {
       this.orderBy = this.$route.query.orderBy ?? 'recommend'
-      this.purpose = this.$route.query.purpose
+      this.purpose = this.$route.query.purpose ?? []
       this.min = this.$route.query.min
       this.max = this.$route.query.max
     },
