@@ -14,7 +14,7 @@
         <NoData v-if="itemList && showItemCnt === 0" main-msg="조회된 업체 및 서비스가 없습니다." />
         <ProductCardWrap
           v-else
-          v-que="{animation: 'fadeSlowInUpPx', delay: 300, duration: 900}"
+          v-que="{animation: 'fadeSlowInUpPx', delay: 300, duration: 900, ioRatio: 0.1}"
           :list="showItemList.slice(cursor * 12, (cursor + 1) * (showItemCnt >= 12 ? 12 : 7))"
         />
         <Pagination :chunk-size="12" :current-cursor="cursor" :total-count="showItemCnt" @change="changeCursor" />
