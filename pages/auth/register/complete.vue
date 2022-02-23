@@ -19,6 +19,13 @@ import ClButton from '@/components/common/ClButton'
 export default {
   name: 'RegisterCompletePage',
   components: { ClButton },
+  beforeRouteEnter (to, from, next) {
+    if (from.name === 'auth-login') {
+      next('/')
+    }
+
+    next()
+  },
   computed: {
     isInfluencer () {
       return this.$route.query.type === 'influencer'
